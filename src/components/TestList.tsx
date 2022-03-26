@@ -43,6 +43,26 @@ export const TestList: React.FC<Props> = ({
       hidden={!opened}
       width={{ sm: 300, lg: 400 }}
     >
+      <Navbar.Section
+        m="sm"
+        style={{ display: "flex", justifyContent: "space-between" }}
+      >
+        <Text my="auto">{cred?.userName}</Text>
+        <Button
+          px="xl"
+          color="gray"
+          onClick={() => {
+            setCred(undefined);
+
+            router.push("/login");
+          }}
+        >
+          登出
+        </Button>
+      </Navbar.Section>
+
+      <Divider />
+
       {testList ? (
         <Navbar.Section grow component={ScrollArea} offsetScrollbars pt="sm">
           <SimpleGrid cols={1} spacing="sm">
@@ -67,26 +87,6 @@ export const TestList: React.FC<Props> = ({
       ) : (
         <Loader mx="auto" />
       )}
-
-      <Divider />
-
-      <Navbar.Section
-        m="sm"
-        style={{ display: "flex", justifyContent: "space-between" }}
-      >
-        <Text>{cred?.userName}</Text>
-        <Button
-          px="xl"
-          color="gray"
-          onClick={() => {
-            setCred(undefined);
-
-            router.push("/login");
-          }}
-        >
-          登出
-        </Button>
-      </Navbar.Section>
     </Navbar>
   );
 };
