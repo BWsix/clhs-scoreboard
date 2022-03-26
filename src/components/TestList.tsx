@@ -1,18 +1,19 @@
 import {
+  ActionIcon,
   Button,
   Divider,
   Loader,
   Navbar,
   ScrollArea,
-  SimpleGrid,
+  Table,
   Text,
-  Title,
 } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 import { useRouter } from "next/router";
 import React, { Dispatch, SetStateAction } from "react";
 import { Credentials } from "src/pages/login";
 import { TestMeta } from "src/utils/getTestMetaList";
+import { ChevronRight } from "tabler-icons-react";
 
 interface Props {
   error: string;
@@ -35,6 +36,25 @@ export const TestList: React.FC<Props> = ({
   });
 
   if (error) return <>{error}</>;
+
+  const rows = testList?.map((test) => (
+    <tr
+      key={test.year + test.semester + test.name}
+      onClick={() => {
+        setOpened(false);
+        setTest(test);
+      }}
+    >
+      <td>{test.year}</td>
+      <td>{test.semester}</td>
+      <td>{test.name}</td>
+      <td>
+        <ActionIcon my="auto" variant="hover">
+          <ChevronRight />
+        </ActionIcon>
+      </td>
+    </tr>
+  ));
 
   return (
     <Navbar
@@ -65,24 +85,17 @@ export const TestList: React.FC<Props> = ({
 
       {testList ? (
         <Navbar.Section grow component={ScrollArea} offsetScrollbars pt="sm">
-          <SimpleGrid cols={1} spacing="sm">
-            {testList.map((test) => (
-              <Button
-                key={test.fullName}
-                variant="subtle"
-                color="gray"
-                onClick={() => {
-                  setTest(test);
-
-                  if (opened) {
-                    setOpened(false);
-                  }
-                }}
-              >
-                <Text align="center">{test.fullName}</Text>
-              </Button>
-            ))}
-          </SimpleGrid>
+          <Table highlightOnHover>
+            <thead>
+              <tr>
+                <th>學年</th>
+                <th>學期</th>
+                <th>考試</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>{rows}</tbody>
+          </Table>
         </Navbar.Section>
       ) : (
         <Loader mx="auto" />

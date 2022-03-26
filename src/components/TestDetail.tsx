@@ -60,7 +60,7 @@ export const TestDetail: React.FC<Props> = ({ testMeta, session }) => {
 
       <Divider size="sm" my="lg" />
 
-      <Table striped highlightOnHover>
+      <Table striped>
         <thead>
           <tr>
             <th>科目</th>
