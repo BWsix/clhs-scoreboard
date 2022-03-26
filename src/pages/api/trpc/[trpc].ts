@@ -45,6 +45,8 @@ const appRouter = trpc
 
         return { error: false, message: "成功登入", cookie, userName };
       } catch (e) {
+        console.error(e);
+
         return {
           error: true,
           message: "發生了預期之外的錯誤(也許再試一次會解決)",
@@ -64,6 +66,8 @@ const appRouter = trpc
 
         return { error: false, message: "", testList };
       } catch (e) {
+        console.error(e);
+
         return { error: true, message: "發生了預期之外的錯誤" };
       }
     },
@@ -81,6 +85,8 @@ const appRouter = trpc
 
         return { error: false, message: "", testDetail };
       } catch (e) {
+        console.error(e);
+
         return { error: true, message: "發生了預期之外的錯誤" };
       }
     },
