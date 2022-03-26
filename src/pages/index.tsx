@@ -16,7 +16,7 @@ const Home: NextPage = () => {
   const sessionMutation = trpc.useMutation("session");
 
   useEffect(() => {
-    if (!cred.id || !cred.password) {
+    if (!cred?.id || !cred?.password) {
       router.push("/login");
       return;
     }
