@@ -19,7 +19,7 @@ export const MyHeader: React.FC<Props> = ({ opened, setOpened }) => {
           />
         </MediaQuery>
 
-        <Title order={2}>壢中成績查詢2.0</Title>
+        <Title order={2}>CLHS Scoreboard</Title>
       </div>
     </Header>
   );
