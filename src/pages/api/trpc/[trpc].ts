@@ -61,9 +61,9 @@ const appRouter = trpc
           headers: { cookie: input.session },
         });
         const decodedTestListHtml = decode(testListResult.rawBody);
-        const testList = getTestMetaList(decodedTestListHtml);
+        const testMetaList = getTestMetaList(decodedTestListHtml);
 
-        return { error: false, message: "", testList };
+        return { error: false, message: "", testMetaList };
       } catch (e) {
         console.error(e);
 

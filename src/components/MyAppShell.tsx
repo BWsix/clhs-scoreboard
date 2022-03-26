@@ -24,7 +24,7 @@ export const MyAppShell: React.FC<Props> = ({ session, children }) => {
       return;
     }
 
-    setTestMeta(testList.data.testList![0]);
+    setTestMeta(testList.data.testMetaList![0]);
   }, [testList.data]);
 
   return (
@@ -37,7 +37,7 @@ export const MyAppShell: React.FC<Props> = ({ session, children }) => {
           opened={opened}
           setOpened={setOpened}
           setTest={setTestMeta}
-          testList={testList.data?.testList}
+          testList={testList.data?.testMetaList}
         />
       }
       header={<MyHeader opened={opened} setOpened={setOpened} />}
