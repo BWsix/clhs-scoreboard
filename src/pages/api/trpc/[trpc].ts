@@ -21,10 +21,7 @@ const appRouter = trpc
         const data = await got.get(API.BASE);
 
         const cookie = data.headers["set-cookie"]![0].split(";")[0];
-        console.log(cookie);
-
         const verificationToken = getVerificationToken(data.body);
-        console.log(verificationToken);
 
         const loginResult = await got.post(API.LOGIN, {
           headers: { cookie },
@@ -36,18 +33,14 @@ const appRouter = trpc
           },
         });
 
-        console.log(loginResult.body);
-
-        const MATCH_NAME = /<title>([\u4e00-\u9fa5]+)學生線上查詢<\/title>/g;
-        const userName =
-          MATCH_NAME.exec(decode(loginResult.rawBody))?.at(1) || "姓名載入失敗";
-        console.log(userName);
-
         const expires = loginResult.headers.expires;
 
         if (!expires) {
           return { error: true, message: "錯誤的帳號或密碼" };
         }
+
+        const MATCH_NAME = /<title>([\u4e00-\u9fa5]+)學生線上查詢<\/title>/g;
+        const userName = MATCH_NAME.exec(decode(loginResult.rawBody))![1];
 
         return { error: false, message: "成功登入", cookie, userName };
       } catch (e) {
