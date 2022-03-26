@@ -72,7 +72,7 @@ const Login: NextPage = () => {
           session.mutate(form.values);
         })}
       >
-        <Title order={3}>登入壢中成績查詢2.0</Title>
+        <Title order={3}>登入CLHS Scoreboard</Title>
 
         <div style={{ position: "relative" }}>
           <LoadingOverlay visible={session.isLoading} />
