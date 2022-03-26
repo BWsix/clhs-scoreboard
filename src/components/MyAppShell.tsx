@@ -1,6 +1,6 @@
 import { AppShell } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { Test } from "src/utils/getTestList";
+import { TestMeta } from "src/utils/getTestMetaList";
 import { trpc } from "src/utils/trpc";
 import { MyHeader } from "./MyHeader";
 import { TestDetail } from "./TestDetail";
@@ -13,19 +13,18 @@ interface Props {
 export const MyAppShell: React.FC<Props> = ({ session, children }) => {
   const [error, setError] = useState("");
   const [opened, setOpened] = useState(false);
-  const [test, setTest] = useState<Test | undefined>(undefined);
-  const testList = trpc.useQuery(["testList", { session }]);
+  const [testMeta, setTestMeta] = useState<TestMeta | undefined>(undefined);
+  const testList = trpc.useQuery(["testMetaList", { session }]);
 
   useEffect(() => {
     if (!testList.data) return;
 
     if (testList.data.error) {
-      console.log(testList.data.message);
       setError(testList.data.message);
       return;
     }
 
-    setTest(testList.data.testList![0]);
+    setTestMeta(testList.data.testList![0]);
   }, [testList.data]);
 
   return (
@@ -37,13 +36,13 @@ export const MyAppShell: React.FC<Props> = ({ session, children }) => {
           error={error}
           opened={opened}
           setOpened={setOpened}
-          setTest={setTest}
+          setTest={setTestMeta}
           testList={testList.data?.testList}
         />
       }
       header={<MyHeader opened={opened} setOpened={setOpened} />}
     >
-      <TestDetail test={test} />
+      <TestDetail session={session} testMeta={testMeta} />
     </AppShell>
   );
 };

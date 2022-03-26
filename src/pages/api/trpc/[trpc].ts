@@ -1,9 +1,11 @@
 import * as trpc from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
+import axios from "axios";
 import got from "got";
 import { API } from "src/constants";
 import { decode } from "src/utils/decode";
-import { getTestList } from "src/utils/getTestList";
+import { getTestDetail } from "src/utils/getTestDetail";
+import { getTestMetaList } from "src/utils/getTestMetaList";
 import { getVerificationToken } from "src/utils/getVerificationToken";
 import { z } from "zod";
 
@@ -31,15 +33,17 @@ const appRouter = trpc
           },
         });
 
+        const MATCH_NAME = /<title>([\u4e00-\u9fa5]+)學生線上查詢<\/title>/g;
+        const userName =
+          MATCH_NAME.exec(decode(loginResult.rawBody))?.at(1) || "姓名載入失敗";
+
         const expires = loginResult.headers.expires;
 
         if (!expires) {
           return { error: true, message: "錯誤的帳號或密碼" };
         }
 
-        console.log("hey");
-
-        return { error: false, message: "成功登入", cookie };
+        return { error: false, message: "成功登入", cookie, userName };
       } catch (e) {
         return {
           error: true,
@@ -48,21 +52,35 @@ const appRouter = trpc
       }
     },
   })
-  .query("testList", {
+  .query("testMetaList", {
     input: z.object({ session: z.string() }),
     async resolve({ input }) {
       try {
         const testListResult = await got.get(API.TEST_LIST, {
           headers: { cookie: input.session },
         });
-
         const decodedTestListHtml = decode(testListResult.rawBody);
-        const testList = getTestList(decodedTestListHtml);
+        const testList = getTestMetaList(decodedTestListHtml);
 
         return { error: false, message: "", testList };
       } catch (e) {
-        console.log(e);
+        return { error: true, message: "發生了預期之外的錯誤" };
+      }
+    },
+  })
+  .mutation("testDetail", {
+    input: z.object({ session: z.string(), url: z.string() }),
+    async resolve({ input }) {
+      try {
+        const testListResult = await axios.get(input.url, {
+          headers: { cookie: input.session },
+          responseType: "arraybuffer",
+        });
+        const decodedTestListHtml = decode(Buffer.from(testListResult.data));
+        const testDetail = getTestDetail(decodedTestListHtml);
 
+        return { error: false, message: "", testDetail };
+      } catch (e) {
         return { error: true, message: "發生了預期之外的錯誤" };
       }
     },

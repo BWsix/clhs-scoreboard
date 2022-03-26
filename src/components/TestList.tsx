@@ -3,19 +3,23 @@ import {
   Divider,
   Loader,
   Navbar,
+  ScrollArea,
   SimpleGrid,
   Text,
   Title,
 } from "@mantine/core";
+import { useLocalStorage } from "@mantine/hooks";
+import { useRouter } from "next/router";
 import React, { Dispatch, SetStateAction } from "react";
-import { Test } from "src/utils/getTestList";
+import { Credentials } from "src/pages/login";
+import { TestMeta } from "src/utils/getTestMetaList";
 
 interface Props {
   error: string;
   opened: boolean;
   setOpened: Dispatch<SetStateAction<boolean>>;
-  setTest: Dispatch<SetStateAction<Test | undefined>>;
-  testList?: Test[];
+  setTest: Dispatch<SetStateAction<TestMeta | undefined>>;
+  testList?: TestMeta[];
 }
 
 export const TestList: React.FC<Props> = ({
@@ -25,43 +29,64 @@ export const TestList: React.FC<Props> = ({
   setTest,
   testList,
 }) => {
-  if (error) return <>error</>;
+  const router = useRouter();
+  const [cred, setCred] = useLocalStorage<Credentials | undefined>({
+    key: "cred",
+  });
+
+  if (error) return <>{error}</>;
 
   return (
     <Navbar
-      p="md"
+      px="sm"
       hiddenBreakpoint="sm"
       hidden={!opened}
       width={{ sm: 300, lg: 400 }}
     >
-      <Title align="center" order={4} pb="sm">
-        考試列表
-      </Title>
-
-      <Divider py="sm" />
-
       {testList ? (
-        <SimpleGrid cols={1} spacing="sm">
-          {testList.map((test) => (
-            <Button
-              key={test.fullName}
-              variant="outline"
-              color="gray"
-              onClick={() => {
-                setTest(test);
+        <Navbar.Section grow component={ScrollArea} offsetScrollbars pt="sm">
+          <SimpleGrid cols={1} spacing="sm">
+            {testList.map((test) => (
+              <Button
+                key={test.fullName}
+                variant="subtle"
+                color="gray"
+                onClick={() => {
+                  setTest(test);
 
-                if (opened) {
-                  setOpened(false);
-                }
-              }}
-            >
-              <Text align="center">{test.fullName}</Text>
-            </Button>
-          ))}
-        </SimpleGrid>
+                  if (opened) {
+                    setOpened(false);
+                  }
+                }}
+              >
+                <Text align="center">{test.fullName}</Text>
+              </Button>
+            ))}
+          </SimpleGrid>
+        </Navbar.Section>
       ) : (
         <Loader mx="auto" />
       )}
+
+      <Divider />
+
+      <Navbar.Section
+        m="sm"
+        style={{ display: "flex", justifyContent: "space-between" }}
+      >
+        <Text>{cred?.userName}</Text>
+        <Button
+          px="xl"
+          color="gray"
+          onClick={() => {
+            setCred(undefined);
+
+            router.push("/login");
+          }}
+        >
+          登出
+        </Button>
+      </Navbar.Section>
     </Navbar>
   );
 };

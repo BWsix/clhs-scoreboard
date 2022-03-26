@@ -1,4 +1,4 @@
-import { Burger, Header, MediaQuery, Text } from "@mantine/core";
+import { Burger, Header, MediaQuery, Text, Title } from "@mantine/core";
 import { Dispatch, SetStateAction } from "react";
 
 interface Props {
@@ -19,7 +19,7 @@ export const MyHeader: React.FC<Props> = ({ opened, setOpened }) => {
           />
         </MediaQuery>
 
-        <Text>壢中成績查詢2.0</Text>
+        <Title order={2}>壢中成績查詢2.0</Title>
       </div>
     </Header>
   );

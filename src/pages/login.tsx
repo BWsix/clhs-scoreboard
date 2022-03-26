@@ -18,6 +18,7 @@ export interface Credentials {
   id: string;
   password: string;
   session: string;
+  userName: string;
   updatedAt: number;
 }
 
@@ -35,17 +36,17 @@ const Login: NextPage = () => {
     },
   });
 
-  const sessionCookie = trpc.useMutation("session");
+  const session = trpc.useMutation("session");
   useEffect(() => {
-    if (!sessionCookie.data) {
+    if (!session.data) {
       return;
     }
-    if (sessionCookie.data?.error) {
-      form.setFieldError("password", sessionCookie.data.message);
+    if (session.data?.error) {
+      form.setFieldError("password", session.data.message);
 
       return;
     }
-    if (!sessionCookie.data?.cookie) {
+    if (!session.data?.cookie) {
       form.setFieldError("password", "Unexpected Error Occurred.");
 
       return;
@@ -54,12 +55,13 @@ const Login: NextPage = () => {
     setCred({
       id: form.values.id,
       password: form.values.password,
-      session: sessionCookie.data.cookie,
+      session: session.data.cookie,
+      userName: session.data.userName,
       updatedAt: Date.now(),
     });
 
     router.push("/");
-  }, [sessionCookie.data]);
+  }, [session.data]);
 
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto" pt="md" px="sm">
@@ -67,13 +69,13 @@ const Login: NextPage = () => {
         onSubmit={form.onSubmit(() => {
           console.log(form.values);
 
-          sessionCookie.mutate(form.values);
+          session.mutate(form.values);
         })}
       >
         <Title order={3}>登入壢中成績查詢2.0</Title>
 
         <div style={{ position: "relative" }}>
-          <LoadingOverlay visible={sessionCookie.isLoading} />
+          <LoadingOverlay visible={session.isLoading} />
 
           <TextInput
             required
