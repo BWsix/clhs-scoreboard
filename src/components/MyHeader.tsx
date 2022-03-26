@@ -1,5 +1,6 @@
-import { Burger, Header, MediaQuery, Text, Title } from "@mantine/core";
+import { Burger, Header, MediaQuery, Title } from "@mantine/core";
 import { Dispatch, SetStateAction } from "react";
+import { IconSet } from "./Icons/IconSet";
 
 interface Props {
   opened: boolean;
@@ -9,7 +10,14 @@ interface Props {
 export const MyHeader: React.FC<Props> = ({ opened, setOpened }) => {
   return (
     <Header height={70} p="md">
-      <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          height: "100%",
+        }}
+      >
         <MediaQuery largerThan="sm" styles={{ display: "none" }}>
           <Burger
             opened={opened}
@@ -20,6 +28,8 @@ export const MyHeader: React.FC<Props> = ({ opened, setOpened }) => {
         </MediaQuery>
 
         <Title order={2}>CLHS Scoreboard</Title>
+
+        <IconSet />
       </div>
     </Header>
   );
