@@ -23,7 +23,7 @@ export interface TestDetail {
   subjects: Subject[];
 }
 
-export const getTestDetail = (content: string): TestDetail => {
+export const getTestDetail = (content: string): [TestDetail, any] => {
   const MATCH_SUBJECT_NAME =
     /<td class="top" style="font-size: 15px;">([\u4e00-\u9fa5\-\s\d\w]+)<\/td>/g;
   const MATCH_GENERIC_SCORE =
@@ -34,6 +34,7 @@ export const getTestDetail = (content: string): TestDetail => {
     /<span class="bluetext">【([\u4e00-\u9fa5])年 (\d+)\s*班】\[(\d\d\d)([\u4e00-\u9fa5])\] ([\u4e00-\u9fa5\w\s\d\[\]]+)成績<\/span>/g;
 
   let test;
+  let error = null;
   let subjects: Subject[] = [];
 
   while ((test = MATCH_SUBJECT_NAME.exec(content))) {
@@ -48,29 +49,55 @@ export const getTestDetail = (content: string): TestDetail => {
     subjects.push({ name, score, average });
   }
 
-  const scoreSum = MATCH_STATUS.exec(content)![1];
-  const scoreAvg = MATCH_STATUS.exec(content)![1];
-  const rankClass = MATCH_STATUS.exec(content)![1];
-  const rankSchool = MATCH_STATUS.exec(content)![1];
+  let scoreSum = "error",
+    scoreAvg = "error",
+    rankClass = "error",
+    rankSchool = "error";
+  try {
+    scoreSum = MATCH_STATUS.exec(content)![1];
+    scoreAvg = MATCH_STATUS.exec(content)![1];
+    rankClass = MATCH_STATUS.exec(content)![1];
+    rankSchool = MATCH_STATUS.exec(content)![1];
+  } catch (e) {
+    error = e;
+  }
 
-  const [_, grade, className, year, semester, name] = MATCH_INFO.exec(content)!;
+  let grade = "error",
+    className = "error",
+    year = "error",
+    semester = "error",
+    name = "error";
+  try {
+    const result = MATCH_INFO.exec(content)!;
 
-  return {
-    info: {
-      className,
-      grade,
-      name,
-      semester,
-      year,
+    grade = result[1];
+    className = result[2];
+    year = result[3];
+    semester = result[4];
+    name = result[5];
+  } catch (e) {
+    error = e;
+  }
+
+  return [
+    {
+      info: {
+        className,
+        grade,
+        name,
+        semester,
+        year,
+      },
+      rank: {
+        inClass: rankClass,
+        inSchool: rankSchool,
+      },
+      score: {
+        avg: scoreAvg,
+        sum: scoreSum,
+      },
+      subjects,
     },
-    rank: {
-      inClass: rankClass,
-      inSchool: rankSchool,
-    },
-    score: {
-      avg: scoreAvg,
-      sum: scoreSum,
-    },
-    subjects,
-  };
+    error,
+  ];
 };

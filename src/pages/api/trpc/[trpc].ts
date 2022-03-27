@@ -51,7 +51,7 @@ const appRouter = trpc
 
         return { error: false, message: "成功登入", cookie, userName };
       } catch (error) {
-        console.log({
+        console.error({
           where: "api/trpc/session",
           error,
           cookie,
@@ -82,11 +82,7 @@ const appRouter = trpc
 
         return { error: false, message: "", testMetaList };
       } catch (error) {
-        console.log({
-          where: "api/trpc/testMetaList",
-          error,
-          input,
-        });
+        console.error({ where: "api/trpc/testMetaList", error, input });
 
         return { error: true, message: "發生了預期之外的錯誤" };
       }
@@ -95,7 +91,7 @@ const appRouter = trpc
   .mutation("testDetail", {
     input: z.object({ session: z.string(), url: z.string() }),
     async resolve({ input }) {
-      let testDetailResult, decodedTestDetailHtml, testDetail;
+      let testDetailResult, decodedTestDetailHtml, testDetail, error;
 
       try {
         testDetailResult = await axios.get(input.url, {
@@ -103,15 +99,14 @@ const appRouter = trpc
           responseType: "arraybuffer",
         });
         decodedTestDetailHtml = decode(Buffer.from(testDetailResult.data));
-        testDetail = getTestDetail(decodedTestDetailHtml);
+        [testDetail, error] = getTestDetail(decodedTestDetailHtml);
+
+        if (error)
+          console.error({ where: "api/trpc/testDetail", error, input });
 
         return { error: false, message: "", testDetail };
       } catch (error) {
-        console.log({
-          where: "api/trpc/testDetail",
-          error,
-          input,
-        });
+        console.error({ where: "api/trpc/testDetail", error, input });
 
         return { error: true, message: "發生了預期之外的錯誤" };
       }
