@@ -54,7 +54,6 @@ const appRouter = trpc
         console.log({
           where: "api/trpc/session",
           error,
-          pageWithCookieResult,
           cookie,
           verificationToken,
           loginResult,
@@ -86,9 +85,7 @@ const appRouter = trpc
         console.log({
           where: "api/trpc/testMetaList",
           error,
-          testListResult,
-          decodedTestListHtml,
-          testMetaList,
+          input,
         });
 
         return { error: true, message: "發生了預期之外的錯誤" };
@@ -114,9 +111,6 @@ const appRouter = trpc
           where: "api/trpc/testDetail",
           error,
           input,
-          testDetailResult,
-          decodedTestDetailHtml,
-          testDetail,
         });
 
         return { error: true, message: "發生了預期之外的錯誤" };
