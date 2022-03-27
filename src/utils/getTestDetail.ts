@@ -31,7 +31,7 @@ export const getTestDetail = (content: string): TestDetail => {
   const MATCH_STATUS =
     /<td class="score">\n?\s*(?:<span class="\w+">|)([\d\.]*)(?:<\/span>|)\n?\s*<\/td>/g;
   const MATCH_INFO =
-    /<span class="bluetext">【([\u4e00-\u9fa5])年 (\d+) 班】\[(\d\d\d)([\u4e00-\u9fa5])\] ([\u4e00-\u9fa5\w\s\d\[\]]+)成績<\/span>/g;
+    /<span class="bluetext">【([\u4e00-\u9fa5])年 (\d+)\s*班】\[(\d\d\d)([\u4e00-\u9fa5])\] ([\u4e00-\u9fa5\w\s\d\[\]]+)成績<\/span>/g;
 
   let test;
   let subjects: Subject[] = [];
