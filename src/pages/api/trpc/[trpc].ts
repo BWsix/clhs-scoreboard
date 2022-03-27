@@ -17,13 +17,20 @@ const appRouter = trpc
       password: z.string(),
     }),
     async resolve({ input }) {
+      let pageWithCookieResult,
+        cookie,
+        verificationToken,
+        loginResult,
+        expires,
+        userName;
+
       try {
-        const data = await got.get(API.BASE);
+        pageWithCookieResult = await got.get(API.BASE);
 
-        const cookie = data.headers["set-cookie"]![0].split(";")[0];
-        const verificationToken = getVerificationToken(data.body);
+        cookie = pageWithCookieResult.headers["set-cookie"]![0].split(";")[0];
+        verificationToken = getVerificationToken(pageWithCookieResult.body);
 
-        const loginResult = await got.post(API.LOGIN, {
+        loginResult = await got.post(API.LOGIN, {
           headers: { cookie },
           form: {
             division: "senior",
@@ -33,18 +40,27 @@ const appRouter = trpc
           },
         });
 
-        const expires = loginResult.headers.expires;
+        expires = loginResult.headers.expires;
 
         if (!expires) {
           return { error: true, message: "錯誤的帳號或密碼" };
         }
 
         const MATCH_NAME = /<title>([\u4e00-\u9fa5]+)學生線上查詢<\/title>/g;
-        const userName = MATCH_NAME.exec(decode(loginResult.rawBody))![1];
+        userName = MATCH_NAME.exec(decode(loginResult.rawBody))![1];
 
         return { error: false, message: "成功登入", cookie, userName };
-      } catch (e) {
-        console.error(e);
+      } catch (error) {
+        console.log({
+          where: "api/trpc/session",
+          error,
+          pageWithCookieResult,
+          cookie,
+          verificationToken,
+          loginResult,
+          expires,
+          userName,
+        });
 
         return {
           error: true,
@@ -56,16 +72,24 @@ const appRouter = trpc
   .query("testMetaList", {
     input: z.object({ session: z.string() }),
     async resolve({ input }) {
+      let testListResult, decodedTestListHtml, testMetaList;
+
       try {
-        const testListResult = await got.get(API.TEST_LIST, {
+        testListResult = await got.get(API.TEST_LIST, {
           headers: { cookie: input.session },
         });
-        const decodedTestListHtml = decode(testListResult.rawBody);
-        const testMetaList = getTestMetaList(decodedTestListHtml);
+        decodedTestListHtml = decode(testListResult.rawBody);
+        testMetaList = getTestMetaList(decodedTestListHtml);
 
         return { error: false, message: "", testMetaList };
-      } catch (e) {
-        console.error(e);
+      } catch (error) {
+        console.log({
+          where: "api/trpc/testMetaList",
+          error,
+          testListResult,
+          decodedTestListHtml,
+          testMetaList,
+        });
 
         return { error: true, message: "發生了預期之外的錯誤" };
       }
@@ -74,17 +98,26 @@ const appRouter = trpc
   .mutation("testDetail", {
     input: z.object({ session: z.string(), url: z.string() }),
     async resolve({ input }) {
+      let testDetailResult, decodedTestDetailHtml, testDetail;
+
       try {
-        const testListResult = await axios.get(input.url, {
+        testDetailResult = await axios.get(input.url, {
           headers: { cookie: input.session },
           responseType: "arraybuffer",
         });
-        const decodedTestListHtml = decode(Buffer.from(testListResult.data));
-        const testDetail = getTestDetail(decodedTestListHtml);
+        decodedTestDetailHtml = decode(Buffer.from(testDetailResult.data));
+        testDetail = getTestDetail(decodedTestDetailHtml);
 
         return { error: false, message: "", testDetail };
-      } catch (e) {
-        console.error(e);
+      } catch (error) {
+        console.log({
+          where: "api/trpc/testDetail",
+          error,
+          input,
+          testDetailResult,
+          decodedTestDetailHtml,
+          testDetail,
+        });
 
         return { error: true, message: "發生了預期之外的錯誤" };
       }
