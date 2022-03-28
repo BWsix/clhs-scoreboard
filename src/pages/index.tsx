@@ -1,64 +1,46 @@
-import { Center, Loader } from "@mantine/core";
-import { useLocalStorage } from "@mantine/hooks";
-import ms from "ms";
+import { Anchor, Center, Text } from "@mantine/core";
 import type { NextPage } from "next";
-import Error from "next/error";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { MyAppShell } from "src/components/MyAppShell";
-import { Credentials } from "src/pages/login";
 import { trpc } from "src/utils/trpc";
 
 const Home: NextPage = () => {
   const router = useRouter();
 
-  const [cred, setCred] = useLocalStorage<Credentials>({ key: "cred" });
-  const sessionMutation = trpc.useMutation("session");
+  const keepLoggedInMutation = trpc.useMutation("refresh", {
+    onError: (error: any) => {
+      if (error?.message === "sessionError") {
+        router.push("/login");
+        return;
+      }
+    },
+  });
 
   useEffect(() => {
-    if (!cred?.id || !cred?.password) {
-      router.push("/login");
-      return;
-    }
-
-    if (Date.now() - cred.updatedAt < ms("10m")) {
-      sessionMutation.data = {
-        error: false,
-        message: "",
-        userName: cred.userName,
-        cookie: cred.session,
-      };
-
-      return;
-    }
-
-    sessionMutation.mutate({ id: cred.id, password: cred.password });
+    keepLoggedInMutation.mutate();
   }, []);
 
-  useEffect(() => {
-    if (!sessionMutation.data?.cookie) {
-      return;
-    }
-
-    setCred({
-      ...cred,
-      session: sessionMutation.data.cookie,
-      updatedAt: Date.now(),
-    });
-  }, [sessionMutation.data]);
-
-  if (sessionMutation.data?.error) {
-    return <Error statusCode={500} title={sessionMutation.data.message} />;
-  }
-
-  if (!cred?.session)
+  if (!keepLoggedInMutation.isSuccess)
     return (
       <Center style={{ width: "100vw", height: "100vh" }}>
-        <Loader />
+        <div>
+          <Text align="center">正在登入... </Text>
+          <Anchor
+            component="button"
+            align="center"
+            color="gray"
+            onClick={() => {
+              keepLoggedInMutation.mutate();
+            }}
+          >
+            (卡住了嗎? 點我重試)
+          </Anchor>
+        </div>
       </Center>
     );
 
-  return <MyAppShell session={cred.session} />;
+  return <MyAppShell />;
 };
 
 export default Home;

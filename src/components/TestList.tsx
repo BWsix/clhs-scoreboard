@@ -8,46 +8,52 @@ import {
   Table,
   Text,
 } from "@mantine/core";
-import { useLocalStorage } from "@mantine/hooks";
 import { useRouter } from "next/router";
-import React, { Dispatch, SetStateAction } from "react";
-import { Credentials } from "src/pages/login";
-import { TestMeta } from "src/utils/getTestMetaList";
+import { Dispatch, SetStateAction } from "react";
+import { TestMeta } from "src/handlers/testMetaList/getTestMetaList";
+import { trpc } from "src/utils/trpc";
 import { ChevronRight } from "tabler-icons-react";
 
 interface Props {
   error: string;
   opened: boolean;
   setOpened: Dispatch<SetStateAction<boolean>>;
-  setTest: Dispatch<SetStateAction<TestMeta | undefined>>;
-  testList?: TestMeta[];
+  setTestMeta: Dispatch<SetStateAction<TestMeta | undefined>>;
+  testMetaList?: TestMeta[];
 }
 
 export const TestList: React.FC<Props> = ({
   error,
   opened,
   setOpened,
-  setTest,
-  testList,
+  setTestMeta,
+  testMetaList,
 }) => {
   const router = useRouter();
-  const [cred, setCred] = useLocalStorage<Credentials | undefined>({
-    key: "cred",
+  const meQuery = trpc.useQuery(["me"]);
+  const logoutMutation = trpc.useMutation("logout", {
+    onSuccess: () => router.push("/login"),
   });
 
-  if (error) return <>{error}</>;
+  if (error) {
+    return (
+      <Text color="red" align="center" mt="md">
+        {error}
+      </Text>
+    );
+  }
 
-  const rows = testList?.map((test) => (
+  const rows = testMetaList?.map((testMeta) => (
     <tr
-      key={test.year + test.semester + test.name}
+      key={testMeta.year + testMeta.semester + testMeta.name}
       onClick={() => {
         setOpened(false);
-        setTest(test);
+        setTestMeta(testMeta);
       }}
     >
-      <td>{test.year}</td>
-      <td>{test.semester}</td>
-      <td>{test.name}</td>
+      <td>{testMeta.year}</td>
+      <td>{testMeta.semester}</td>
+      <td>{testMeta.name}</td>
       <td>
         <ActionIcon my="auto" variant="hover">
           <ChevronRight />
@@ -67,23 +73,15 @@ export const TestList: React.FC<Props> = ({
         m="sm"
         style={{ display: "flex", justifyContent: "space-between" }}
       >
-        <Text my="auto">{cred?.userName}</Text>
-        <Button
-          px="xl"
-          color="gray"
-          onClick={() => {
-            setCred(undefined);
-
-            router.push("/login");
-          }}
-        >
+        <Text my="auto">{meQuery.data}</Text>
+        <Button px="xl" color="gray" onClick={() => logoutMutation.mutate()}>
           登出
         </Button>
       </Navbar.Section>
 
       <Divider />
 
-      {testList ? (
+      {testMetaList ? (
         <Navbar.Section grow component={ScrollArea} offsetScrollbars pt="sm">
           <Table highlightOnHover>
             <thead>

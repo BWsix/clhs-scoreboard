@@ -1,4 +1,4 @@
-import { API } from "src/constants";
+import { API } from "../constants";
 
 export interface TestMeta {
   name: string;

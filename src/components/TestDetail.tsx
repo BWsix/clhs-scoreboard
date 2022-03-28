@@ -1,30 +1,36 @@
 import { Container, Divider, Loader, Table, Title } from "@mantine/core";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { TestMeta } from "src/utils/getTestMetaList";
+import { TestMeta } from "src/handlers/testMetaList/getTestMetaList";
 import { trpc } from "src/utils/trpc";
 
 interface Props {
-  session: string;
   testMeta?: TestMeta;
 }
 
-export const TestDetail: React.FC<Props> = ({ testMeta, session }) => {
-  const testDetail = trpc.useMutation("testDetail");
+export const TestDetail: React.FC<Props> = ({ testMeta }) => {
+  const router = useRouter();
+  const testDetailMutation = trpc.useMutation("testDetail", {
+    onError: (error: any) => {
+      if (error?.message === "sessionError") {
+        router.push("/login");
+        return;
+      }
+    },
+  });
 
   useEffect(() => {
     if (!testMeta) return;
 
-    testDetail.mutate({ session, url: testMeta.url });
+    testDetailMutation.mutate({ url: testMeta.url });
   }, [testMeta]);
 
-  if (testDetail.isLoading || !testMeta) return <Loader mx="auto" />;
+  if (testDetailMutation.isLoading || !testMeta) return <Loader mx="auto" />;
+  if (testDetailMutation.isError)
+    return <>{testDetailMutation.error.message}</>;
+  if (!testDetailMutation.data) return <>no data</>;
 
-  const detail = testDetail.data;
-
-  if (detail?.error) return <>{detail.message}</>;
-  if (!detail?.testDetail) return <>no data</>;
-
-  const { info, rank, score, subjects } = detail.testDetail;
+  const { info, rank, score, subjects } = testDetailMutation.data;
 
   const rows = subjects?.map(({ average, name, score }) => (
     <tr key={name}>

@@ -1,121 +1,87 @@
 import * as trpc from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
-import axios from "axios";
-import got from "got";
-import { API } from "src/constants";
-import { decode } from "src/utils/decode";
-import { getTestDetail } from "src/utils/getTestDetail";
-import { getTestMetaList } from "src/utils/getTestMetaList";
-import { getVerificationToken } from "src/utils/getVerificationToken";
+import { login } from "src/handlers/login";
+import { testDetail } from "src/handlers/testDetail";
+import { testMetaList } from "src/handlers/testMetaList";
+import {
+  destroyAllCookies,
+  getCookie,
+  getSessionCookie,
+  setCookie,
+} from "src/utils/cookies";
 import { z } from "zod";
 
-const appRouter = trpc
-  .router()
-  .mutation("session", {
+export function createContext(opts?: trpcNext.CreateNextContextOptions) {
+  if (!opts) {
+    throw new Error("Cannot resolve your request!");
+  }
+
+  return opts;
+}
+
+type Context = trpc.inferAsyncReturnType<typeof createContext>;
+
+const router = trpc
+  .router<Context>()
+  .mutation("login", {
     input: z.object({
       id: z.string(),
       password: z.string(),
     }),
-    async resolve({ input }) {
-      let pageWithCookieResult,
-        cookie,
-        verificationToken,
-        loginResult,
-        expires,
-        userName;
+    async resolve({ input, ctx }) {
+      const data = await login(input.id, input.password);
 
-      try {
-        pageWithCookieResult = await got.get(API.BASE);
+      const TEN_DAYS = 60 * 60 * 24 * 10;
 
-        cookie = pageWithCookieResult.headers["set-cookie"]![0].split(";")[0];
-        verificationToken = getVerificationToken(pageWithCookieResult.body);
+      setCookie(ctx, "sessionCookie", data.sessionCookie);
+      setCookie(ctx, "name", data.name, null); // will last forever since I really don't wanna change the frontend code.
+      setCookie(ctx, "id", input.id, TEN_DAYS);
+      setCookie(ctx, "password", input.password, TEN_DAYS);
 
-        loginResult = await got.post(API.LOGIN, {
-          headers: { cookie },
-          form: {
-            division: "senior",
-            Loginid: input.id,
-            LoginPwd: input.password,
-            __RequestVerificationToken: verificationToken,
-          },
-        });
+      return data;
+    },
+  })
+  .query("me", {
+    async resolve({ ctx }) {
+      const name = getCookie(ctx, "name");
 
-        expires = loginResult.headers.expires;
+      return name;
+    },
+  })
+  .mutation("logout", {
+    async resolve({ ctx }) {
+      destroyAllCookies(ctx);
 
-        if (!expires) {
-          return { error: true, message: "錯誤的帳號或密碼" };
-        }
+      return { foo: "bar" };
+    },
+  })
+  .mutation("refresh", {
+    async resolve({ ctx }) {
+      await getSessionCookie(ctx);
 
-        const MATCH_NAME = /<title>([\u4e00-\u9fa5]+)學生線上查詢<\/title>/g;
-        userName = MATCH_NAME.exec(decode(loginResult.rawBody))![1];
-
-        return { error: false, message: "成功登入", cookie, userName };
-      } catch (error) {
-        console.error({
-          where: "api/trpc/session",
-          error,
-          cookie,
-          verificationToken,
-          loginResult,
-          expires,
-          userName,
-        });
-
-        return {
-          error: true,
-          message: "發生了預期之外的錯誤(也許再試一次會解決)",
-        };
-      }
+      return { foo: "bar" };
     },
   })
   .query("testMetaList", {
-    input: z.object({ session: z.string() }),
-    async resolve({ input }) {
-      let testListResult, decodedTestListHtml, testMetaList;
+    async resolve({ ctx }) {
+      const sessionCookie = await getSessionCookie(ctx);
 
-      try {
-        testListResult = await got.get(API.TEST_LIST, {
-          headers: { cookie: input.session },
-        });
-        decodedTestListHtml = decode(testListResult.rawBody);
-        testMetaList = getTestMetaList(decodedTestListHtml);
+      const data = await testMetaList(sessionCookie);
 
-        return { error: false, message: "", testMetaList };
-      } catch (error) {
-        console.error({ where: "api/trpc/testMetaList", error, input });
-
-        return { error: true, message: "發生了預期之外的錯誤" };
-      }
+      return data;
     },
   })
   .mutation("testDetail", {
-    input: z.object({ session: z.string(), url: z.string() }),
-    async resolve({ input }) {
-      let testDetailResult, decodedTestDetailHtml, testDetail, error;
+    input: z.object({ url: z.string() }),
+    async resolve({ input, ctx }) {
+      const sessionCookie = await getSessionCookie(ctx);
 
-      try {
-        testDetailResult = await axios.get(input.url, {
-          headers: { cookie: input.session },
-          responseType: "arraybuffer",
-        });
-        decodedTestDetailHtml = decode(Buffer.from(testDetailResult.data));
-        [testDetail, error] = getTestDetail(decodedTestDetailHtml);
+      const data = await testDetail(sessionCookie, input.url);
 
-        if (error)
-          console.error({ where: "api/trpc/testDetail", error, input });
-
-        return { error: false, message: "", testDetail };
-      } catch (error) {
-        console.error({ where: "api/trpc/testDetail", error, input });
-
-        return { error: true, message: "發生了預期之外的錯誤" };
-      }
+      return data;
     },
   });
 
-export type AppRouter = typeof appRouter;
+export type AppRouter = typeof router;
 
-export default trpcNext.createNextApiHandler({
-  router: appRouter,
-  createContext: () => null,
-});
+export default trpcNext.createNextApiHandler({ router, createContext });

@@ -23,7 +23,7 @@ export interface TestDetail {
   subjects: Subject[];
 }
 
-export const getTestDetail = (content: string): [TestDetail, any] => {
+export const getTestDetail = (content: string): TestDetail => {
   const MATCH_SUBJECT_NAME =
     /<td class="top" style="font-size: 15px;">([\u4e00-\u9fa5\-\s\d\w]+)<\/td>/g;
   const MATCH_GENERIC_SCORE =
@@ -49,10 +49,10 @@ export const getTestDetail = (content: string): [TestDetail, any] => {
     subjects.push({ name, score, average });
   }
 
-  let scoreSum = "error",
-    scoreAvg = "error",
-    rankClass = "error",
-    rankSchool = "error";
+  let scoreSum = "(error)";
+  let scoreAvg = "(error)";
+  let rankClass = "(error)";
+  let rankSchool = "(error)";
   try {
     scoreSum = MATCH_STATUS.exec(content)![1];
     scoreAvg = MATCH_STATUS.exec(content)![1];
@@ -62,11 +62,11 @@ export const getTestDetail = (content: string): [TestDetail, any] => {
     error = e;
   }
 
-  let grade = "error",
-    className = "error",
-    year = "error",
-    semester = "error",
-    name = "error";
+  let grade = "(error)";
+  let className = "(error)";
+  let year = "(error)";
+  let semester = "(error)";
+  let name = "(error)";
   try {
     const result = MATCH_INFO.exec(content)!;
 
@@ -79,25 +79,22 @@ export const getTestDetail = (content: string): [TestDetail, any] => {
     error = e;
   }
 
-  return [
-    {
-      info: {
-        className,
-        grade,
-        name,
-        semester,
-        year,
-      },
-      rank: {
-        inClass: rankClass,
-        inSchool: rankSchool,
-      },
-      score: {
-        avg: scoreAvg,
-        sum: scoreSum,
-      },
-      subjects,
+  return {
+    info: {
+      className,
+      grade,
+      name,
+      semester,
+      year,
     },
-    error,
-  ];
+    rank: {
+      inClass: rankClass,
+      inSchool: rankSchool,
+    },
+    score: {
+      avg: scoreAvg,
+      sum: scoreSum,
+    },
+    subjects,
+  };
 };

@@ -2,9 +2,14 @@ import { MantineProvider } from "@mantine/core";
 import { withTRPC } from "@trpc/next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { useEffect } from "react";
 import { AppRouter } from "./api/trpc/[trpc]";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    localStorage.removeItem("cred");
+  }, []);
+
   return (
     <>
       <Head>

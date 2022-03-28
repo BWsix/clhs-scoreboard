@@ -1,31 +1,35 @@
 import { AppShell } from "@mantine/core";
-import { useEffect, useState } from "react";
-import { TestMeta } from "src/utils/getTestMetaList";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { TestMeta } from "src/handlers/testMetaList/getTestMetaList";
 import { trpc } from "src/utils/trpc";
 import { MyHeader } from "./MyHeader";
 import { TestDetail } from "./TestDetail";
 import { TestList } from "./TestList";
 
-interface Props {
-  session: string;
-}
-
-export const MyAppShell: React.FC<Props> = ({ session, children }) => {
-  const [error, setError] = useState("");
+export const MyAppShell: React.FC = () => {
+  const router = useRouter();
   const [opened, setOpened] = useState(false);
+
+  const [error, setError] = useState("");
   const [testMeta, setTestMeta] = useState<TestMeta | undefined>(undefined);
-  const testList = trpc.useQuery(["testMetaList", { session }]);
 
-  useEffect(() => {
-    if (!testList.data) return;
+  const testMetaListQuery = trpc.useQuery(["testMetaList"], {
+    onSuccess: (testMetaList) => {
+      if (!testMetaList.length) {
+        setError("沒有考試紀錄");
+        return;
+      }
 
-    if (testList.data.error) {
-      setError(testList.data.message);
-      return;
-    }
-
-    setTestMeta(testList.data.testMetaList![0]);
-  }, [testList.data]);
+      setTestMeta(testMetaList[0]);
+    },
+    onError: (error: any) => {
+      if (error?.message === "sessionError") {
+        router.push("/login");
+        return;
+      }
+    },
+  });
 
   return (
     <AppShell
@@ -33,16 +37,16 @@ export const MyAppShell: React.FC<Props> = ({ session, children }) => {
       fixed
       navbar={
         <TestList
-          error={error}
+          error={testMetaListQuery.error?.message || error || ""}
           opened={opened}
           setOpened={setOpened}
-          setTest={setTestMeta}
-          testList={testList.data?.testMetaList}
+          setTestMeta={setTestMeta}
+          testMetaList={testMetaListQuery.data}
         />
       }
       header={<MyHeader opened={opened} setOpened={setOpened} />}
     >
-      <TestDetail session={session} testMeta={testMeta} />
+      <TestDetail testMeta={testMeta} />
     </AppShell>
   );
 };
