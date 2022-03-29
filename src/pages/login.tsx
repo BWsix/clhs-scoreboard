@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Center,
@@ -13,6 +14,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useUsername } from "src/hooks/useUserName";
 import { trpc } from "src/utils/trpc";
+import { AlertCircle } from "tabler-icons-react";
 
 const Login: NextPage = () => {
   const router = useRouter();
@@ -66,6 +68,24 @@ const Login: NextPage = () => {
             {loginMutation.error?.message || ""}
           </Text>
         </form>
+
+        <Alert
+          title="3/29 重大更新"
+          radius="md"
+          icon={<AlertCircle size={16} />}
+          variant="outline"
+          mt="md"
+        >
+          為了讓 CLHS Scoreboard 更加安全，用戶端自動登入功能已經被移除了。
+          <br />
+          <br />
+          所有先前儲存在用戶端的資料皆刪除完畢 (
+          不過這並不影響瀏覽器的密碼自動填入功能 )。
+          <br />
+          <br />
+          往後使用 CLHS Scoreboard
+          時會需要在大約閒置15~20分鐘後使用瀏覽器的密碼自動填入功能重新登入。
+        </Alert>
       </Box>
     </Center>
   );
