@@ -8,10 +8,10 @@ import {
   Table,
   Text,
 } from "@mantine/core";
-import { useRouter } from "next/router";
 import { Dispatch, SetStateAction } from "react";
 import { TestMeta } from "src/handlers/testMetaList/getTestMetaList";
-import { trpc } from "src/utils/trpc";
+import { useLogout } from "src/hooks/useLogout";
+import { useUsername } from "src/hooks/useUserName";
 import { ChevronRight } from "tabler-icons-react";
 
 interface Props {
@@ -29,11 +29,8 @@ export const TestList: React.FC<Props> = ({
   setTestMeta,
   testMetaList,
 }) => {
-  const router = useRouter();
-  const meQuery = trpc.useQuery(["me"]);
-  const logoutMutation = trpc.useMutation("logout", {
-    onSuccess: () => router.push("/login"),
-  });
+  const { userName } = useUsername();
+  const toggleLogout = useLogout();
 
   if (error) {
     return (
@@ -73,8 +70,8 @@ export const TestList: React.FC<Props> = ({
         m="sm"
         style={{ display: "flex", justifyContent: "space-between" }}
       >
-        <Text my="auto">{meQuery.data}</Text>
-        <Button px="xl" color="gray" onClick={() => logoutMutation.mutate()}>
+        <Text my="auto">{userName}</Text>
+        <Button px="xl" color="gray" onClick={() => toggleLogout()}>
           登出
         </Button>
       </Navbar.Section>

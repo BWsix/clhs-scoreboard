@@ -1,13 +1,14 @@
 import * as trpc from "@trpc/server";
+import { TRPCError } from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
 import { login } from "src/handlers/login";
 import { testDetail } from "src/handlers/testDetail";
 import { testMetaList } from "src/handlers/testMetaList";
 import {
-  destroyAllCookies,
-  getCookie,
+  destroyAllDeprecatedCookies,
+  destroySessionCookie,
   getSessionCookie,
-  setCookie,
+  setSessionCookie,
 } from "src/utils/cookies";
 import { z } from "zod";
 
@@ -29,44 +30,41 @@ const router = trpc
       password: z.string(),
     }),
     async resolve({ input, ctx }) {
-      const data = await login(input.id, input.password);
+      destroyAllDeprecatedCookies(ctx);
 
-      const TEN_DAYS = 60 * 60 * 24 * 10;
+      const { name, sessionCookie } = await login(input.id, input.password);
+      setSessionCookie(ctx, sessionCookie);
 
-      setCookie(ctx, "sessionCookie", data.sessionCookie);
-      setCookie(ctx, "name", data.name, null); // will last forever since I really don't wanna change the frontend code.
-      setCookie(ctx, "id", input.id, TEN_DAYS);
-      setCookie(ctx, "password", input.password, TEN_DAYS);
-
-      return data;
-    },
-  })
-  .query("me", {
-    async resolve({ ctx }) {
-      const name = getCookie(ctx, "name");
-
-      return name;
+      return { name };
     },
   })
   .mutation("logout", {
-    async resolve({ ctx }) {
-      destroyAllCookies(ctx);
+    resolve: ({ ctx }) => {
+      destroyAllDeprecatedCookies(ctx);
 
-      return { foo: "bar" };
+      destroySessionCookie(ctx);
     },
   })
-  .mutation("refresh", {
-    async resolve({ ctx }) {
-      await getSessionCookie(ctx);
+  .middleware(async ({ ctx, next }) => {
+    const sessionCookie = getSessionCookie(ctx);
 
-      return { foo: "bar" };
+    if (!sessionCookie) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "Session expired, please re-login.",
+      });
+    }
+
+    return next({ ctx: { ...ctx, sessionCookie } });
+  })
+  .mutation("me", {
+    resolve: () => {
+      return true;
     },
   })
   .query("testMetaList", {
     async resolve({ ctx }) {
-      const sessionCookie = await getSessionCookie(ctx);
-
-      const data = await testMetaList(sessionCookie);
+      const data = await testMetaList(ctx.sessionCookie);
 
       return data;
     },
@@ -74,9 +72,7 @@ const router = trpc
   .mutation("testDetail", {
     input: z.object({ url: z.string() }),
     async resolve({ input, ctx }) {
-      const sessionCookie = await getSessionCookie(ctx);
-
-      const data = await testDetail(sessionCookie, input.url);
+      const data = await testDetail(ctx.sessionCookie, input.url);
 
       return data;
     },

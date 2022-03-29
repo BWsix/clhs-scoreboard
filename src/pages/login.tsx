@@ -11,17 +11,19 @@ import {
 import { useForm } from "@mantine/form";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import { useUsername } from "src/hooks/useUserName";
 import { trpc } from "src/utils/trpc";
 
 const Login: NextPage = () => {
   const router = useRouter();
-
+  const { updateUserName } = useUsername();
   const form = useForm({
     initialValues: { id: "", password: "" },
   });
 
   const loginMutation = trpc.useMutation("login", {
-    onSuccess: () => {
+    onSuccess: (data) => {
+      updateUserName(data.name);
       router.push("/");
     },
   });

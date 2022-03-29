@@ -1,44 +1,37 @@
-import { Anchor, Center, Text } from "@mantine/core";
+import { Center, Text } from "@mantine/core";
+import { useInterval } from "@mantine/hooks";
 import type { NextPage } from "next";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MyAppShell } from "src/components/MyAppShell";
+import { useLogout } from "src/hooks/useLogout";
 import { trpc } from "src/utils/trpc";
 
 const Home: NextPage = () => {
-  const router = useRouter();
+  const toggleLogout = useLogout();
 
-  const keepLoggedInMutation = trpc.useMutation("refresh", {
-    onError: (error: any) => {
-      if (error?.message === "sessionError") {
-        router.push("/login");
-        return;
-      }
+  const meMutation = trpc.useMutation(["me"], {
+    onError: () => {
+      return toggleLogout();
     },
   });
 
   useEffect(() => {
-    keepLoggedInMutation.mutate();
+    meMutation.mutate();
+    interval.start();
+
+    return interval.stop;
   }, []);
 
-  if (!keepLoggedInMutation.isSuccess)
+  const [ticks, setTicks] = useState(0);
+  const interval = useInterval(() => setTicks((s) => s + 1), 500);
+
+  if (!meMutation.isSuccess) {
     return (
       <Center style={{ width: "100vw", height: "100vh" }}>
-        <div>
-          <Text align="center">正在登入... </Text>
-          <Anchor
-            component="button"
-            align="center"
-            color="gray"
-            onClick={() => {
-              keepLoggedInMutation.mutate();
-            }}
-          >
-            (卡住了嗎? 點我重試)
-          </Anchor>
-        </div>
+        <Text align="center">正在檢查登入狀態{".".repeat(ticks % 4)}</Text>
       </Center>
     );
+  }
 
   return <MyAppShell />;
 };

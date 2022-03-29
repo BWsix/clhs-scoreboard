@@ -2,6 +2,7 @@ import { Container, Divider, Loader, Table, Title } from "@mantine/core";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { TestMeta } from "src/handlers/testMetaList/getTestMetaList";
+import { useLogout } from "src/hooks/useLogout";
 import { trpc } from "src/utils/trpc";
 
 interface Props {
@@ -9,12 +10,11 @@ interface Props {
 }
 
 export const TestDetail: React.FC<Props> = ({ testMeta }) => {
-  const router = useRouter();
+  const toggleLogout = useLogout();
   const testDetailMutation = trpc.useMutation("testDetail", {
-    onError: (error: any) => {
-      if (error?.message === "sessionError") {
-        router.push("/login");
-        return;
+    onError: (error) => {
+      if (error.data?.code === "UNAUTHORIZED") {
+        return toggleLogout();
       }
     },
   });
