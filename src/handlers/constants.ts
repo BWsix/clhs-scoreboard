@@ -6,4 +6,5 @@ export const API = {
   TEST_LIST:
     BASE +
     "/selection_student/student_subjects_number.asp?action=open_window_frame",
+  CHECK_SESSION: BASE + "/student/frames.asp",
 };

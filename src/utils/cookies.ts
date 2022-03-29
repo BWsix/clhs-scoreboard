@@ -1,4 +1,3 @@
-import { TRPCError } from "@trpc/server";
 import type { CreateNextContextOptions } from "@trpc/server/adapters/next";
 import nookies from "nookies";
 
@@ -8,7 +7,7 @@ type CookieNames = "sessionCookie" | "name" | "id" | "password";
 const withPrefix = (name: CookieNames) => "sb-" + name;
 const isDevMode = process.env.NODE_ENV === "development";
 const cookieConfig = {
-  maxAge: 60 * 15, // 15 minutes
+  // maxAge: 60 * 60, // 1 hour
   path: "/",
   httpOnly: !isDevMode,
   secure: !isDevMode,
