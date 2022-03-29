@@ -1,14 +1,30 @@
+import { Partytown } from "@builder.io/partytown/react";
 import { MantineProvider } from "@mantine/core";
 import { withTRPC } from "@trpc/next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import Script from "next/script";
 import { useEffect } from "react";
+import * as gtag from "src/utils/gtag";
 import { AppRouter } from "./api/trpc/[trpc]";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
   useEffect(() => {
     localStorage.removeItem("cred");
   }, []);
+
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      gtag.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
 
   return (
     <>
@@ -17,7 +33,32 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
+        <Partytown
+          debug={process.env.NODE_ENV === "development"}
+          forward={["dataLayer.push"]}
+        />
       </Head>
+
+      {/* Global Site Tag (gtag.js) - Google Analytics */}
+      <Script
+        strategy="worker"
+        src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+      />
+
+      <script
+        type="text/partytown"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function gtag(){window.dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '${gtag.GA_TRACKING_ID}', { 
+                page_path: window.location.pathname,
+            });
+        `,
+        }}
+      />
 
       <MantineProvider
         withGlobalStyles

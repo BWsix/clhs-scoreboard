@@ -6,6 +6,8 @@
 **/public/workbox-*.js.map
 **/public/worker-*.js.map
 
+**/~partytown
+
 # Logs
 logs
 *.log
