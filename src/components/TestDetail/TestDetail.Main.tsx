@@ -22,7 +22,7 @@ export const TestDetail_Main: React.FC<Props> = ({ testMeta }) => {
 
   const updatedAt = new Date(dataUpdatedAt).toLocaleTimeString();
 
-  if (isLoading || !testMeta) return <Loader />;
+  if (isLoading || !testMeta) return <Loader width="100%" mt="sm" />;
   if (isError) return <>{error.message}</>;
   if (!data) return <>no data</>;
 
@@ -43,9 +43,9 @@ export const TestDetail_Main: React.FC<Props> = ({ testMeta }) => {
   ));
 
   return (
-    <Container m="sm">
+    <Container my="sm" px="xs">
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <Title order={3} mb="sm">
+        <Title order={3} pb="sm">
           高{data.info.grade + data.info.semester} {data.info.name}
         </Title>
 
