@@ -72,7 +72,7 @@ const router = trpc
       return data;
     },
   })
-  .mutation("testDetail", {
+  .query("testDetail", {
     input: z.object({ url: z.string() }),
     async resolve({ input, ctx }) {
       const data = await testDetail(ctx.sessionCookie, input.url);

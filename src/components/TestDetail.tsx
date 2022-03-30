@@ -1,38 +1,27 @@
 import { Container, Divider, Loader, Table, Title } from "@mantine/core";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 import { TestMeta } from "src/handlers/testMetaList/getTestMetaList";
-import { useLogout } from "src/hooks/useLogout";
-import { trpc } from "src/utils/trpc";
+import { useTestDetailQuery } from "src/hooks/useTestDetailQuery";
 
 interface Props {
-  testMeta?: TestMeta;
+  testMeta: TestMeta | undefined;
 }
 
 export const TestDetail: React.FC<Props> = ({ testMeta }) => {
-  const toggleLogout = useLogout();
-  const testDetailMutation = trpc.useMutation("testDetail", {
-    onError: (error) => {
-      if (error.data?.code === "UNAUTHORIZED") {
-        return toggleLogout();
-      }
-    },
-  });
+  const { data, isLoading, isError, error } = useTestDetailQuery(testMeta?.url);
 
-  useEffect(() => {
-    if (!testMeta) return;
+  if (isLoading || !testMeta) return <Loader mx="auto" />;
+  if (isError) return <>{error.message}</>;
+  if (!data) return <>no data</>;
 
-    testDetailMutation.mutate({ url: testMeta.url });
-  }, [testMeta]);
+  const head = (
+    <tr>
+      <th>科目</th>
+      <th>分數</th>
+      <th>班平均</th>
+    </tr>
+  );
 
-  if (testDetailMutation.isLoading || !testMeta) return <Loader mx="auto" />;
-  if (testDetailMutation.isError)
-    return <>{testDetailMutation.error.message}</>;
-  if (!testDetailMutation.data) return <>no data</>;
-
-  const { info, rank, score, subjects } = testDetailMutation.data;
-
-  const rows = subjects?.map(({ average, name, score }) => (
+  const rows = data.subjects?.map(({ average, name, score }) => (
     <tr key={name}>
       <td>{name}</td>
       <td>{score}</td>
@@ -43,8 +32,9 @@ export const TestDetail: React.FC<Props> = ({ testMeta }) => {
   return (
     <Container m="sm">
       <Title order={3} mb="sm">
-        高{info.grade + info.semester} {info.name}
+        高{data.info.grade + data.info.semester} {data.info.name}
       </Title>
+
       <Table>
         <thead>
           <tr>
@@ -56,10 +46,10 @@ export const TestDetail: React.FC<Props> = ({ testMeta }) => {
         </thead>
         <tbody>
           <tr>
-            <td>{score.sum || "(無)"}</td>
-            <td>{score.avg || "(無)"}</td>
-            <td>{rank.inClass || "(無)"}</td>
-            <td>{rank.inSchool || "(無)"}</td>
+            <td>{data.score.sum || "(無)"}</td>
+            <td>{data.score.avg || "(無)"}</td>
+            <td>{data.rank.inClass || "(無)"}</td>
+            <td>{data.rank.inSchool || "(無)"}</td>
           </tr>
         </tbody>
       </Table>
@@ -67,13 +57,7 @@ export const TestDetail: React.FC<Props> = ({ testMeta }) => {
       <Divider size="sm" my="lg" />
 
       <Table striped>
-        <thead>
-          <tr>
-            <th>科目</th>
-            <th>分數</th>
-            <th>班平均</th>
-          </tr>
-        </thead>
+        <thead>{head}</thead>
         <tbody>{rows}</tbody>
       </Table>
     </Container>
