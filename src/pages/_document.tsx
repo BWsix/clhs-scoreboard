@@ -16,6 +16,12 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3805368801442649"
+            crossOrigin="anonymous"
+          />
+
           {/* PWA */}
           <link rel="manifest" href="/manifest.json" />
           <link rel="shortcut icon" href="/favicon.ico" />
