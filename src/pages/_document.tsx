@@ -16,18 +16,6 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <script
-            data-partytown-config
-            dangerouslySetInnerHTML={{
-              __html: `
-                partytown = {
-                  lib: "/_next/static/~partytown/",
-                  forward: ["gtag"]           
-                };
-              `,
-            }}
-          />
-
           {/* PWA */}
           <link rel="manifest" href="/manifest.json" />
           <link rel="shortcut icon" href="/favicon.ico" />

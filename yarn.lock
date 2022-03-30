@@ -919,11 +919,6 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@builder.io/partytown@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@builder.io/partytown/-/partytown-0.5.1.tgz#89373ff8c424c60e1b61dc9029b31b9f9d5ece56"
-  integrity sha512-Qs1CrHTT/I1xeNlPn6+KSxhQhvcJKv2mZhesLfEeEftRbCWb3TdXIghNNIxrnAmD7Sivdp8dSOGEAcM8BLybDA==
-
 "@emotion/babel-plugin@^11.7.1":
   version "11.7.2"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.7.2.tgz#fec75f38a6ab5b304b0601c74e2a5e77c95e5fa0"

@@ -1,4 +1,3 @@
-import { Partytown } from "@builder.io/partytown/react";
 import { MantineProvider } from "@mantine/core";
 import { withTRPC } from "@trpc/next";
 import type { AppProps } from "next/app";
@@ -33,30 +32,25 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
-        <Partytown
-          debug={process.env.NODE_ENV === "development"}
-          forward={["dataLayer.push"]}
-        />
       </Head>
 
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       <Script
-        strategy="worker"
+        strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
       />
-
-      <script
-        type="text/partytown"
+      <Script
+        id="gtag-init"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
-            window.gtag = function gtag(){window.dataLayer.push(arguments);}
+            function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-
-            gtag('config', '${gtag.GA_TRACKING_ID}', { 
-                page_path: window.location.pathname,
+            gtag('config', '${gtag.GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
             });
-        `,
+          `,
         }}
       />
 
