@@ -1,6 +1,7 @@
 import { useToggle } from "@mantine/hooks";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { event } from "src/utils/gtag";
 import { trpc } from "src/utils/trpc";
 import { useUsername } from "./useUserName";
 
@@ -14,6 +15,8 @@ export const useLogout = () => {
     if (!isLogout) return;
 
     logoutMutation.mutateAsync().then(() => {
+      event({ action: "logout", category: "system" });
+
       deleteUserName();
       router.push("/login");
     });

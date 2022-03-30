@@ -1,13 +1,14 @@
 import { AppShell } from "@mantine/core";
-import { ErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { TestMeta } from "src/handlers/testMetaList/getTestMetaList";
 import { useLogout } from "src/hooks/useLogout";
+import { event } from "src/utils/gtag";
 import { trpc } from "src/utils/trpc";
 import { MyHeader } from "./MyHeader";
+import { ErrorFallback } from "./Shared/ErrorFallback";
 import { TestDetail } from "./TestDetail";
 import { TestList } from "./TestList";
-import { ErrorFallback } from "./Shared/ErrorFallback";
 
 export const MyAppShell: React.FC = () => {
   const [opened, setOpened] = useState(false);
@@ -17,6 +18,8 @@ export const MyAppShell: React.FC = () => {
 
   const testMetaListQuery = trpc.useQuery(["testMetaList"], {
     onSuccess: (testMetaList) => {
+      event({ action: "testListQuery", category: "system" });
+
       if (!testMetaList.length) {
         setError("沒有考試紀錄");
         return;
