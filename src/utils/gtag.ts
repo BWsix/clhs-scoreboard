@@ -16,7 +16,7 @@ export const pageview = (url: string) => {
 };
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/events
-export const event = ({ action, category, label, value }: Event) => {
+export const event = ({ action, category, label, value }: Partial<Event>) => {
   //@ts-ignore
   window.gtag("event", action, {
     event_category: category,

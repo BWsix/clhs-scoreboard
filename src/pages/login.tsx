@@ -11,23 +11,13 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import type { NextPage } from "next";
-import { useRouter } from "next/router";
-import { useUsername } from "src/hooks/useUserName";
-import { trpc } from "src/utils/trpc";
+import { useLoginMutation } from "src/hooks/useLoginMutation";
 import { AlertCircle } from "tabler-icons-react";
 
 const Login: NextPage = () => {
-  const router = useRouter();
-  const { updateUserName } = useUsername();
+  const loginMutation = useLoginMutation();
   const form = useForm({
     initialValues: { id: "", password: "" },
-  });
-
-  const loginMutation = trpc.useMutation("login", {
-    onSuccess: (data) => {
-      updateUserName(data.name);
-      router.push("/");
-    },
   });
 
   return (
