@@ -17,12 +17,22 @@ interface Props {
 }
 
 export const TestDetail_Main: React.FC<Props> = ({ testMeta }) => {
-  const { data, isLoading, isError, error, refetch, dataUpdatedAt } =
-    useTestDetailQuery(testMeta?.url);
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+    refetch,
+    isFetching,
+    isRefetching,
+    dataUpdatedAt,
+  } = useTestDetailQuery(testMeta?.url);
 
   const updatedAt = new Date(dataUpdatedAt).toLocaleTimeString();
 
-  if (isLoading || !testMeta) return <Loader width="100%" mt="sm" />;
+  if (!testMeta || isLoading || isFetching || isRefetching) {
+    return <Loader width="100%" mt="sm" />;
+  }
   if (isError) return <>{error.message}</>;
   if (!data) return <>no data</>;
 
