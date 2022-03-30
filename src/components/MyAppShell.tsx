@@ -1,4 +1,5 @@
 import { AppShell } from "@mantine/core";
+import { ErrorBoundary } from "react-error-boundary";
 import { useState } from "react";
 import { TestMeta } from "src/handlers/testMetaList/getTestMetaList";
 import { useLogout } from "src/hooks/useLogout";
@@ -6,6 +7,7 @@ import { trpc } from "src/utils/trpc";
 import { MyHeader } from "./MyHeader";
 import { TestDetail } from "./TestDetail";
 import { TestList } from "./TestList";
+import { ErrorFallback } from "./Shared/ErrorFallback";
 
 export const MyAppShell: React.FC = () => {
   const [opened, setOpened] = useState(false);
@@ -30,21 +32,23 @@ export const MyAppShell: React.FC = () => {
   });
 
   return (
-    <AppShell
-      navbarOffsetBreakpoint="sm"
-      fixed
-      navbar={
-        <TestList
-          error={testMetaListQuery.error?.message || error || ""}
-          opened={opened}
-          setOpened={setOpened}
-          setTestMeta={setTestMeta}
-          testMetaList={testMetaListQuery.data}
-        />
-      }
-      header={<MyHeader opened={opened} setOpened={setOpened} />}
-    >
-      <TestDetail testMeta={testMeta} />
-    </AppShell>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <AppShell
+        navbarOffsetBreakpoint="sm"
+        fixed
+        navbar={
+          <TestList
+            error={testMetaListQuery.error?.message || error || ""}
+            opened={opened}
+            setOpened={setOpened}
+            setTestMeta={setTestMeta}
+            testMetaList={testMetaListQuery.data}
+          />
+        }
+        header={<MyHeader opened={opened} setOpened={setOpened} />}
+      >
+        <TestDetail testMeta={testMeta} />
+      </AppShell>
+    </ErrorBoundary>
   );
 };

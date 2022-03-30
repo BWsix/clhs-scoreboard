@@ -1,14 +1,16 @@
 import { Center, Text } from "@mantine/core";
-import { useInterval } from "@mantine/hooks";
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { MyAppShell } from "src/components/MyAppShell";
+import { ErrorFallback } from "src/components/Shared/ErrorFallback";
+import { useLoaderAnimatedText } from "src/hooks/useLoaderAnimatedText";
 import { useLogout } from "src/hooks/useLogout";
 import { trpc } from "src/utils/trpc";
 
 const Home: NextPage = () => {
   const toggleLogout = useLogout();
-
+  const loaderText = useLoaderAnimatedText("正在檢查登入狀態");
   const meMutation = trpc.useMutation(["me"], {
     onError: () => {
       return toggleLogout();
@@ -17,23 +19,21 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     meMutation.mutate();
-    interval.start();
-
-    return interval.stop;
   }, []);
-
-  const [ticks, setTicks] = useState(0);
-  const interval = useInterval(() => setTicks((s) => s + 1), 500);
 
   if (!meMutation.isSuccess) {
     return (
       <Center style={{ width: "100vw", height: "100vh" }}>
-        <Text align="center">正在檢查登入狀態{".".repeat(ticks % 4)}</Text>
+        <Text align="center">{loaderText}</Text>
       </Center>
     );
   }
 
-  return <MyAppShell />;
+  return (
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <MyAppShell />
+    </ErrorBoundary>
+  );
 };
 
 export default Home;
