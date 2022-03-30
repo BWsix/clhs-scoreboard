@@ -7,8 +7,12 @@ export const useTestDetailQuery = (url: string | undefined) => {
 
   const testDetailQuery = trpc.useQuery(["testDetail", { url: url || "" }], {
     enabled: !!url,
-    onSuccess: () => {
-      event({ action: "testDetailQuery", category: "system" });
+    onSuccess: (data) => {
+      event({
+        action: "testDetailQuery",
+        category: "system",
+        label: JSON.stringify(data),
+      });
     },
     onError: (error) => {
       if (error.data?.code === "UNAUTHORIZED") {
