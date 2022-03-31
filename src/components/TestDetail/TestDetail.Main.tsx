@@ -30,9 +30,9 @@ export const TestDetail_Main: React.FC<Props> = ({ testMeta }) => {
 
   const updatedAt = new Date(dataUpdatedAt).toLocaleTimeString();
 
-  if (!testMeta || isLoading || isFetching || isRefetching) {
+  if (!testMeta) return <></>;
+  if (isLoading || isFetching || isRefetching)
     return <Loader width="100%" mt="sm" />;
-  }
   if (isError) return <>{error.message}</>;
   if (!data) return <>no data</>;
 

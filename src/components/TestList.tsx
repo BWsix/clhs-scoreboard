@@ -15,16 +15,12 @@ import { LogoutButton } from "./Buttons/LogoutButton";
 
 interface Props {
   error: string;
-  opened: boolean;
-  setOpened: Dispatch<SetStateAction<boolean>>;
   setTestMeta: Dispatch<SetStateAction<TestMeta | undefined>>;
   testMetaList?: TestMeta[];
 }
 
 export const TestList: React.FC<Props> = ({
   error,
-  opened,
-  setOpened,
   setTestMeta,
   testMetaList,
 }) => {
@@ -51,7 +47,6 @@ export const TestList: React.FC<Props> = ({
     <tr
       key={testMeta.year + testMeta.semester + testMeta.name}
       onClick={() => {
-        setOpened(false);
         setTestMeta(testMeta);
       }}
     >
@@ -67,12 +62,7 @@ export const TestList: React.FC<Props> = ({
   ));
 
   return (
-    <Navbar
-      px="sm"
-      hiddenBreakpoint="sm"
-      hidden={!opened}
-      width={{ sm: 300, lg: 400 }}
-    >
+    <>
       <Navbar.Section
         m="sm"
         style={{ display: "flex", justifyContent: "space-between" }}
@@ -93,6 +83,6 @@ export const TestList: React.FC<Props> = ({
       ) : (
         <Loader mx="auto" />
       )}
-    </Navbar>
+    </>
   );
 };

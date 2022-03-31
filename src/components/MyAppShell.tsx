@@ -1,4 +1,4 @@
-import { AppShell } from "@mantine/core";
+import { AppShell, Navbar } from "@mantine/core";
 import { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { TestMeta } from "src/handlers/testMetaList/getTestMetaList";
@@ -13,7 +13,6 @@ import { TestList } from "./TestList";
 export const MyAppShell: React.FC = () => {
   const [opened, setOpened] = useState(false);
   const toggleLogout = useLogout();
-  const [error, setError] = useState("");
   const [testMeta, setTestMeta] = useState<TestMeta | undefined>(undefined);
 
   const testMetaListQuery = trpc.useQuery(["testMetaList"], {
@@ -21,7 +20,6 @@ export const MyAppShell: React.FC = () => {
       event({ action: "testListQuery", category: "system" });
 
       if (!testMetaList.length) {
-        setError("沒有考試紀錄");
         return;
       }
 
@@ -40,13 +38,18 @@ export const MyAppShell: React.FC = () => {
         navbarOffsetBreakpoint="sm"
         fixed
         navbar={
-          <TestList
-            error={testMetaListQuery.error?.message || error || ""}
-            opened={opened}
-            setOpened={setOpened}
-            setTestMeta={setTestMeta}
-            testMetaList={testMetaListQuery.data}
-          />
+          <Navbar
+            px="sm"
+            hiddenBreakpoint="sm"
+            hidden={!opened}
+            width={{ sm: 300, lg: 400 }}
+          >
+            <TestList
+              error={testMetaListQuery.error?.message || ""}
+              setTestMeta={setTestMeta}
+              testMetaList={testMetaListQuery.data}
+            />
+          </Navbar>
         }
         header={<MyHeader opened={opened} setOpened={setOpened} />}
       >
