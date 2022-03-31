@@ -27,7 +27,7 @@ export const MyHeader: React.FC<Props> = ({ opened, setOpened }) => {
           />
         </MediaQuery>
 
-        <Title order={2}>CLHS Scoreboard</Title>
+        <Title order={3}>Scoreboard</Title>
 
         <IconSet />
       </div>
