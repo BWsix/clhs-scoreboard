@@ -1,8 +1,8 @@
 {
   "name": "CLHS Scoreboard",
   "short_name": "Scoreboard",
-  "theme_color": "#333",
-  "background_color": "#222",
+  "theme_color": "#1a1b1e",
+  "background_color": "#1a1b1e",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
