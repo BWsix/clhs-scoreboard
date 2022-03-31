@@ -2,7 +2,6 @@ import * as trpc from "@trpc/server";
 import { TRPCError } from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
 import { login } from "src/handlers/login";
-import { isSessionExpired } from "src/handlers/middleWare/isSessionExpired";
 import { testDetail } from "src/handlers/testDetail";
 import { testMetaList } from "src/handlers/testMetaList";
 import {
@@ -49,9 +48,7 @@ const router = trpc
   .middleware(async ({ ctx, next }) => {
     const sessionCookie = getSessionCookie(ctx);
 
-    if (!sessionCookie || (await isSessionExpired(sessionCookie))) {
-      destroySessionCookie(ctx);
-
+    if (!sessionCookie) {
       throw new TRPCError({
         code: "UNAUTHORIZED",
         message: "Session expired, please re-login.",
