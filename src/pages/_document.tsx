@@ -3,9 +3,9 @@ import Document, { Head, Html, Main, NextScript } from "next/document";
 
 const getInitialProps = createGetInitialProps();
 
-const title = "CLHS Scoreboard - 壢中成績查詢2.0";
+const title = "CLHS Scoreboard";
 const description =
-  "開啟後直接顯示最新的的段考成績，透過自動登入來一鍵查詢。是時候告別學校的線上查詢系統了！";
+  "一鍵查詢、響應式設計並支援黑暗模式。為使用者著想的開源壢中成績查詢平台";
 const homepageUrl = "https://clhs-scoreboard.vercel.app/";
 const imageUrl = "https://i.imgur.com/lLbSDIy.png";
 
