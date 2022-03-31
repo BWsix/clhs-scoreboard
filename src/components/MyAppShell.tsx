@@ -1,4 +1,5 @@
 import { AppShell, Navbar } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { TestMeta } from "src/handlers/testMetaList/getTestMetaList";
@@ -11,7 +12,7 @@ import { TestDetail } from "./TestDetail";
 import { TestList } from "./TestList";
 
 export const MyAppShell: React.FC = () => {
-  const [opened, setOpened] = useState(false);
+  const [sideOpened, sideHandler] = useDisclosure(false);
   const toggleLogout = useLogout();
   const [testMeta, setTestMeta] = useState<TestMeta | undefined>(undefined);
 
@@ -41,17 +42,20 @@ export const MyAppShell: React.FC = () => {
           <Navbar
             px="sm"
             hiddenBreakpoint="sm"
-            hidden={!opened}
+            hidden={!sideOpened}
             width={{ sm: 300, lg: 400 }}
           >
             <TestList
+              closeSide={sideHandler.close}
               error={testMetaListQuery.error?.message || ""}
               setTestMeta={setTestMeta}
               testMetaList={testMetaListQuery.data}
             />
           </Navbar>
         }
-        header={<MyHeader opened={opened} setOpened={setOpened} />}
+        header={
+          <MyHeader opened={sideOpened} toggleSideOpened={sideHandler.toggle} />
+        }
       >
         <TestDetail testMeta={testMeta} />
       </AppShell>

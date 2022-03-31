@@ -14,12 +14,14 @@ import { ChevronRight } from "tabler-icons-react";
 import { LogoutButton } from "./Buttons/LogoutButton";
 
 interface Props {
+  closeSide: () => void;
   error: string;
   setTestMeta: Dispatch<SetStateAction<TestMeta | undefined>>;
   testMetaList?: TestMeta[];
 }
 
 export const TestList: React.FC<Props> = ({
+  closeSide,
   error,
   setTestMeta,
   testMetaList,
@@ -47,6 +49,7 @@ export const TestList: React.FC<Props> = ({
     <tr
       key={testMeta.year + testMeta.semester + testMeta.name}
       onClick={() => {
+        closeSide();
         setTestMeta(testMeta);
       }}
     >

@@ -4,10 +4,10 @@ import { IconSet } from "./Icons/IconSet";
 
 interface Props {
   opened: boolean;
-  setOpened: Dispatch<SetStateAction<boolean>>;
+  toggleSideOpened: () => void;
 }
 
-export const MyHeader: React.FC<Props> = ({ opened, setOpened }) => {
+export const MyHeader: React.FC<Props> = ({ opened, toggleSideOpened }) => {
   return (
     <Header height={70} p="md">
       <div
@@ -21,7 +21,7 @@ export const MyHeader: React.FC<Props> = ({ opened, setOpened }) => {
         <MediaQuery largerThan="sm" styles={{ display: "none" }}>
           <Burger
             opened={opened}
-            onClick={() => setOpened((o) => !o)}
+            onClick={toggleSideOpened}
             size="sm"
             mr="xl"
           />
