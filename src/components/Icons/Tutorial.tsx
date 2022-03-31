@@ -1,38 +1,154 @@
 import {
   Accordion,
   ActionIcon,
+  Anchor,
+  Divider,
   Image,
   Modal,
   Text,
-  Title,
+  Tooltip,
 } from "@mantine/core";
+import { useClickOutside, useClipboard, useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import { QuestionMark } from "tabler-icons-react";
 
-const IMAGES = {
-  pc: "https://i.imgur.com/iicTAqa.png",
-  ios: "https://i.imgur.com/XwULSH1.jpg",
-  android: "https://i.imgur.com/7u3ZRU8.png",
-};
+function CopyURL() {
+  const clipboard = useClipboard();
+  const [opened, handlers] = useDisclosure(false);
+  const ref = useClickOutside(() => handlers.close());
+
+  const url = "https://CLHS-Scoreboard.vercel.app";
+
+  return (
+    <Tooltip
+      opened={opened}
+      label="已複製到剪貼簿！"
+      radius="md"
+      withArrow
+      ref={ref}
+    >
+      <Anchor
+        onClick={() => {
+          clipboard.copy(url);
+          handlers.open();
+        }}
+      >
+        複製網址
+      </Anchor>
+    </Tooltip>
+  );
+}
+
+function Android() {
+  const urls = {
+    directPrompt: "https://i.imgur.com/1uS8lcr.png",
+    menuIcon: "https://i.imgur.com/5ksgtax.png",
+    installationButton: "https://i.imgur.com/EDnbWTl.png",
+  };
+
+  return (
+    <>
+      <Text pb="sm">
+        1. <CopyURL />
+        後用Chrome打開，畫面下方便會跳出安裝按鈕
+      </Text>
+      <Image radius="md" src={urls.directPrompt} alt="directPrompt" />
+
+      <Divider py="sm" label="或是" labelPosition="center" />
+
+      <Text pb="sm">
+        2-1. <CopyURL /> 後用Chrome打開，點選畫面右上方的選單
+      </Text>
+      <Image radius="md" src={urls.menuIcon} alt="menuIcon" />
+
+      <Text pb="sm">2-2. 選單大約中間位置會有一個「安裝應用程式」的按鈕</Text>
+      <Image
+        radius="md"
+        src={urls.installationButton}
+        alt="installationButton"
+      />
+    </>
+  );
+}
+
+function IPhone() {
+  const urls = {
+    installationButton: "https://i.imgur.com/FyMcYg1.jpg",
+  };
+
+  return (
+    <>
+      <Text pb="sm">
+        1. <CopyURL />
+        後用safari打開，點選畫面底部中間的分享按鈕來開啟選單
+      </Text>
+
+      <Text pb="sm">2. 選單大約中間位置會有一個「加入主畫面」的按鈕</Text>
+      <Image
+        radius="md"
+        src={urls.installationButton}
+        alt="installationButton"
+      />
+    </>
+  );
+}
+
+function IPad() {
+  const urls = {
+    installationButton: "https://i.imgur.com/FyMcYg1.jpg",
+  };
+
+  return (
+    <>
+      <Text pb="sm">
+        1. <CopyURL />
+        後用safari打開，點選畫面右上方的分享按鈕來開啟選單
+      </Text>
+
+      <Text pb="sm">2. 選單大約中間位置會有一個「加入主畫面」的按鈕</Text>
+      <Image
+        radius="md"
+        src={urls.installationButton}
+        alt="installationButton"
+      />
+    </>
+  );
+}
+
+function PC() {
+  const urls = {
+    installationButton: "https://i.imgur.com/iicTAqa.png",
+  };
+
+  return (
+    <>
+      <Text pb="sm">網址列右方的「安裝」圖示</Text>
+      <Image
+        radius="md"
+        src={urls.installationButton}
+        alt="installationButton"
+      />
+    </>
+  );
+}
 
 function InstallationGuide() {
   return (
-    <Accordion iconPosition="right" multiple>
+    <Accordion iconPosition="right">
       <Accordion.Item label="Android">
-        <Text pb="sm">使用Chrome開啟後便會在畫面下方跳出安裝按鈕</Text>
-        <Image radius="md" src={IMAGES.android} alt="installation(ios)" />
+        <Android />
       </Accordion.Item>
 
-      <Accordion.Item label="iPhone和iPad">
-        <Text pb="sm">
-          將網址複製下來用safari打開，按中間的分享後再按新增至主畫面
-        </Text>
-        <Image radius="md" src={IMAGES.ios} alt="installation(ios)" />
+      <Accordion.Item label="iPhone">
+        <IPhone />
+      </Accordion.Item>
+
+      <Accordion.Item label="iPad">
+        <IPad />
       </Accordion.Item>
 
       <Accordion.Item label="電腦">
-        <Text pb="sm">按一下網址列右上方的「安裝」圖示後即可安裝</Text>
-        <Image radius="md" src={IMAGES.pc} alt="installation(PC)" />
+        <PC />
       </Accordion.Item>
     </Accordion>
   );
@@ -46,11 +162,8 @@ export function TutorialIcon() {
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}
-        title="CLHS Scoreboard"
+        title="如何安裝 CLHS Scoreboard"
       >
-        <Title order={4} align="center">
-          如何安裝
-        </Title>
         <InstallationGuide />
       </Modal>
 
