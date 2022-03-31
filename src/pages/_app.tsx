@@ -13,6 +13,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     localStorage.removeItem("cred");
+
+    if (typeof window !== "undefined" && !!window.ResizeObserver) {
+      import("resize-observer").then(({ install }) => {
+        install();
+      });
+    }
   }, []);
 
   useEffect(() => {
