@@ -28,8 +28,6 @@ export const TestDetail_Main: React.FC<Props> = ({ testMeta }) => {
     dataUpdatedAt,
   } = useTestDetailQuery(testMeta?.url);
 
-  const updatedAt = new Date(dataUpdatedAt).toLocaleTimeString();
-
   if (!testMeta) return <></>;
   if (isLoading || isFetching || isRefetching)
     return <Loader width="100%" mt="sm" />;
@@ -77,7 +75,7 @@ export const TestDetail_Main: React.FC<Props> = ({ testMeta }) => {
           onClick={() => refetch()}
           disabled={isLoading}
         >
-          重整資料 (最後更新於{updatedAt})
+          重整資料
         </Anchor>
       </ErrorBoundary>
     </Container>
