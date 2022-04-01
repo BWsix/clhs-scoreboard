@@ -1,37 +1,57 @@
-import { AppShell, Navbar } from "@mantine/core";
+import { AppShell } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { TestMeta } from "src/handlers/testMetaList/getTestMetaList";
-import { useLogout } from "src/hooks/useLogout";
-import { event } from "src/utils/gtag";
-import { trpc } from "src/utils/trpc";
-import { MyHeader } from "./MyHeader";
-import { ErrorFallback } from "./Shared/ErrorFallback";
-import { TestDetail } from "./TestDetail";
-import { TestList } from "./TestList";
+import { MyHeader } from "src/components/MyHeader";
+import { MyNavbar } from "src/components/MyNavbar";
+import { AppShellContainer } from "src/components/Others/AppShellContainer";
+import { InstallationGuide } from "src/components/Others/InstallationGuide";
+import { ErrorFallback } from "src/components/Shared/ErrorFallback";
+import { TestDetail } from "src/components/TestDetail";
+import {
+  TestMeta,
+  testMetaSchema,
+} from "src/handlers/testMetaList/getTestMetaList";
+import { useLastTab } from "src/hooks/uselastTab";
+
+export type TabProps =
+  | { tab: "testDetail"; data: TestMeta }
+  | { tab: "installationGuide"; data: null };
 
 export const MyAppShell: React.FC = () => {
+  const router = useRouter();
   const [sideOpened, sideHandler] = useDisclosure(false);
-  const toggleLogout = useLogout();
-  const [testMeta, setTestMeta] = useState<TestMeta | undefined>(undefined);
-
-  const testMetaListQuery = trpc.useQuery(["testMetaList"], {
-    onSuccess: (testMetaList) => {
-      event({ action: "testListQuery", category: "system" });
-
-      if (!testMetaList.length) {
-        return;
-      }
-
-      setTestMeta(testMetaList[0]);
-    },
-    onError: (error) => {
-      if (error.data?.code === "UNAUTHORIZED") {
-        return toggleLogout();
-      }
-    },
+  const { lastTab } = useLastTab();
+  const [tabData, setTabData] = useState<TabProps>({
+    tab: lastTab,
+    data: {} as any,
   });
+
+  useEffect(() => {
+    const tab = String(router.query.tab) as TabProps["tab"];
+
+    switch (tab) {
+      case "testDetail": {
+        const parsedTestMeta = testMetaSchema.safeParse(router.query);
+
+        if (parsedTestMeta.success) {
+          setTabData({ tab: "testDetail", data: parsedTestMeta.data });
+        }
+
+        break;
+      }
+
+      case "installationGuide": {
+        setTabData({ tab: "installationGuide", data: null });
+        break;
+      }
+
+      default: {
+        break;
+      }
+    }
+  }, [router.query]);
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
@@ -39,25 +59,21 @@ export const MyAppShell: React.FC = () => {
         navbarOffsetBreakpoint="sm"
         fixed
         navbar={
-          <Navbar
-            px="sm"
-            hiddenBreakpoint="sm"
-            hidden={!sideOpened}
-            width={{ sm: 300, lg: 400 }}
-          >
-            <TestList
-              closeSide={sideHandler.close}
-              error={testMetaListQuery.error?.message || ""}
-              setTestMeta={setTestMeta}
-              testMetaList={testMetaListQuery.data}
-            />
-          </Navbar>
+          <MyNavbar sideOpened={sideOpened} closeSide={sideHandler.close} />
         }
         header={
-          <MyHeader opened={sideOpened} toggleSideOpened={sideHandler.toggle} />
+          <MyHeader opened={sideOpened} toggleSide={sideHandler.toggle} />
         }
       >
-        <TestDetail testMeta={testMeta} />
+        <AppShellContainer>
+          {tabData.tab === "testDetail" ? (
+            <TestDetail testMeta={tabData.data} />
+          ) : tabData.tab === "installationGuide" ? (
+            <InstallationGuide />
+          ) : (
+            <></>
+          )}
+        </AppShellContainer>
       </AppShell>
     </ErrorBoundary>
   );

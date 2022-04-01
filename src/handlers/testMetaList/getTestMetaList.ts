@@ -1,12 +1,15 @@
+import { z } from "zod";
 import { API } from "../constants";
 
-export interface TestMeta {
-  name: string;
-  number: string;
-  semester: string;
-  url: string;
-  year: string;
-}
+export const testMetaSchema = z.object({
+  name: z.string(),
+  number: z.string(),
+  semester: z.string(),
+  url: z.string().url(),
+  year: z.string(),
+});
+
+export type TestMeta = z.infer<typeof testMetaSchema>;
 
 const getWeight = (test: TestMeta, weight = 0) => {
   weight += 100 * parseInt(test.year, 10);

@@ -15,7 +15,6 @@ export const ErrorFallback: React.FC<Props> = ({
         message: error.message,
         name: error.name,
         cause: error.cause,
-        stack: error.stack,
       })}
 
       <br />

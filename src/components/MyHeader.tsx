@@ -1,13 +1,12 @@
 import { Burger, Header, MediaQuery, Title } from "@mantine/core";
-import { Dispatch, SetStateAction } from "react";
-import { IconSet } from "./Icons/IconSet";
+import { GithubIcon } from "./Icons/Github";
 
 interface Props {
   opened: boolean;
-  toggleSideOpened: () => void;
+  toggleSide: () => void;
 }
 
-export const MyHeader: React.FC<Props> = ({ opened, toggleSideOpened }) => {
+export const MyHeader: React.FC<Props> = ({ opened, toggleSide }) => {
   return (
     <Header height={70} p="md">
       <div
@@ -19,17 +18,12 @@ export const MyHeader: React.FC<Props> = ({ opened, toggleSideOpened }) => {
         }}
       >
         <MediaQuery largerThan="sm" styles={{ display: "none" }}>
-          <Burger
-            opened={opened}
-            onClick={toggleSideOpened}
-            size="sm"
-            mr="xl"
-          />
+          <Burger opened={opened} onClick={toggleSide} size="sm" mr="xl" />
         </MediaQuery>
 
         <Title order={3}>Scoreboard</Title>
 
-        <IconSet />
+        <GithubIcon />
       </div>
     </Header>
   );

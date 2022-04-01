@@ -1,16 +1,13 @@
 import {
   Accordion,
-  ActionIcon,
   Anchor,
   Divider,
   Image,
-  Modal,
   Text,
+  Title,
   Tooltip,
 } from "@mantine/core";
 import { useClickOutside, useClipboard, useDisclosure } from "@mantine/hooks";
-import { useState } from "react";
-import { QuestionMark } from "tabler-icons-react";
 
 function CopyURL() {
   const clipboard = useClipboard();
@@ -132,51 +129,30 @@ function PC() {
   );
 }
 
-function InstallationGuide() {
-  return (
-    <Accordion iconPosition="right">
-      <Accordion.Item label="Android">
-        <Android />
-      </Accordion.Item>
-
-      <Accordion.Item label="iPhone">
-        <IPhone />
-      </Accordion.Item>
-
-      <Accordion.Item label="iPad">
-        <IPad />
-      </Accordion.Item>
-
-      <Accordion.Item label="電腦">
-        <PC />
-      </Accordion.Item>
-    </Accordion>
-  );
-}
-
-export function TutorialIcon() {
-  const [opened, setOpened] = useState(false);
-
+export const InstallationGuide = () => {
   return (
     <>
-      <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
-        title="如何安裝 CLHS Scoreboard"
-      >
-        <InstallationGuide />
-      </Modal>
+      <Title order={3} pb="md">
+        安裝教學
+      </Title>
 
-      <ActionIcon
-        size="lg"
-        radius="md"
-        variant="filled"
-        onClick={() => {
-          setOpened(true);
-        }}
-      >
-        <QuestionMark />
-      </ActionIcon>
+      <Accordion iconPosition="right">
+        <Accordion.Item label="Android">
+          <Android />
+        </Accordion.Item>
+
+        <Accordion.Item label="iPhone">
+          <IPhone />
+        </Accordion.Item>
+
+        <Accordion.Item label="iPad">
+          <IPad />
+        </Accordion.Item>
+
+        <Accordion.Item label="電腦">
+          <PC />
+        </Accordion.Item>
+      </Accordion>
     </>
   );
-}
+};
