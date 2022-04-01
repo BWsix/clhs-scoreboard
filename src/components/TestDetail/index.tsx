@@ -16,7 +16,7 @@ export const TestDetail: React.FC<Props> = ({ testMeta }) => {
 
   if (!testMeta) return <LoaderCircle />;
   if (!testMeta || isLoading || isFetching || isRefetching)
-    return <Loader width="100%" mt="sm" />;
+    return <LoaderCircle />;
   if (isError) return <>{error.message}</>;
   if (!data) return <LoaderCircle />;
 
