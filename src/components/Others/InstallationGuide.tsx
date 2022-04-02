@@ -4,10 +4,10 @@ import {
   Divider,
   Image,
   Text,
-  Title,
   Tooltip,
 } from "@mantine/core";
 import { useClickOutside, useClipboard, useDisclosure } from "@mantine/hooks";
+import { AppShellContainerTitle } from "./AppShellContainerTitle";
 
 function CopyURL() {
   const clipboard = useClipboard();
@@ -132,9 +132,7 @@ function PC() {
 export const InstallationGuide = () => {
   return (
     <>
-      <Title order={3} pb="md">
-        安裝教學
-      </Title>
+      <AppShellContainerTitle title="安裝教學" />
 
       <Accordion iconPosition="right">
         <Accordion.Item label="Android">

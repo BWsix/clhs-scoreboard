@@ -1,9 +1,10 @@
-import { Anchor, Divider, Loader, Table, Title } from "@mantine/core";
+import { Anchor, Divider, Table } from "@mantine/core";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "src/components/Shared/ErrorFallback";
 import { TestDetail_Title } from "src/components/TestDetail/TestDetail.Title";
 import { TestMeta } from "src/handlers/testMetaList/getTestMetaList";
 import { useTestDetailQuery } from "src/hooks/useTestDetailQuery";
+import { AppShellContainerTitle } from "../Others/AppShellContainerTitle";
 import { LoaderCircle } from "../Shared/LoaderCircle";
 
 interface Props {
@@ -38,9 +39,9 @@ export const TestDetail: React.FC<Props> = ({ testMeta }) => {
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
-      <Title order={3} pb="sm">
-        高{data.info.grade + data.info.semester} {data.info.name}
-      </Title>
+      <AppShellContainerTitle
+        title={`高${data.info.grade + data.info.semester} ${data.info.name}`}
+      />
 
       <TestDetail_Title data={data} />
 
