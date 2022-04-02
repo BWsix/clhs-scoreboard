@@ -1,7 +1,7 @@
+import { newsListQuery } from "@clhs-api/core";
 import * as trpc from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
 import { login } from "src/handlers/login";
-import { newsRouter } from "src/handlers/routers/newsRouter";
 import { getSchedule } from "src/handlers/schedule";
 import { testDetail } from "src/handlers/testDetail";
 import { testMetaList } from "src/handlers/testMetaList";
@@ -46,16 +46,24 @@ const router = trpc
       destroySessionCookie(ctx);
     },
   })
+  .query("news", {
+    input: z.object({
+      cursor: z.number().nullish(),
+    }),
+    async resolve({ input: { cursor } }) {
+      const page = cursor || 0;
+
+      const result = await newsListQuery({ page });
+
+      return { newsList: result.newsList, nextCursor: page + 1 };
+    },
+  })
   .middleware(({ ctx, next }) => {
     const sessionCookie = getSessionCookie(ctx);
 
     return next({ ctx: { ...ctx, sessionCookie } });
   })
-  .mutation("me", {
-    resolve: () => {
-      return true;
-    },
-  })
+
   .query("schedule", {
     async resolve({ ctx }) {
       const data = await getSchedule(ctx.sessionCookie);
@@ -77,8 +85,7 @@ const router = trpc
 
       return data;
     },
-  })
-  .merge(newsRouter);
+  });
 
 export type AppRouter = typeof router;
 
