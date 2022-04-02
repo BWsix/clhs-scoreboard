@@ -16,6 +16,7 @@ export const MyNavbar_TestList: React.FC<Props> = ({ closeSide }) => {
   const navigate = useNavigator();
   const { lastTab } = useLastTab();
   const { data, error, isError } = trpc.useQuery(["testMetaList"], {
+    refetchOnWindowFocus: false,
     onSuccess: (data) => {
       event({ action: "testListQuery", category: "system" });
 
