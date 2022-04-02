@@ -1,6 +1,7 @@
 import * as trpc from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
 import { login } from "src/handlers/login";
+import { newsRouter } from "src/handlers/routers/newsRouter";
 import { getSchedule } from "src/handlers/schedule";
 import { testDetail } from "src/handlers/testDetail";
 import { testMetaList } from "src/handlers/testMetaList";
@@ -76,7 +77,8 @@ const router = trpc
 
       return data;
     },
-  });
+  })
+  .merge(newsRouter);
 
 export type AppRouter = typeof router;
 

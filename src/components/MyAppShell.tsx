@@ -6,6 +6,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { InstallationGuide } from "src/components/InstallationGuide";
 import { MyHeader } from "src/components/MyHeader";
 import { MyNavbar } from "src/components/MyNavbar";
+import { News } from "src/components/News";
 import { AppShellContainer } from "src/components/Others/AppShellContainer";
 import { Schedule } from "src/components/Schedule";
 import { ErrorFallback } from "src/components/Shared/ErrorFallback";
@@ -19,7 +20,8 @@ import { useLastTab } from "src/hooks/uselastTab";
 export type TabProps =
   | { tab: "testDetail"; data: TestMeta }
   | { tab: "installationGuide"; data: null }
-  | { tab: "schedule"; data: null };
+  | { tab: "schedule"; data: null }
+  | { tab: "news"; data: null };
 
 export const MyAppShell: React.FC = () => {
   const router = useRouter();
@@ -42,6 +44,10 @@ export const MyAppShell: React.FC = () => {
       }
       case "schedule": {
         setTabData({ tab: "schedule", data: null });
+        break;
+      }
+      case "news": {
+        setTabData({ tab: "news", data: null });
         break;
       }
       case "installationGuide": {
@@ -73,6 +79,8 @@ export const MyAppShell: React.FC = () => {
             <InstallationGuide />
           ) : tabData.tab === "schedule" ? (
             <Schedule />
+          ) : tabData.tab === "news" ? (
+            <News />
           ) : (
             <></>
           )}

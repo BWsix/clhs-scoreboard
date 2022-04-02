@@ -31,19 +31,28 @@ export const MyNavbar_Items: React.FC<Props> = ({ closeSide }) => {
           onClick={() => {
             closeSide();
 
-            navigate({ tab: "installationGuide", data: null });
+            navigate({ tab: "schedule", data: null });
           }}
         >
-          安裝教學
+          課表
         </Row>
         <Row
           onClick={() => {
             closeSide();
 
-            navigate({ tab: "schedule", data: null });
+            navigate({ tab: "news", data: null });
           }}
         >
-          課表
+          官網公告
+        </Row>
+        <Row
+          onClick={() => {
+            closeSide();
+
+            navigate({ tab: "installationGuide", data: null });
+          }}
+        >
+          安裝教學
         </Row>
       </tbody>
     </Table>
