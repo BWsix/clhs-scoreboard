@@ -21,6 +21,8 @@ export const getLessonNames = (decodedScheduleHtml: string) => {
     .slice(2, -1)
     .toString();
 
+  console.log(body);
+
   const parsed = body
     ?.replaceAll(MATCH_CLASS, "")
     .replaceAll(MATCH_STYLE, "")
