@@ -74,8 +74,7 @@ export default Login;
 function ScheduleUpdate() {
   return (
     <LoginInfoCard title="2022/4/2 功能更新">
-      加入了課表查詢功能 (
-      這個功能是奕翔建議加入的，因為他都不直接截圖課表，每次要看課表的時候再上學校網站看)。
+      加入了課表查詢功能以及學校官網公告查詢功能。
     </LoginInfoCard>
   );
 }
