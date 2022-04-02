@@ -3,11 +3,11 @@ import { useDisclosure } from "@mantine/hooks";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { InstallationGuide } from "src/components/InstallationGuide";
 import { MyHeader } from "src/components/MyHeader";
 import { MyNavbar } from "src/components/MyNavbar";
 import { AppShellContainer } from "src/components/Others/AppShellContainer";
-import { InstallationGuide } from "src/components/Others/InstallationGuide";
-import { Schedule } from "src/components/Others/Schedule";
+import { Schedule } from "src/components/Schedule";
 import { ErrorFallback } from "src/components/Shared/ErrorFallback";
 import { TestDetail } from "src/components/TestDetail";
 import {

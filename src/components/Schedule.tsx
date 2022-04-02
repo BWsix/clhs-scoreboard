@@ -1,7 +1,8 @@
-import { Grid, ScrollArea, SimpleGrid, Table } from "@mantine/core";
+import { ScrollArea, Table } from "@mantine/core";
 import React from "react";
+import { AppShellContainerTitle } from "src/components/Others/AppShellContainerTitle";
 import { trpc } from "src/utils/trpc";
-import { AppShellContainerTitle } from "./AppShellContainerTitle";
+import { LoaderCircle } from "./Shared/LoaderCircle";
 
 export const Schedule: React.FC = () => {
   const { data, error, isError } = trpc.useQuery(["schedule"]);
@@ -21,7 +22,7 @@ export const Schedule: React.FC = () => {
   );
 
   if (!data) {
-    return <></>;
+    return <LoaderCircle />;
   }
 
   let rows = data!.map((lessons, idx) => (

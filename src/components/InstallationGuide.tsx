@@ -7,7 +7,7 @@ import {
   Tooltip,
 } from "@mantine/core";
 import { useClickOutside, useClipboard, useDisclosure } from "@mantine/hooks";
-import { AppShellContainerTitle } from "./AppShellContainerTitle";
+import { AppShellContainerTitle } from "src/components/Others/AppShellContainerTitle";
 
 function CopyURL() {
   const clipboard = useClipboard();
