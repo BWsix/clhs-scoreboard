@@ -13,7 +13,7 @@ export const useSettings = () => {
     key: "sb-newsSettings",
     defaultValue: {
       threshold: 15,
-      persistPinned: false,
+      persistPinned: true,
     },
   });
 
