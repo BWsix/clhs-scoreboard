@@ -13,6 +13,7 @@ import React from "react";
 import { AppShellContainerTitle } from "src/components/Others/AppShellContainerTitle";
 import { trpc } from "src/utils/trpc";
 import { Filter } from "tabler-icons-react";
+import { LoaderCircle } from "../Shared/LoaderCircle";
 import { NewsTable } from "./News.Table";
 import { useSettings } from "./useSettings";
 
@@ -31,7 +32,7 @@ export const News = () => {
   }
 
   if (!newsQuery.data) {
-    return <></>;
+    return <LoaderCircle />;
   }
 
   const news = newsQuery.data.pages
