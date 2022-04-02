@@ -3,9 +3,11 @@ import React from "react";
 import { AppShellContainerTitle } from "src/components/Others/AppShellContainerTitle";
 import { trpc } from "src/utils/trpc";
 import { LoaderCircle } from "./Shared/LoaderCircle";
+import { useQueryAuthErrorHandler } from "./useQueryAuthErrorHandler";
 
 export const Schedule: React.FC = () => {
-  const { data, error, isError } = trpc.useQuery(["schedule"]);
+  const onError = useQueryAuthErrorHandler();
+  const { data, error, isError } = trpc.useQuery(["schedule"], { onError });
 
   if (isError) {
     return <>{error.message}</>;

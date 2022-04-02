@@ -1,9 +1,9 @@
+import { useQueryAuthErrorHandler } from "src/components/useQueryAuthErrorHandler";
 import { event } from "src/utils/gtag";
 import { trpc } from "src/utils/trpc";
-import { useLogout } from "./useLogout";
 
 export const useTestDetailQuery = (url: string | undefined) => {
-  const toggleLogout = useLogout();
+  const onError = useQueryAuthErrorHandler();
 
   const testDetailQuery = trpc.useQuery(["testDetail", { url: url || "" }], {
     enabled: !!url,
@@ -14,11 +14,7 @@ export const useTestDetailQuery = (url: string | undefined) => {
         label: JSON.stringify(data),
       });
     },
-    onError: (error) => {
-      if (error.data?.code === "UNAUTHORIZED") {
-        return toggleLogout();
-      }
-    },
+    onError,
   });
 
   return testDetailQuery;
