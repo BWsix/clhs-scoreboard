@@ -9,15 +9,16 @@ import {
   Slider,
 } from "@mantine/core";
 import { useToggle } from "@mantine/hooks";
-import React, { useState } from "react";
+import React from "react";
+import { AppShellContainerTitle } from "src/components/Others/AppShellContainerTitle";
 import { trpc } from "src/utils/trpc";
 import { Filter } from "tabler-icons-react";
-import { AppShellContainerTitle } from "../Others/AppShellContainerTitle";
 import { NewsTable } from "./News.Table";
+import { useSettings } from "./useSettings";
 
 export const News = () => {
-  const [threshold, setThreshold] = useState(15);
-  const [persistPinned, setPersistPinned] = useState(true);
+  const { persistPinned, setPersistPinned, setThreshold, threshold } =
+    useSettings();
   const [opened, toggleOpened] = useToggle(false, [false, true]);
 
   const newsQuery = trpc.useInfiniteQuery(["news", {}], {
