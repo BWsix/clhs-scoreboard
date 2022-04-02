@@ -5,7 +5,7 @@ const key = "sb-username";
 export const useUsername = () => {
   const [userName, updateUserName] = useLocalStorage({
     key,
-    defaultValue: "(系統忘了你的名字)",
+    defaultValue: "",
   });
 
   const deleteUserName = () => {

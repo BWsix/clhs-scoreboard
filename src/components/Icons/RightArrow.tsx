@@ -1,13 +1,17 @@
 import { ActionIcon } from "@mantine/core";
-import { ChevronRight } from "tabler-icons-react";
+import { ChevronDown, ChevronRight } from "tabler-icons-react";
 
-export const RightArrow = () => {
+interface Props {
+  down?: boolean;
+}
+
+export const RightArrow: React.FC<Props> = ({ down }) => {
   return (
     <ActionIcon
       variant="transparent"
       style={{ width: "100%", display: "flex", justifyContent: "right" }}
     >
-      <ChevronRight />
+      {down ? <ChevronDown /> : <ChevronRight />}
     </ActionIcon>
   );
 };
