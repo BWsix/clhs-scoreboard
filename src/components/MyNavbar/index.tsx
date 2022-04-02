@@ -1,9 +1,8 @@
-import { Divider, Navbar, ScrollArea, Text } from "@mantine/core";
+import { Divider, Navbar, Text } from "@mantine/core";
 import React from "react";
 import { LogoutButton } from "../Buttons/LogoutButton";
 import { Username } from "../Shared/Username";
 import { MyNavbar_Items } from "./MyNavbar.Items";
-import { MyNavbar_TestList } from "./MyNavbar.TestList";
 
 interface Props {
   sideOpened: boolean;
@@ -30,15 +29,7 @@ export const MyNavbar: React.FC<Props> = ({ sideOpened, closeSide }) => {
 
       <Divider mb="sm" />
 
-      <Navbar.Section>
-        <MyNavbar_Items closeSide={closeSide} />
-      </Navbar.Section>
-
-      <Divider my="sm" />
-
-      <Navbar.Section grow component={ScrollArea}>
-        <MyNavbar_TestList closeSide={closeSide} />
-      </Navbar.Section>
+      <MyNavbar_Items closeSide={closeSide} />
     </Navbar>
   );
 };
