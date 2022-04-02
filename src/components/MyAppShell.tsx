@@ -7,6 +7,7 @@ import { MyHeader } from "src/components/MyHeader";
 import { MyNavbar } from "src/components/MyNavbar";
 import { AppShellContainer } from "src/components/Others/AppShellContainer";
 import { InstallationGuide } from "src/components/Others/InstallationGuide";
+import { Schedule } from "src/components/Others/Schedule";
 import { ErrorFallback } from "src/components/Shared/ErrorFallback";
 import { TestDetail } from "src/components/TestDetail";
 import {
@@ -17,7 +18,8 @@ import { useLastTab } from "src/hooks/uselastTab";
 
 export type TabProps =
   | { tab: "testDetail"; data: TestMeta }
-  | { tab: "installationGuide"; data: null };
+  | { tab: "installationGuide"; data: null }
+  | { tab: "schedule"; data: null };
 
 export const MyAppShell: React.FC = () => {
   const router = useRouter();
@@ -34,19 +36,18 @@ export const MyAppShell: React.FC = () => {
     switch (tab) {
       case "testDetail": {
         const parsedTestMeta = testMetaSchema.safeParse(router.query);
-
-        if (parsedTestMeta.success) {
+        if (parsedTestMeta.success)
           setTabData({ tab: "testDetail", data: parsedTestMeta.data });
-        }
-
         break;
       }
-
+      case "schedule": {
+        setTabData({ tab: "schedule", data: null });
+        break;
+      }
       case "installationGuide": {
         setTabData({ tab: "installationGuide", data: null });
         break;
       }
-
       default: {
         break;
       }
@@ -70,6 +71,8 @@ export const MyAppShell: React.FC = () => {
             <TestDetail testMeta={tabData.data} />
           ) : tabData.tab === "installationGuide" ? (
             <InstallationGuide />
+          ) : tabData.tab === "schedule" ? (
+            <Schedule />
           ) : (
             <></>
           )}

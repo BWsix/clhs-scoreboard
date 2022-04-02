@@ -2,6 +2,7 @@ import * as trpc from "@trpc/server";
 import { TRPCError } from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
 import { login } from "src/handlers/login";
+import { getSchedule } from "src/handlers/schedule";
 import { testDetail } from "src/handlers/testDetail";
 import { testMetaList } from "src/handlers/testMetaList";
 import {
@@ -60,6 +61,13 @@ const router = trpc
   .mutation("me", {
     resolve: () => {
       return true;
+    },
+  })
+  .query("schedule", {
+    async resolve({ ctx }) {
+      const data = await getSchedule(ctx.sessionCookie);
+
+      return data;
     },
   })
   .query("testMetaList", {
