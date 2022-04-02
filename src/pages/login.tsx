@@ -22,7 +22,7 @@ const Login: NextPage = () => {
 
   return (
     <>
-      <MyHeader opened={true} toggleSide={() => {}} />
+      <MyHeader noMenu opened toggleSide={() => {}} />
       <AppShellContainer>
         <Box sx={{ maxWidth: 300 }} mx="auto">
           <form

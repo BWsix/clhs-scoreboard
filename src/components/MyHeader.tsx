@@ -2,11 +2,12 @@ import { Burger, Header, MediaQuery, Title } from "@mantine/core";
 import { GithubIcon } from "./Icons/Github";
 
 interface Props {
+  noMenu?: boolean;
   opened: boolean;
   toggleSide: () => void;
 }
 
-export const MyHeader: React.FC<Props> = ({ opened, toggleSide }) => {
+export const MyHeader: React.FC<Props> = ({ opened, toggleSide, noMenu }) => {
   return (
     <Header height={70} p="md">
       <div
@@ -17,9 +18,11 @@ export const MyHeader: React.FC<Props> = ({ opened, toggleSide }) => {
           height: "100%",
         }}
       >
-        <MediaQuery largerThan="sm" styles={{ display: "none" }}>
-          <Burger opened={opened} onClick={toggleSide} size="sm" mr="xl" />
-        </MediaQuery>
+        {!noMenu && (
+          <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+            <Burger opened={opened} onClick={toggleSide} size="sm" mr="xl" />
+          </MediaQuery>
+        )}
 
         <Title order={3}>Scoreboard</Title>
 
