@@ -1,5 +1,5 @@
 import { News } from "@clhs-api/core";
-import { Table } from "@mantine/core";
+import { ActionIcon, Chip, Table, Text } from "@mantine/core";
 import React from "react";
 import { ExternalLink } from "tabler-icons-react";
 
@@ -18,31 +18,36 @@ export const NewsTable: React.FC<Props> = ({
   threshold,
 }) => {
   const rows = news
-    .filter(({ clicks, top }) => {
-      if (persistPinned && top) return true;
-      return parseInt(clicks, 10) > threshold * 10;
+    .filter((news) => {
+      if (persistPinned && news.top) return true;
+      return parseInt(news.clicks, 10) > threshold * 10;
     })
-    .map(({ title, newsId, time }) => (
-      <tr
-        key={newsId}
-        style={{ cursor: "pointer" }}
-        onClick={() => {
-          window.open(newsLink(newsId), "_blank");
-        }}
-      >
+    .map((news) => (
+      <tr key={news.newsId}>
         <td>
-          {time}
-          <br />
-          {title}
+          <div style={{ color: "gray" }}>
+            {news.time}．{news.unit_name}．{news.clicks}點閱
+          </div>
+          <Text mt="xs">{news.title}</Text>
         </td>
+
         <td>
-          <ExternalLink color="gray" />
+          <ActionIcon
+            size="xl"
+            component="a"
+            href={newsLink(news.newsId)}
+            variant="transparent"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <ExternalLink color="gray" />
+          </ActionIcon>
         </td>
       </tr>
     ));
 
   return (
-    <Table highlightOnHover verticalSpacing="sm" mt="sm">
+    <Table verticalSpacing="sm" mt="sm">
       <tbody>{rows}</tbody>
     </Table>
   );
