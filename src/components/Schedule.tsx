@@ -25,7 +25,7 @@ export const Schedule: React.FC = () => {
     return <LoaderCircle />;
   }
 
-  let rows = data!.map((lessons, idx) => (
+  const rows = data!.map((lessons, idx) => (
     <tr key={idx}>
       {lessons.map((lesson, idx) => (
         <td key={idx} style={{ whiteSpace: "nowrap" }}>
@@ -50,7 +50,7 @@ export const Schedule: React.FC = () => {
           scrollbarSize={8}
           style={{ display: "inline-block" }}
         >
-          <Table striped>
+          <Table striped verticalSpacing="sm">
             <thead>{head}</thead>
             <tbody>{rows}</tbody>
           </Table>
@@ -62,7 +62,7 @@ export const Schedule: React.FC = () => {
 
 const LeftBar = () => {
   return (
-    <Table striped style={{ textAlign: "center" }}>
+    <Table striped verticalSpacing="sm" style={{ textAlign: "center" }}>
       <thead>
         <tr>
           <th>　</th>
@@ -70,30 +70,11 @@ const LeftBar = () => {
       </thead>
 
       <tbody>
-        <tr>
-          <td>1</td>
-        </tr>
-        <tr>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>3</td>
-        </tr>
-        <tr>
-          <td>4</td>
-        </tr>
-        <tr>
-          <td>5</td>
-        </tr>
-        <tr>
-          <td>6</td>
-        </tr>
-        <tr>
-          <td>7</td>
-        </tr>
-        <tr>
-          <td>8</td>
-        </tr>
+        {Array.from(Array(8).keys()).map((idx) => (
+          <tr key={idx}>
+            <td>{idx + 1}</td>
+          </tr>
+        ))}
       </tbody>
     </Table>
   );
