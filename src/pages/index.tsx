@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { ErrorBoundary } from "react-error-boundary";
 import { MyAppShell } from "src/components/MyAppShell";
-import { ErrorFallback } from "src/components/Shared/ErrorFallback";
+import { ErrorFallback } from "src/components/Shared";
 
 const Home: NextPage = () => {
   if (typeof window !== "undefined") {

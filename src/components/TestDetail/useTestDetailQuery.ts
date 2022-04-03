@@ -1,4 +1,4 @@
-import { useQueryAuthErrorHandler } from "src/components/useQueryAuthErrorHandler";
+import { useQueryAuthErrorHandler } from "src/components/hooks";
 import { event } from "src/utils/gtag";
 import { trpc } from "src/utils/trpc";
 

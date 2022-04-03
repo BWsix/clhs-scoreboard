@@ -1,0 +1,1 @@
+export { InstallationGuide } from "./InstallationGuide";

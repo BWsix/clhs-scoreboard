@@ -1,9 +1,8 @@
 import { ScrollArea, Table } from "@mantine/core";
-import React from "react";
+import { useQueryAuthErrorHandler } from "src/components/hooks";
 import { AppShellContainerTitle } from "src/components/Others/AppShellContainerTitle";
+import { LoaderCircle } from "src/components/Shared";
 import { trpc } from "src/utils/trpc";
-import { LoaderCircle } from "./Shared/LoaderCircle";
-import { useQueryAuthErrorHandler } from "./useQueryAuthErrorHandler";
 
 export const Schedule: React.FC = () => {
   const onError = useQueryAuthErrorHandler();

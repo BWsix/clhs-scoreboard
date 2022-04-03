@@ -3,19 +3,19 @@ import { useDisclosure } from "@mantine/hooks";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { useLastTab } from "src/components/hooks";
 import { InstallationGuide } from "src/components/InstallationGuide";
 import { MyHeader } from "src/components/MyHeader";
 import { MyNavbar } from "src/components/MyNavbar";
 import { News } from "src/components/News";
 import { AppShellContainer } from "src/components/Others/AppShellContainer";
 import { Schedule } from "src/components/Schedule";
-import { ErrorFallback } from "src/components/Shared/ErrorFallback";
+import { ErrorFallback } from "src/components/Shared";
 import { TestDetail } from "src/components/TestDetail";
 import {
   TestMeta,
   testMetaSchema,
 } from "src/handlers/testMetaList/getTestMetaList";
-import { useLastTab } from "src/hooks/uselastTab";
 
 export type TabProps =
   | { tab: "testDetail"; data: TestMeta }

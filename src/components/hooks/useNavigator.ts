@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { TabProps } from "src/components/MyAppShell";
-import { useLastTab } from "src/hooks/uselastTab";
+import { useLastTab } from "./uselastTab";
 
 export const useNavigator = () => {
   const router = useRouter();

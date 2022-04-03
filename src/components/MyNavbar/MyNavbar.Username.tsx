@@ -1,4 +1,4 @@
-import { useUsername } from "src/hooks/useUserName";
+import { useUsername } from "src/components/hooks";
 
 export const Username = () => {
   const { userName } = useUsername();

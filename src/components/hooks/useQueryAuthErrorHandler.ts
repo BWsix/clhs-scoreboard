@@ -1,4 +1,4 @@
-import { useLogout } from "src/hooks/useLogout";
+import { useLogout } from "./useLogout";
 
 export const useQueryAuthErrorHandler = () => {
   const toggleLogout = useLogout();

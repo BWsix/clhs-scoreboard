@@ -1,11 +1,13 @@
 import { Table, Text } from "@mantine/core";
-import { RightArrow } from "src/components/Icons/RightArrow";
-import { useLastTab } from "src/hooks/uselastTab";
-import { useNavigator } from "src/hooks/useNavigator";
+import {
+  useLastTab,
+  useNavigator,
+  useQueryAuthErrorHandler,
+} from "src/components/hooks";
+import { LoaderCircle } from "src/components/Shared";
 import { event } from "src/utils/gtag";
 import { trpc } from "src/utils/trpc";
-import { LoaderCircle } from "../Shared/LoaderCircle";
-import { useQueryAuthErrorHandler } from "../useQueryAuthErrorHandler";
+import { RightArrow } from "./MyNavbar.RightArrow";
 
 interface Props {
   closeSide: () => void;

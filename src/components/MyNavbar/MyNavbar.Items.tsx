@@ -1,8 +1,7 @@
 import { Navbar, ScrollArea, Table } from "@mantine/core";
-import React, { useState } from "react";
-import { RightArrow } from "src/components/Icons/RightArrow";
-import { useLastTab } from "src/hooks/uselastTab";
-import { useNavigator } from "src/hooks/useNavigator";
+import { useState } from "react";
+import { useLastTab, useNavigator } from "src/components/hooks";
+import { RightArrow } from "./MyNavbar.RightArrow";
 import { MyNavbar_TestList } from "./MyNavbar.TestList";
 
 interface Props {

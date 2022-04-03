@@ -1,5 +1,4 @@
 import { Table } from "@mantine/core";
-import React from "react";
 
 interface Props {
   data: {

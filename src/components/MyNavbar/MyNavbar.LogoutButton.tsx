@@ -1,6 +1,5 @@
 import { Button } from "@mantine/core";
-import React from "react";
-import { useLogout } from "src/hooks/useLogout";
+import { useLogout } from "src/components/hooks";
 
 export const LogoutButton = () => {
   const toggleLogout = useLogout();

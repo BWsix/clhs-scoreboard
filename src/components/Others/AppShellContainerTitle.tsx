@@ -1,5 +1,4 @@
 import { Title } from "@mantine/core";
-import React from "react";
 
 interface Props {
   title: string;

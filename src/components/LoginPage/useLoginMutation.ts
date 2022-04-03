@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
+import { useUsername } from "src/components/hooks";
 import { event } from "src/utils/gtag";
 import { trpc } from "src/utils/trpc";
-import { useUsername } from "./useUserName";
 
 export const useLoginMutation = () => {
   const router = useRouter();

@@ -1,5 +1,5 @@
 import { Burger, Header, MediaQuery, Title } from "@mantine/core";
-import { GithubIcon } from "./Icons/Github";
+import { GithubIcon } from "./MyHeader.Github";
 
 interface Props {
   noMenu?: boolean;

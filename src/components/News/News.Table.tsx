@@ -1,6 +1,5 @@
 import { News } from "@clhs-api/core";
-import { ActionIcon, Chip, Table, Text } from "@mantine/core";
-import React from "react";
+import { ActionIcon, Table, Text } from "@mantine/core";
 import { ExternalLink } from "tabler-icons-react";
 
 interface Props {
