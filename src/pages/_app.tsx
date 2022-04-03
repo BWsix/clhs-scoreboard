@@ -86,7 +86,13 @@ export default withTRPC<AppRouter>({
     return {
       url,
       queryClientConfig: {
-        defaultOptions: { queries: { retry: 0, refetchOnMount: false } },
+        defaultOptions: {
+          queries: {
+            retry: 0,
+            refetchOnWindowFocus: false,
+            refetchOnMount: false,
+          },
+        },
       },
     };
   },
