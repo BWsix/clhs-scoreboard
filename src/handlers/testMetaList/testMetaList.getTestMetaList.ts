@@ -1,5 +1,5 @@
+import { API } from "src/handlers/constants";
 import { z } from "zod";
-import { API } from "../constants";
 
 export const testMetaSchema = z.object({
   name: z.string(),

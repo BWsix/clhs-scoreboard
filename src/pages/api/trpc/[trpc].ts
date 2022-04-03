@@ -1,16 +1,8 @@
 import { newsListQuery } from "@clhs-api/core";
 import * as trpc from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
-import { login } from "src/handlers/login";
-import { getSchedule } from "src/handlers/schedule";
-import { testDetail } from "src/handlers/testDetail";
-import { testMetaList } from "src/handlers/testMetaList";
-import {
-  destroyAllDeprecatedCookies,
-  destroySessionCookie,
-  getSessionCookie,
-  setSessionCookie,
-} from "src/utils/cookies";
+import * as handlers from "src/handlers";
+import * as cookie from "src/handlers/libs/cookie";
 import { z } from "zod";
 
 export function createContext(opts?: trpcNext.CreateNextContextOptions) {
@@ -31,19 +23,22 @@ const router = trpc
       password: z.string(),
     }),
     async resolve({ input, ctx }) {
-      destroyAllDeprecatedCookies(ctx);
+      cookie.destroyAllDeprecatedCookies(ctx);
 
-      const { name, sessionCookie } = await login(input.id, input.password);
-      setSessionCookie(ctx, sessionCookie);
+      const { name, sessionCookie } = await handlers.login(
+        input.id,
+        input.password
+      );
+      cookie.setSessionCookie(ctx, sessionCookie);
 
       return { name };
     },
   })
   .mutation("logout", {
     resolve: ({ ctx }) => {
-      destroyAllDeprecatedCookies(ctx);
+      cookie.destroyAllDeprecatedCookies(ctx);
 
-      destroySessionCookie(ctx);
+      cookie.destroySessionCookie(ctx);
     },
   })
   .query("news", {
@@ -59,21 +54,21 @@ const router = trpc
     },
   })
   .middleware(({ ctx, next }) => {
-    const sessionCookie = getSessionCookie(ctx);
+    const sessionCookie = cookie.getSessionCookie(ctx);
 
     return next({ ctx: { ...ctx, sessionCookie } });
   })
 
   .query("schedule", {
     async resolve({ ctx }) {
-      const data = await getSchedule(ctx.sessionCookie);
+      const data = await handlers.getSchedule(ctx.sessionCookie);
 
       return data;
     },
   })
   .query("testMetaList", {
     async resolve({ ctx }) {
-      const data = await testMetaList(ctx.sessionCookie);
+      const data = await handlers.testMetaList(ctx.sessionCookie);
 
       return data;
     },
@@ -81,7 +76,7 @@ const router = trpc
   .query("testDetail", {
     input: z.object({ url: z.string() }),
     async resolve({ input, ctx }) {
-      const data = await testDetail(ctx.sessionCookie, input.url);
+      const data = await handlers.testDetail(ctx.sessionCookie, input.url);
 
       return data;
     },

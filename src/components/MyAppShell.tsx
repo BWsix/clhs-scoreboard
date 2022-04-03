@@ -15,7 +15,7 @@ import { TestDetail } from "src/components/TestDetail";
 import {
   TestMeta,
   testMetaSchema,
-} from "src/handlers/testMetaList/getTestMetaList";
+} from "src/handlers/testMetaList/testMetaList.getTestMetaList";
 
 export type TabProps =
   | { tab: "testDetail"; data: TestMeta }

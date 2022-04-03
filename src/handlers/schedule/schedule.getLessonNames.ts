@@ -1,4 +1,4 @@
-import * as cheer from "cheerio";
+import { load } from "cheerio";
 
 const MATCH_CLASS = /class="[\d\w\s\;\:\-\u4e00-\u9fa5]+"/g;
 const MATCH_STYLE = /style="[\d\w\s\;\:\-\u4e00-\u9fa5]+"/g;
@@ -9,7 +9,7 @@ const MATCH_NAME = /<br>[\u4e00-\u9fa5]+/g;
 type WEEK = [mon: string, tue: string, wed: string, thu: string, fri: string];
 
 export const getLessonNames = (decodedScheduleHtml: string) => {
-  const $ = cheer.load(decodedScheduleHtml);
+  const $ = load(decodedScheduleHtml);
 
   const body = $("body")
     .find("table")

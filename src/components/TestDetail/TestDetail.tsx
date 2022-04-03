@@ -2,7 +2,7 @@ import { Anchor, Divider, Table } from "@mantine/core";
 import { ErrorBoundary } from "react-error-boundary";
 import { AppShellContainerTitle } from "src/components/Others/AppShellContainerTitle";
 import { ErrorFallback, LoaderCircle } from "src/components/Shared";
-import type { TestMeta } from "src/handlers/testMetaList/getTestMetaList";
+import type { TestMeta } from "src/handlers/testMetaList/testMetaList.getTestMetaList";
 import { TestDetail_Title } from "./TestDetail.Title";
 import { useTestDetailQuery } from "./useTestDetailQuery";
 
