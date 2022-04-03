@@ -12,13 +12,11 @@ import { AppShellContainer } from "src/components/Others/AppShellContainer";
 import { Schedule } from "src/components/Schedule";
 import { ErrorFallback } from "src/components/Shared";
 import { TestDetail } from "src/components/TestDetail";
-import {
-  TestMeta,
-  testMetaSchema,
-} from "src/handlers/testMetaList/testMetaList.getTestMetaList";
+import * as schemas from "src/schemas";
+import type { TestMetaType } from "src/schemas/testMeta.schema";
 
 export type TabProps =
-  | { tab: "testDetail"; data: TestMeta }
+  | { tab: "testDetail"; data: TestMetaType }
   | { tab: "installationGuide"; data: null }
   | { tab: "schedule"; data: null }
   | { tab: "news"; data: null };
@@ -37,7 +35,7 @@ export const MyAppShell: React.FC = () => {
 
     switch (tab) {
       case "testDetail": {
-        const parsedTestMeta = testMetaSchema.safeParse(router.query);
+        const parsedTestMeta = schemas.testMeta.safeParse(router.query);
         if (parsedTestMeta.success)
           setTabData({ tab: "testDetail", data: parsedTestMeta.data });
         break;

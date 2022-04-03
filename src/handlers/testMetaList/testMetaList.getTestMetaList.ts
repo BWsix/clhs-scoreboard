@@ -1,17 +1,7 @@
 import { API } from "src/handlers/constants";
-import { z } from "zod";
+import type { TestMetaType } from "src/schemas/testMeta.schema";
 
-export const testMetaSchema = z.object({
-  name: z.string(),
-  number: z.string(),
-  semester: z.string(),
-  url: z.string().url(),
-  year: z.string(),
-});
-
-export type TestMeta = z.infer<typeof testMetaSchema>;
-
-const getWeight = (test: TestMeta, weight = 0) => {
+const getWeight = (test: TestMetaType, weight = 0) => {
   weight += 100 * parseInt(test.year, 10);
   weight += 10 * (test.semester === "下" ? 1 : 0);
   weight += 1 * ["第1次期中考", "第2次期中考", "期末考"].indexOf(test.name);
@@ -30,7 +20,7 @@ export const getTestMetaList = (content: string) => {
     /number=(\d+)&[\d\w\%\=\;]+">\[(\d\d\d)([\u4e00-\u9fa5])\] ([\u4e00-\u9fa5\d]+)</g;
 
   let test;
-  let result: TestMeta[] = [];
+  let result: TestMetaType[] = [];
 
   while ((test = MATCHER.exec(content))) {
     const [_, number, year, semester, name] = test;

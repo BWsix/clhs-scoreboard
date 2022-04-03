@@ -2,12 +2,12 @@ import { Anchor, Divider, Table } from "@mantine/core";
 import { ErrorBoundary } from "react-error-boundary";
 import { AppShellContainerTitle } from "src/components/Others/AppShellContainerTitle";
 import { ErrorFallback, LoaderCircle } from "src/components/Shared";
-import type { TestMeta } from "src/handlers/testMetaList/testMetaList.getTestMetaList";
+import type { TestMetaType } from "src/schemas/testMeta.schema";
 import { TestDetail_Title } from "./TestDetail.Title";
 import { useTestDetailQuery } from "./useTestDetailQuery";
 
 interface Props {
-  testMeta: TestMeta | undefined;
+  testMeta: TestMetaType | undefined;
 }
 
 export const TestDetail: React.FC<Props> = ({ testMeta }) => {
