@@ -28,13 +28,30 @@ export const TestDetail: React.FC<Props> = ({ testMeta }) => {
     </tr>
   );
 
-  const rows = data.subjects?.map(({ average, name, score }) => (
-    <tr key={name}>
-      <td>{name}</td>
-      <td>{score}</td>
-      <td>{average}</td>
-    </tr>
-  ));
+  const rows = data.subjects?.map(({ average, name, score }) => {
+    if (name.includes("-")) {
+      const [a, b] = name.split("-");
+      return (
+        <tr key={name}>
+          <td>
+            {a}
+            <br />
+            {b}
+          </td>
+          <td>{score}</td>
+          <td>{average}</td>
+        </tr>
+      );
+    }
+
+    return (
+      <tr key={name}>
+        <td>{name}</td>
+        <td>{score}</td>
+        <td>{average}</td>
+      </tr>
+    );
+  });
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
