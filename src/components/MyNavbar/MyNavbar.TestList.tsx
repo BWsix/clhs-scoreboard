@@ -1,4 +1,4 @@
-import { Table, Text } from "@mantine/core";
+import { Group, Table, Text } from "@mantine/core";
 import {
   useLastTab,
   useNavigator,
@@ -7,7 +7,7 @@ import {
 import { LoaderCircle } from "src/components/Shared";
 import { event } from "src/utils/gtag";
 import { trpc } from "src/utils/trpc";
-import { RightArrow } from "./MyNavbar.RightArrow";
+import { ChevronRight } from "tabler-icons-react";
 
 interface Props {
   closeSide: () => void;
@@ -51,7 +51,9 @@ export const MyNavbar_TestList: React.FC<Props> = ({ closeSide }) => {
       <td>{testMeta.semester}</td>
       <td>{testMeta.name}</td>
       <td>
-        <RightArrow />
+        <Group position="right">
+          <ChevronRight />
+        </Group>
       </td>
     </tr>
   ));

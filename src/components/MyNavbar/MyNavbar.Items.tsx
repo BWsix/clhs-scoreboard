@@ -1,91 +1,95 @@
-import { Navbar, ScrollArea, Table } from "@mantine/core";
+import { ActionIcon, Box, Divider, Group, Text } from "@mantine/core";
 import { useState } from "react";
 import { useLastTab, useNavigator } from "src/components/hooks";
-import { RightArrow } from "./MyNavbar.RightArrow";
+import {
+  Book,
+  CalendarEvent,
+  ChevronDown,
+  ChevronUp,
+  Help,
+  List,
+  Speakerphone,
+} from "tabler-icons-react";
+import { ItemRow } from "./MyNavbar.Items.Row";
 import { MyNavbar_TestList } from "./MyNavbar.TestList";
 
 interface Props {
   closeSide: () => void;
 }
 
-const Row: React.FC<{ onClick: () => void; opened?: boolean }> = ({
-  children,
-  onClick: _onClick,
-  opened,
-}) => {
-  return (
-    <tr style={{ cursor: "pointer" }} onClick={_onClick}>
-      <td>{children}</td>
-      <td>
-        <RightArrow down={opened} />
-      </td>
-    </tr>
-  );
-};
-
 export const MyNavbar_Items: React.FC<Props> = ({ closeSide }) => {
   const navigate = useNavigator();
   const { lastTab, setLastTab } = useLastTab();
-  const [opened, setOpened] = useState(lastTab === "testDetail");
+  const [lastTabIsTestDetail, setLastTabIsTestDetail] = useState(
+    lastTab === "testDetail"
+  );
+
+  const arrowDown = !lastTabIsTestDetail;
 
   return (
     <>
-      <Navbar.Section>
-        <Table highlightOnHover>
-          <tbody>
-            <Row
-              onClick={() => {
-                closeSide();
+      <ItemRow
+        Icon={Book}
+        onClick={() => {
+          closeSide();
+          navigate({ tab: "schedule", data: null });
+        }}
+      >
+        <Text>課表</Text>
+      </ItemRow>
 
-                navigate({ tab: "schedule", data: null });
-              }}
-            >
-              課表
-            </Row>
-            <Row
-              onClick={() => {
-                closeSide();
+      <ItemRow
+        Icon={Speakerphone}
+        onClick={() => {
+          closeSide();
+          navigate({ tab: "news", data: null });
+        }}
+      >
+        <Text>官網公告</Text>
+      </ItemRow>
 
-                navigate({ tab: "news", data: null });
-              }}
-            >
-              官網公告
-            </Row>
-            <Row
-              onClick={() => {
-                closeSide();
+      <ItemRow
+        Icon={CalendarEvent}
+        onClick={() => {
+          closeSide();
+          navigate({ tab: "calendar", data: null });
+        }}
+      >
+        <Text>行事曆</Text>
+      </ItemRow>
 
-                navigate({ tab: "calendar", data: null });
-              }}
-            >
-              行事曆
-            </Row>
-            <Row
-              onClick={() => {
-                closeSide();
+      <ItemRow
+        Icon={Help}
+        onClick={() => {
+          closeSide();
+          navigate({ tab: "installationGuide", data: null });
+        }}
+      >
+        <Text>安裝教學</Text>
+      </ItemRow>
 
-                navigate({ tab: "installationGuide", data: null });
-              }}
-            >
-              安裝教學
-            </Row>
-            <Row
-              opened={opened}
-              onClick={() => {
-                setOpened((o) => !o);
-                setLastTab("testDetail");
-              }}
-            >
-              考試清單
-            </Row>
-          </tbody>
-        </Table>
-      </Navbar.Section>
+      <ItemRow
+        Icon={List}
+        onClick={() => {
+          setLastTabIsTestDetail((o) => !o);
+          setLastTab("testDetail");
+        }}
+      >
+        <Group position="apart" sx={{ flex: 1 }}>
+          <Text>考試清單</Text>
 
-      {!!opened && (
-        <Navbar.Section grow component={ScrollArea}>
+          <ActionIcon variant="transparent">
+            {arrowDown ? <ChevronDown /> : <ChevronUp />}
+          </ActionIcon>
+        </Group>
+      </ItemRow>
+
+      {lastTabIsTestDetail && (
+        <Box>
+          <Divider my="sm" label="考試清單" />
+
           <MyNavbar_TestList closeSide={closeSide} />
-        </Navbar.Section>
+        </Box>
       )}
     </>
   );
