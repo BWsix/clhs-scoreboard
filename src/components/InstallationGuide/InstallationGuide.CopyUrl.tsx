@@ -1,6 +1,5 @@
-import { Tooltip } from "@mantine/core";
+import { Anchor, Tooltip } from "@mantine/core";
 import { useClickOutside, useClipboard, useDisclosure } from "@mantine/hooks";
-import { Anchor } from "tabler-icons-react";
 
 const URL = "https://CLHS-Scoreboard.vercel.app";
 
