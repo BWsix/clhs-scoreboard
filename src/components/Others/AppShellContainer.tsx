@@ -2,7 +2,7 @@ import { Container } from "@mantine/core";
 
 export const AppShellContainer: React.FC = ({ children }) => {
   return (
-    <Container my="sm" px="xs">
+    <Container p="xs" sx={{ height: "100%" }}>
       {children}
     </Container>
   );
