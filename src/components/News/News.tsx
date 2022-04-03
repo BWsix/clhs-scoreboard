@@ -13,6 +13,7 @@ import { AppShellContainerTitle } from "src/components/Others/AppShellContainerT
 import { LoaderCircle } from "src/components/Shared";
 import { trpc } from "src/utils/trpc";
 import { Filter } from "tabler-icons-react";
+import { NewsScrollToTop } from "./News.ScrollToTop";
 import { NewsTable } from "./News.Table";
 import { useSettings } from "./useSettings";
 
@@ -86,6 +87,8 @@ export const News = () => {
           載入更多
         </Button>
       </Center>
+
+      <NewsScrollToTop />
     </>
   );
 };
