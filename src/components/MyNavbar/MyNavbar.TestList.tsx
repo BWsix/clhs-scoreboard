@@ -59,6 +59,14 @@ export const MyNavbar_TestList: React.FC<Props> = ({ closeSide }) => {
   return (
     <>
       <Table highlightOnHover>
+        <thead>
+          <tr>
+            <th>學年</th>
+            <th>學期</th>
+            <th>考試</th>
+            <th></th>
+          </tr>
+        </thead>
         <tbody>{rows}</tbody>
       </Table>
     </>

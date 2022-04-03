@@ -26,7 +26,7 @@ const Row: React.FC<{ onClick: () => void; opened?: boolean }> = ({
 
 export const MyNavbar_Items: React.FC<Props> = ({ closeSide }) => {
   const navigate = useNavigator();
-  const { lastTab } = useLastTab();
+  const { lastTab, setLastTab } = useLastTab();
   const [opened, setOpened] = useState(lastTab === "testDetail");
 
   return (
@@ -65,6 +65,7 @@ export const MyNavbar_Items: React.FC<Props> = ({ closeSide }) => {
               opened={opened}
               onClick={() => {
                 setOpened((o) => !o);
+                setLastTab("testDetail");
               }}
             >
               考試清單
