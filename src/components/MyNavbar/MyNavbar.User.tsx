@@ -31,8 +31,6 @@ export const MyNavBar_User = () => {
       }}
     >
       <Group>
-        <UserCircle color={theme.colors[theme.primaryColor][5]} />
-
         <Box sx={{ flex: 1 }}>
           <Username />
         </Box>
