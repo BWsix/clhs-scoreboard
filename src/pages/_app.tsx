@@ -1,15 +1,18 @@
-import { MantineProvider } from "@mantine/core";
+import { ColorSchemeProvider, MantineProvider } from "@mantine/core";
 import { withTRPC } from "@trpc/next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Script from "next/script";
 import { useEffect } from "react";
+import { useColorScheme } from "src/components/hooks/useColorScheme";
 import * as gtag from "src/utils/gtag";
 import { AppRouter } from "./api/trpc/[trpc]";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const { colorScheme, primaryColor, setColorSchemeAndPrimaryColor } =
+    useColorScheme();
 
   useEffect(() => {
     localStorage.removeItem("cred");
@@ -60,15 +63,22 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
 
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{
-          colorScheme: "dark",
-        }}
+      <ColorSchemeProvider
+        colorScheme={colorScheme}
+        toggleColorScheme={setColorSchemeAndPrimaryColor}
       >
-        <Component {...pageProps} />
-      </MantineProvider>
+        <MantineProvider
+          withGlobalStyles
+          withNormalizeCSS
+          theme={{
+            colorScheme,
+            primaryColor,
+            other: { variant: colorScheme === "dark" ? "filled" : "outline" },
+          }}
+        >
+          <Component {...pageProps} />
+        </MantineProvider>
+      </ColorSchemeProvider>
     </>
   );
 }

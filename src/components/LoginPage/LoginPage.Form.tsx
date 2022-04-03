@@ -5,11 +5,14 @@ import {
   Text,
   TextInput,
   Title,
+  useMantineTheme,
 } from "@mantine/core";
 import { useForm } from "@mantine/hooks";
 import { useLoginMutation } from "./useLoginMutation";
 
 export const LoginPageForm = () => {
+  const theme = useMantineTheme();
+
   const loginMutation = useLoginMutation();
   const form = useForm({
     initialValues: { id: "", password: "" },
@@ -42,7 +45,7 @@ export const LoginPageForm = () => {
           {...form.getInputProps("password")}
         />
 
-        <Button type="submit" mt="md" fullWidth>
+        <Button type="submit" mt="md" fullWidth variant={theme.other.variant}>
           登入
         </Button>
       </div>

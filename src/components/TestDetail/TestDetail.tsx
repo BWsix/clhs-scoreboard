@@ -1,4 +1,4 @@
-import { Anchor, Divider, Table } from "@mantine/core";
+import { Anchor, Divider, Group, Table } from "@mantine/core";
 import { ErrorBoundary } from "react-error-boundary";
 import { AppShellContainerTitle } from "src/components/Others/AppShellContainerTitle";
 import { ErrorFallback, LoaderCircle } from "src/components/Shared";
@@ -51,17 +51,17 @@ export const TestDetail: React.FC<Props> = ({ testMeta }) => {
         <tbody>{rows}</tbody>
       </Table>
 
-      <Anchor
-        component="button"
-        color="gray"
-        align="right"
-        mt="sm"
-        sx={{ width: "100%" }}
-        onClick={() => refetch()}
-        disabled={isLoading}
-      >
-        重整資料
-      </Anchor>
+      <Group position="right">
+        <Anchor
+          component="button"
+          align="right"
+          mt="sm"
+          onClick={() => refetch()}
+          disabled={isLoading}
+        >
+          重整資料
+        </Anchor>
+      </Group>
     </ErrorBoundary>
   );
 };

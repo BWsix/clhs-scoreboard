@@ -1,8 +1,10 @@
-import { Affix, Button, Transition } from "@mantine/core";
+import { Affix, Button, Transition, useMantineTheme } from "@mantine/core";
 import { useWindowScroll } from "@mantine/hooks";
 import { ArrowUp } from "tabler-icons-react";
 
 export const NewsScrollToTop: React.FC = () => {
+  const theme = useMantineTheme();
+
   const [scroll, scrollTo] = useWindowScroll();
 
   return (
@@ -11,7 +13,7 @@ export const NewsScrollToTop: React.FC = () => {
         {(transitionStyles) => (
           <Button
             leftIcon={<ArrowUp />}
-            variant="outline"
+            variant={theme.other.variant}
             radius="md"
             style={transitionStyles}
             onClick={() => scrollTo({ y: 0 })}

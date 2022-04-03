@@ -7,6 +7,7 @@ import {
   Group,
   InputWrapper,
   Slider,
+  useMantineTheme,
 } from "@mantine/core";
 import { useToggle } from "@mantine/hooks";
 import { AppShellContainerTitle } from "src/components/Others/AppShellContainerTitle";
@@ -18,6 +19,8 @@ import { NewsTable } from "./News.Table";
 import { useSettings } from "./useSettings";
 
 export const News = () => {
+  const theme = useMantineTheme();
+
   const { persistPinned, setPersistPinned, setThreshold, threshold } =
     useSettings();
   const [opened, toggleOpened] = useToggle(false, [false, true]);
@@ -79,7 +82,7 @@ export const News = () => {
 
       <Center>
         <Button
-          variant="outline"
+          variant={theme.other.variant}
           mt="md"
           onClick={() => newsQuery.fetchNextPage()}
           loading={newsQuery.isFetchingNextPage}
