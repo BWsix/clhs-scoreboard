@@ -1,5 +1,6 @@
 import { Affix, Button, Transition, useMantineTheme } from "@mantine/core";
 import { useWindowScroll } from "@mantine/hooks";
+import { zIndexTable } from "src/components/zIndexTable";
 import { ArrowUp } from "tabler-icons-react";
 
 export const NewsScrollToTop: React.FC = () => {
@@ -8,7 +9,10 @@ export const NewsScrollToTop: React.FC = () => {
   const [scroll, scrollTo] = useWindowScroll();
 
   return (
-    <Affix position={{ bottom: 20, right: 20 }}>
+    <Affix
+      position={{ bottom: 20, right: 20 }}
+      zIndex={zIndexTable.scrollToTop}
+    >
       <Transition transition="slide-up" mounted={scroll.y > 0}>
         {(transitionStyles) => (
           <Button

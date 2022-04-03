@@ -1,4 +1,5 @@
 import { Divider, Navbar, ScrollArea } from "@mantine/core";
+import { zIndexTable } from "src/components/zIndexTable";
 import { MyNavbar_Items } from "./MyNavbar.Items";
 import { MyNavBar_User } from "./MyNavbar.User";
 
@@ -13,6 +14,7 @@ export const MyNavbar: React.FC<Props> = ({ sideOpened, closeSide }) => {
       p="sm"
       hiddenBreakpoint="sm"
       hidden={!sideOpened}
+      zIndex={zIndexTable.sideBar}
       width={{ sm: 300, lg: 400 }}
     >
       <Navbar.Section grow component={ScrollArea}>

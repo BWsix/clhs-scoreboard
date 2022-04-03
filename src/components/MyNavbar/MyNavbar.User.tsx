@@ -10,7 +10,8 @@ import {
 } from "@mantine/core";
 import { useLogout } from "src/components/hooks";
 import { COLORS } from "src/components/hooks/useColorScheme";
-import { Logout, Moon, Palette, Sun, UserCircle } from "tabler-icons-react";
+import { zIndexTable } from "src/components/zIndexTable";
+import { Logout, Moon, Palette, Sun } from "tabler-icons-react";
 import { Username } from "./MyNavbar.Username";
 
 export const MyNavBar_User = () => {
@@ -37,6 +38,8 @@ export const MyNavBar_User = () => {
 
         <Group spacing="xs">
           <Menu
+            transitionDuration={0}
+            zIndex={zIndexTable.colorPicker}
             control={
               <ActionIcon
                 variant={theme.other.variant}
