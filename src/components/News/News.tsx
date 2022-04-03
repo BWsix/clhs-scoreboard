@@ -12,6 +12,7 @@ import {
 import { useToggle } from "@mantine/hooks";
 import { AppShellContainerTitle } from "src/components/Others/AppShellContainerTitle";
 import { LoaderCircle } from "src/components/Shared";
+import { event } from "src/utils/gtag";
 import { trpc } from "src/utils/trpc";
 import { Filter } from "tabler-icons-react";
 import { NewsScrollToTop } from "./News.ScrollToTop";
@@ -28,6 +29,9 @@ export const News = () => {
   const newsQuery = trpc.useInfiniteQuery(["news", {}], {
     refetchOnWindowFocus: false,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
+    onSuccess: () => {
+      event({ action: "newsListQuery", category: "system" });
+    },
   });
 
   if (newsQuery.isError) {

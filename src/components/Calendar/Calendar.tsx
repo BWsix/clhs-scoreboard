@@ -1,4 +1,6 @@
 import { Stack } from "@mantine/core";
+import { useEffect } from "react";
+import { event } from "src/utils/gtag";
 import { AppShellContainerTitle } from "../Others/AppShellContainerTitle";
 
 const URL_BASE = "https://calendar.google.com/calendar/embed";
@@ -17,6 +19,10 @@ export const Calendar = () => {
     showCalendars: "0",
     src: "document@clhs.tyc.edu.tw",
   };
+
+  useEffect(() => {
+    event({ action: "calendarPage", category: "system" });
+  }, []);
 
   return (
     <Stack sx={{ height: "100%" }} spacing={0}>

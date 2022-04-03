@@ -2,11 +2,17 @@ import { ScrollArea, Table } from "@mantine/core";
 import { useQueryAuthErrorHandler } from "src/components/hooks";
 import { AppShellContainerTitle } from "src/components/Others/AppShellContainerTitle";
 import { LoaderCircle } from "src/components/Shared";
+import { event } from "src/utils/gtag";
 import { trpc } from "src/utils/trpc";
 
 export const Schedule: React.FC = () => {
   const onError = useQueryAuthErrorHandler();
-  const { data, error, isError } = trpc.useQuery(["schedule"], { onError });
+  const { data, error, isError } = trpc.useQuery(["schedule"], {
+    onError,
+    onSuccess: () => {
+      event({ action: "scheduleQuery", category: "system" });
+    },
+  });
 
   if (isError) {
     return <>{error.message}</>;
