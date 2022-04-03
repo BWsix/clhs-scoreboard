@@ -55,6 +55,15 @@ export const MyNavbar_Items: React.FC<Props> = ({ closeSide }) => {
               onClick={() => {
                 closeSide();
 
+                navigate({ tab: "calendar", data: null });
+              }}
+            >
+              行事曆
+            </Row>
+            <Row
+              onClick={() => {
+                closeSide();
+
                 navigate({ tab: "installationGuide", data: null });
               }}
             >

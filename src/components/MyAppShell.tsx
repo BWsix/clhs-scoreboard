@@ -3,6 +3,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { Calendar } from "src/components/Calendar";
 import { useLastTab } from "src/components/hooks";
 import { InstallationGuide } from "src/components/InstallationGuide";
 import { MyHeader } from "src/components/MyHeader";
@@ -19,6 +20,7 @@ export type TabProps =
   | { tab: "testDetail"; data: TestMetaType }
   | { tab: "installationGuide"; data: null }
   | { tab: "schedule"; data: null }
+  | { tab: "calendar"; data: null }
   | { tab: "news"; data: null };
 
 export const MyAppShell: React.FC = () => {
@@ -52,6 +54,10 @@ export const MyAppShell: React.FC = () => {
         setTabData({ tab: "installationGuide", data: null });
         break;
       }
+      case "calendar": {
+        setTabData({ tab: "calendar", data: null });
+        break;
+      }
       default: {
         break;
       }
@@ -79,6 +85,8 @@ export const MyAppShell: React.FC = () => {
             <Schedule />
           ) : tabData.tab === "news" ? (
             <News />
+          ) : tabData.tab === "calendar" ? (
+            <Calendar />
           ) : (
             <></>
           )}
