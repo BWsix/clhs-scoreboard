@@ -21,12 +21,16 @@ export const getLessonNames = (decodedScheduleHtml: string) => {
     .slice(2, -1)
     .toString();
 
+  console.log(body);
+
   const parsed = body
     ?.replace(MATCH_CLASS, "")
     .replace(MATCH_STYLE, "")
     .replace(MATCH_NAME, "")
     .replace(MATCH_ROOM, "")
     .replace(/<br>/g, "");
+
+  console.log(parsed);
 
   const MATCH_LESSON = /<td >([\u4e00-\u9fa5\w︴\<\>\:\-\s\n ]+)<\/td>\n/g;
 
