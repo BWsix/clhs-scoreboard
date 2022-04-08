@@ -3,7 +3,7 @@
   "short_name": "Scoreboard",
   "theme_color": "#1a1b1e",
   "background_color": "#1a1b1e",
-  "start_url": "/",
+  "start_url": "/goToPrev",
   "display": "standalone",
   "orientation": "portrait",
   "icons": [

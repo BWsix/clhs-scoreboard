@@ -66,17 +66,17 @@ const router = trpc
       return data;
     },
   })
-  .query("testMetaList", {
+  .query("examMetaList", {
     async resolve({ ctx }) {
-      const data = await handlers.testMetaList(ctx.sessionCookie);
+      const data = await handlers.examMetaList(ctx.sessionCookie);
 
       return data;
     },
   })
-  .query("testDetail", {
+  .query("examDetail", {
     input: z.object({ url: z.string() }),
     async resolve({ input, ctx }) {
-      const data = await handlers.testDetail(ctx.sessionCookie, input.url);
+      const data = await handlers.examDetail(ctx.sessionCookie, input.url);
 
       return data;
     },

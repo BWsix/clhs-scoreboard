@@ -1,11 +1,11 @@
 import { useToggle } from "@mantine/hooks";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useUsername } from "src/components/hooks/useUserName";
 import { event } from "src/utils/gtag";
 import { trpc } from "src/utils/trpc";
-import { useUsername } from "./useUserName";
 
-export const useLogout = () => {
+export const useLogout = (toHamePage?: boolean) => {
   const [isLogout, toggleLogout] = useToggle(false, [false, true]);
   const router = useRouter();
   const logoutMutation = trpc.useMutation("logout", { retry: false });
@@ -18,7 +18,11 @@ export const useLogout = () => {
       event({ action: "logout", category: "system" });
 
       deleteUserName();
-      router.push("/login");
+      if (toHamePage) {
+        router.push("/");
+      } else {
+        router.push(`/login?redirectTo=${router.pathname}`);
+      }
     });
   }, [isLogout]);
 

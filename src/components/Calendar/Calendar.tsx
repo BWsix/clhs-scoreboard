@@ -1,7 +1,7 @@
 import { Stack } from "@mantine/core";
 import { useEffect } from "react";
+import { AppShellContainerTitle } from "src/components/AppShell/AppShell.Title";
 import { event } from "src/utils/gtag";
-import { AppShellContainerTitle } from "../Others/AppShellContainerTitle";
 
 const URL_BASE = "https://calendar.google.com/calendar/embed";
 

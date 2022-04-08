@@ -10,14 +10,14 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { useToggle } from "@mantine/hooks";
-import { AppShellContainerTitle } from "src/components/Others/AppShellContainerTitle";
-import { LoaderCircle } from "src/components/Shared";
+import { IconFilter } from "@tabler/icons";
+import { AppShellContainerTitle } from "src/components/AppShell/AppShell.Title";
+import { LoaderCircle } from "src/components/Shared/LoaderCircle";
 import { event } from "src/utils/gtag";
 import { trpc } from "src/utils/trpc";
-import { Filter } from "tabler-icons-react";
-import { NewsScrollToTop } from "./News.ScrollToTop";
-import { NewsTable } from "./News.Table";
-import { useSettings } from "./useSettings";
+import { useSettings } from "./hooks/useSettings";
+import { NewsScrollToTop } from "./ScrollToTop/ScrollToTop";
+import { NewsTable } from "./Table/Table";
 
 export const News = () => {
   const theme = useMantineTheme();
@@ -51,7 +51,7 @@ export const News = () => {
       <Group style={{ display: "flex", justifyContent: "space-between" }}>
         <AppShellContainerTitle title="官網公告" />
         <ActionIcon onClick={() => toggleOpened()}>
-          <Filter />
+          <IconFilter />
         </ActionIcon>
       </Group>
 

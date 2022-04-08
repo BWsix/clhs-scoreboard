@@ -1,0 +1,1 @@
+export { examMetaList } from "./examMetaList";

@@ -14,6 +14,7 @@
     "@mantine/form": "^4.0.8",
     "@mantine/hooks": "^4.0.8",
     "@mantine/next": "^4.0.8",
+    "@tabler/icons": "^1.63.0",
     "@trpc/client": "^9.20.3",
     "@trpc/next": "^9.20.3",
     "@trpc/react": "^9.20.3",
@@ -23,6 +24,7 @@
     "got": "^12.0.2",
     "iconv-lite": "^0.6.3",
     "next": "12.1.1",
+    "next-compose-plugins": "^2.2.1",
     "next-pwa": "^5.4.6",
     "nookies": "^2.5.2",
     "react": "17.0.2",
@@ -30,10 +32,10 @@
     "react-error-boundary": "^3.1.4",
     "react-query": "^3.34.17",
     "resize-observer": "^1.0.4",
-    "tabler-icons-react": "^1.41.0",
     "zod": "^3.14.2"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^12.1.4",
     "@types/node": "17.0.23",
     "@types/react": "17.0.43",
     "@types/react-dom": "17.0.14",

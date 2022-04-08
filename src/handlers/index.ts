@@ -1,4 +1,4 @@
 export { login } from "./login";
 export { getSchedule } from "./schedule";
-export { testDetail } from "./testDetail";
-export { testMetaList } from "./testMetaList";
+export { examDetail } from "./examDetail";
+export { examMetaList } from "./examMetaList";

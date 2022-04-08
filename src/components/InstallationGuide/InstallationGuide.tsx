@@ -1,11 +1,11 @@
 import { Accordion } from "@mantine/core";
-import { AppShellContainerTitle } from "src/components/Others/AppShellContainerTitle";
-import { Android } from "./InstallationGuide.Android";
-import { IPad } from "./InstallationGuide.IPad";
-import { IPhone } from "./InstallationGuide.IPhone";
-import { PC } from "./InstallationGuide.PC";
+import { AppShellContainerTitle } from "src/components/AppShell/AppShell.Title";
+import { Android } from "./Platforms/Android";
+import { IPad } from "./Platforms/IPad";
+import { IPhone } from "./Platforms/IPhone";
+import { PC } from "./Platforms/PC";
 
-export const InstallationGuide = () => {
+export const Installation = () => {
   return (
     <>
       <AppShellContainerTitle title="安裝教學" />
