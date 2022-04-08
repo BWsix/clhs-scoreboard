@@ -1,4 +1,5 @@
 import { load } from "cheerio";
+import { logBodyTrimmer } from "../utils/logBodyTrimmer";
 
 const MATCH_CLASS = /class="[\d\w\s\;\:\-\u4e00-\u9fa5]+"/g;
 const MATCH_STYLE = /style="[\d\w\s\;\:\-\u4e00-\u9fa5]+"/g;
@@ -9,6 +10,8 @@ const MATCH_NAME = /<br>[\u4e00-\u9fa5]+/g;
 type WEEK = [mon: string, tue: string, wed: string, thu: string, fri: string];
 
 export const getLessonNames = (decodedScheduleHtml: string) => {
+  console.log(logBodyTrimmer(decodedScheduleHtml.split("<body>")[1]));
+
   const $ = load(decodedScheduleHtml);
 
   const body = $("body")
@@ -21,7 +24,7 @@ export const getLessonNames = (decodedScheduleHtml: string) => {
     .slice(2, -1)
     .toString();
 
-  console.log(body);
+  console.log(logBodyTrimmer(body));
 
   const parsed = body
     ?.replace(MATCH_CLASS, "")
@@ -30,7 +33,7 @@ export const getLessonNames = (decodedScheduleHtml: string) => {
     .replace(MATCH_ROOM, "")
     .replace(/<br>/g, "");
 
-  console.log(parsed);
+  console.log(logBodyTrimmer(parsed));
 
   const MATCH_LESSON = /<td >([\u4e00-\u9fa5\w︴\<\>\:\-\s\n ]+)<\/td>\n/g;
 
