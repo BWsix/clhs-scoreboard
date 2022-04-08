@@ -1,13 +1,9 @@
-import { CalendarAndThemingUpdate } from "./Updates.CalendarAndTheming";
-import { ScheduleAndNewsUpdate } from "./Updates.ScheduleAndNews";
-import { SecurityUpdate } from "./Updates.Security";
+import { UI_Refactor } from "./Updates.UI-Refactor";
 
 export const Updates = () => {
   return (
     <>
-      <CalendarAndThemingUpdate />
-      <ScheduleAndNewsUpdate />
-      <SecurityUpdate />
+      <UI_Refactor />
     </>
   );
 };
