@@ -5,7 +5,7 @@ const getInitialProps = createGetInitialProps();
 
 const title = "CLHS Scoreboard";
 const description =
-  "一鍵查詢、響應式設計並支援黑暗模式。為使用者著想的開源壢中成績查詢平台";
+  "再也不需要到處按按鈕、跳轉好幾個頁面，壢中 Scoreboard 讓你一登入便能立刻看到成績";
 const homepageUrl = "https://clhs-scoreboard.vercel.app/";
 const imageUrl = "https://i.imgur.com/lLbSDIy.png";
 
@@ -16,6 +16,12 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID}`}
+            crossOrigin="anonymous"
+          />
+
           {/* PWA */}
           <link rel="manifest" href="/manifest.json" />
           <link rel="shortcut icon" href="/favicon.ico" />
