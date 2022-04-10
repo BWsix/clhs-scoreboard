@@ -94,6 +94,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
 const data = [
   { link: "/exams", label: "考試清單", icon: IconList },
   { link: "/timetable", label: "課表", icon: IconBook },
+  { link: "/examOverall", label: "學期成績", icon: IconList },
   { link: "/news", label: "官網公告", icon: IconSpeakerphone },
   { link: "/calendar", label: "行事曆", icon: IconCalendarEvent },
   { link: "/installation", label: "安裝教學", icon: IconDownload },

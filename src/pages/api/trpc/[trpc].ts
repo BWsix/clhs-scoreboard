@@ -58,10 +58,17 @@ const router = trpc
 
     return next({ ctx: { ...ctx, sessionCookie } });
   })
-
   .query("schedule", {
     async resolve({ ctx }) {
       const data = await handlers.getSchedule(ctx.sessionCookie);
+
+      return data;
+    },
+  })
+  .query("examOverall", {
+    input: z.object({ grade: z.number() }),
+    async resolve({ ctx, input }) {
+      const data = await handlers.examOverall(ctx.sessionCookie, input.grade);
 
       return data;
     },
