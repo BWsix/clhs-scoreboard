@@ -7,7 +7,7 @@ const title = "CLHS Scoreboard";
 const description =
   "再也不需要到處按按鈕、跳轉好幾個頁面，壢中 Scoreboard 讓你一登入便能立刻看到成績";
 const homepageUrl = "https://clhs-scoreboard.vercel.app/";
-const imageUrl = "https://i.imgur.com/lLbSDIy.png";
+const imageUrl = "/assets/dark.png";
 
 class MyDocument extends Document {
   static getInitialProps = getInitialProps;
