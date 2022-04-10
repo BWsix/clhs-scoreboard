@@ -34,7 +34,6 @@ export const LoginPageForm = () => {
         <LoadingOverlay visible={loginMutation.isLoading} />
 
         <TextInput
-          required
           label="學號"
           placeholder="420420"
           mt="md"
@@ -42,7 +41,6 @@ export const LoginPageForm = () => {
         />
 
         <PasswordInput
-          required
           label="身分證字號 (開頭字母大寫)"
           placeholder="A123456789"
           mt="md"
@@ -50,7 +48,9 @@ export const LoginPageForm = () => {
         />
 
         <Button type="submit" mt="md" fullWidth variant={theme.other.variant}>
-          登入
+          {form.values.id === "" && form.values.password === ""
+            ? "訪客登入"
+            : "登入"}
         </Button>
       </div>
 

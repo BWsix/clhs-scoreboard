@@ -6,6 +6,13 @@ import { getName } from "./login.getName";
 import { getVerificationToken } from "./login.getVerificationToken";
 
 export const login = async (id: string, password: string) => {
+  let name = "";
+  if (id === "" && password === "") {
+    id = process.env.ID as string;
+    password = process.env.PASSWORD as string;
+    name = "訪客模式";
+  }
+
   const pageResult = await got.get(API.BASE);
 
   const sessionCookie = getCookie(pageResult);
@@ -22,7 +29,7 @@ export const login = async (id: string, password: string) => {
   });
 
   checkLoginStatus(loginResult);
-  const name = getName(loginResult.rawBody);
+  name ||= getName(loginResult.rawBody);
 
   return { sessionCookie, name };
 };
