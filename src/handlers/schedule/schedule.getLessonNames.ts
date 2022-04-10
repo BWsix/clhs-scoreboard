@@ -35,7 +35,7 @@ export const getLessonNames = (decodedScheduleHtml: string) => {
 
   console.log(logBodyTrimmer(parsed));
 
-  const MATCH_LESSON = /<td >([\u4e00-\u9fa5\w︴\<\>\:\-\s\n ]+)<\/td>\n/g;
+  const MATCH_LESSON = /<td >([\u4e00-\u9fa5\w︴：\<\>\:\-\s\n ]+)<\/td>\n/g;
 
   let lessonList: WEEK[] = [];
 
