@@ -4,7 +4,7 @@ import { logBodyTrimmer } from "../utils/logBodyTrimmer";
 const MATCH_CLASS = /class="[\d\w\s\;\:\-\u4e00-\u9fa5]+"/g;
 const MATCH_STYLE = /style="[\d\w\s\;\:\-\u4e00-\u9fa5]+"/g;
 const MATCH_ROOM =
-  /<br><span [\d\w\s\;\:\-\u4e00-\u9fa5\n\"\<\>\=]+<\/span><br>/g;
+  /<br><span [\d\w\s\;\:\-\u4e00-\u9fa5\n\"\<\>\=()]+<\/span><br>/g;
 const MATCH_NAME = /<br>[\u4e00-\u9fa5]+/g;
 
 type WEEK = [mon: string, tue: string, wed: string, thu: string, fri: string];
