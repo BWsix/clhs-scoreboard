@@ -60,7 +60,9 @@ export const ExamOverall = () => {
         <Picker setGrade={setGrade} />
       </div>
 
-      <AppShellContainerTitle title="學期總成績" />
+      <AppShellContainerTitle
+        title={`${["一", "二", "三"][grade - 1]}年級總成績`}
+      />
       {!data ? (
         <LoaderCircle />
       ) : (
@@ -71,7 +73,7 @@ export const ExamOverall = () => {
       )}
 
       <Space h="xl" />
-      <AppShellContainerTitle title="各科學年成績" />
+      <AppShellContainerTitle title="各科成績" />
 
       {!data ? (
         <LoaderCircle />
