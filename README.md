@@ -1,5 +1,4 @@
-[![](/public/assets/dark.png#gh-dark-mode-only)](https://clhs-scoreboard.vercel.app/)
-[![](/public/assets/light.png#gh-light-mode-only)](https://clhs-scoreboard.vercel.app/)
+[![](/public/assets/dark.png)](https://clhs-scoreboard.vercel.app/)
 
 # clhs scoreboard
 
