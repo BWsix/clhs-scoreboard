@@ -73,7 +73,8 @@ const data: FeatureProps[] = [
   {
     icon: IconPackage,
     title: "整合服務",
-    description: "除了成績查詢，另外加入了課表查詢、官網公告和校園行事曆",
+    description:
+      "除了成績查詢，另外加入了課表查詢、學年總成績查詢、官網公告和校園行事曆",
   },
   {
     icon: IconFileText,
