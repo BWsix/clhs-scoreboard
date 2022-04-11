@@ -53,8 +53,17 @@ const router = trpc
       return { newsList: result.newsList, nextCursor: page + 1 };
     },
   })
-  .middleware(({ ctx, next }) => {
+  .middleware(async ({ ctx, next }) => {
     const sessionCookie = cookie.getSessionCookie(ctx);
+
+    if (sessionCookie === "guest") {
+      const { sessionCookie } = await handlers.login(
+        process.env.ID as string,
+        process.env.PASSWORD as string
+      );
+
+      return next({ ctx: { ...ctx, sessionCookie } });
+    }
 
     return next({ ctx: { ...ctx, sessionCookie } });
   })
