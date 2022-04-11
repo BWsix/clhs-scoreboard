@@ -3,6 +3,7 @@ import * as trpc from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
 import * as handlers from "src/handlers";
 import * as cookie from "src/handlers/libs/cookie";
+import * as mocks from "src/mocks";
 import { z } from "zod";
 
 export function createContext(opts?: trpcNext.CreateNextContextOptions) {
@@ -56,19 +57,14 @@ const router = trpc
   .middleware(async ({ ctx, next }) => {
     const sessionCookie = cookie.getSessionCookie(ctx);
 
-    if (sessionCookie === "guest") {
-      const { sessionCookie } = await handlers.login(
-        process.env.ID as string,
-        process.env.PASSWORD as string
-      );
-
-      return next({ ctx: { ...ctx, sessionCookie } });
-    }
-
-    return next({ ctx: { ...ctx, sessionCookie } });
+    return next({
+      ctx: { ...ctx, sessionCookie, guest: sessionCookie === "guest" },
+    });
   })
   .query("schedule", {
     async resolve({ ctx }) {
+      if (ctx.guest) return mocks.timeTable;
+
       const data = await handlers.getSchedule(ctx.sessionCookie);
 
       return data;
@@ -77,6 +73,8 @@ const router = trpc
   .query("examOverall", {
     input: z.object({ grade: z.number() }),
     async resolve({ ctx, input }) {
+      if (ctx.guest) return mocks.examOverall[input.grade];
+
       const data = await handlers.examOverall(ctx.sessionCookie, input.grade);
 
       return data;
@@ -84,6 +82,8 @@ const router = trpc
   })
   .query("examMetaList", {
     async resolve({ ctx }) {
+      if (ctx.guest) return mocks.examMetaList;
+
       const data = await handlers.examMetaList(ctx.sessionCookie);
 
       return data;
@@ -92,6 +92,9 @@ const router = trpc
   .query("examDetail", {
     input: z.object({ url: z.string() }),
     async resolve({ input, ctx }) {
+      // @ts-ignore
+      if (ctx.guest) return mocks.examDetail[input.url];
+
       const data = await handlers.examDetail(ctx.sessionCookie, input.url);
 
       return data;
