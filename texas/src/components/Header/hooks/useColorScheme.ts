@@ -3,7 +3,7 @@ import { useLocalStorage } from "@mantine/hooks";
 
 export const useColorScheme = () => {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
-    key: "sb-colorscheme",
+    key: "sb-scheme", // new name!
     defaultValue: "light",
   });
 
