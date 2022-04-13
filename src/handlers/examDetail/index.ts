@@ -1,1 +1,0 @@
-export { examDetail } from "./examDetail";
