@@ -12,7 +12,8 @@
     "declaration": true,
     "skipLibCheck": true,
     "outDir": "./lib",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "composite": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "src/**/*.test.ts"]

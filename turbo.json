@@ -2,10 +2,10 @@
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
     "build": {
-      "dependsOn": ["^build", "$NEXT_PUBLIC_GA_ID", "$NEXT_PUBLIC_VERCEL_URL"]
+      "dependsOn": ["^build"]
     },
     "@clhs-scoreboard/texas#build": {
-      "dependsOn": ["@clhs-scoreboard/lappland#build"],
+      "dependsOn": ["^build", "$NEXT_PUBLIC_GA_ID", "$NEXT_PUBLIC_VERCEL_URL"],
       "outputs": [".next/**"]
     },
     "dev": {
