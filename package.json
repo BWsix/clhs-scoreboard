@@ -7,6 +7,10 @@
       "lappland"
     ]
   },
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev"
+  },
   "devDependencies": {
     "turbo": "^1.2.2"
   }

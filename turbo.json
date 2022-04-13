@@ -4,6 +4,10 @@
     "build": {
       "dependsOn": ["^build"]
     },
+    "@clhs-scoreboard/texas#build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**"]
+    },
     "dev": {
       "cache": false
     }
