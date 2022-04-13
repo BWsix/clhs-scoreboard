@@ -7,7 +7,9 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export const Section: React.FC = ({ children }) => {
+export const Section: React.FC<{ children?: React.ReactNode }> = ({
+  children,
+}) => {
   const { classes } = useStyles();
 
   return <Container className={classes.wrapper}>{children}</Container>;

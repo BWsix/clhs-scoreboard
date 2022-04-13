@@ -13,11 +13,12 @@ import { MyNavbar } from "src/components/Navbar/Navbar";
 
 interface Props {
   path: string;
+  children: React.ReactNode;
 }
 
 export const PATHS_WITHOUT_APP_SHELL = ["/", "/goToPrev"];
 
-export const MyAppShell: React.FC<Props> = ({ children, path }) => {
+export const MyAppShell: React.FC<Props> = ({ path, children }) => {
   usePreviousPage();
 
   const { colorScheme, toggleColorScheme } = useColorScheme();

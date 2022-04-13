@@ -3,6 +3,7 @@ const withPWA = require("next-pwa");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
+const withTM = require("next-transpile-modules")(["@clhs-scoreboard/lappland"]);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -10,6 +11,7 @@ const nextConfig = {
 };
 
 module.exports = withPlugins([
+  [withTM],
   [withBundleAnalyzer],
   [
     withPWA,

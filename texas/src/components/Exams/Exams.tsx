@@ -3,10 +3,10 @@ import { useQueryAuthErrorHandler } from "src/components/hooks/useQueryAuthError
 import { ExamMetaType } from "src/schemas/examMeta.schema";
 import { trpc } from "src/utils/trpc";
 import { AppShellContainerTitle } from "../AppShell/AppShell.Title";
-import { Picker } from "./Picker/Picker";
 import { ExamDetail } from "./ExamDetail/ExamDetail";
+import { Picker } from "./Picker/Picker";
 
-export const Exams: React.FC = ({ children }) => {
+export const Exams: React.FC = () => {
   const [selected, setSelected] = useState<ExamMetaType | null>(null);
   const [title, setTitle] = useState("");
 

@@ -3,6 +3,7 @@ import { IconAlertCircle } from "@tabler/icons";
 
 interface Props {
   title?: string;
+  children?: React.ReactNode;
 }
 
 export const InfoCard: React.FC<Props> = ({ children, title }) => {

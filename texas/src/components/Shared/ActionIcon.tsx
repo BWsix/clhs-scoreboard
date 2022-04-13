@@ -2,6 +2,7 @@ import { ActionIcon } from "@mantine/core";
 
 interface Props {
   onClick?: () => void;
+  children: React.ReactNode;
 }
 
 export const MyActionIcon: React.FC<Props> = ({ onClick, children }) => {

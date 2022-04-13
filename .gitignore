@@ -1,3 +1,5 @@
+.turbo
+
 # PWA files
 **/public/sw.js
 **/public/workbox-*.js
