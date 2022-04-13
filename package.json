@@ -5,9 +5,6 @@
     "packages": [
       "texas",
       "lappland"
-    ],
-    "nohoist": [
-      "**"
     ]
   },
   "scripts": {
