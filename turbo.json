@@ -5,7 +5,7 @@
       "dependsOn": ["^build", "$NEXT_PUBLIC_GA_ID", "$NEXT_PUBLIC_VERCEL_URL"]
     },
     "@clhs-scoreboard/texas#build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["@clhs-scoreboard/lappland#build"],
       "outputs": [".next/**"]
     },
     "dev": {
