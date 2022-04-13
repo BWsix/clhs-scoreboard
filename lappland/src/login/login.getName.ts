@@ -1,4 +1,4 @@
-import { decodeBig5 } from "src/handlers/utils/decodeBig5";
+import { decodeBig5 } from "../utils/decodeBig5";
 
 export const getName = (loginResultRawBody: Buffer) => {
   const matchName = /<title>([\u4e00-\u9fa5]+)學生線上查詢<\/title>/g;

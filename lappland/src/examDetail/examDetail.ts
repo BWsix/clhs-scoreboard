@@ -1,5 +1,6 @@
 import axios from "axios";
-import { decodeBig5, isSessionExpired } from "src/handlers/utils";
+import { decodeBig5 } from "../utils/decodeBig5";
+import { isSessionExpired } from "../utils/isSessionExpired";
 import { getExamDetail } from "./examDetail.getExamDetail";
 
 export const examDetail = async (sessionCookie: string, url: string) => {

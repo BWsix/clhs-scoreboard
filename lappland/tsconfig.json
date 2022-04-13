@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "lib": ["dom", "ESNext"],
+    "allowJs": true,
+    "skipDefaultLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "isolatedModules": true,
     "declaration": true,
     "skipLibCheck": true,
     "outDir": "./lib",
-    "strict": true,
-    "lib": ["dom", "ES6"],
     "esModuleInterop": true
   },
   "include": ["src"],

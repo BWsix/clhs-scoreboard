@@ -1,5 +1,6 @@
 import got from "got";
-import { decodeBig5, isSessionExpired } from "src/handlers/utils";
+import { decodeBig5 } from "../utils/decodeBig5";
+import { isSessionExpired } from "../utils/isSessionExpired";
 import { getLessonNames } from "./schedule.getLessonNames";
 
 const URL =

@@ -1,5 +1,5 @@
+import type { ExamDetail } from "@clhs-scoreboard/lappland/lib/examDetail";
 import { Table } from "@mantine/core";
-import { ExamDetail } from "src/handlers/examDetail/examDetail.getExamDetail";
 
 interface Props {
   data: ExamDetail;

@@ -1,8 +1,8 @@
 import { newsListQuery } from "@clhs-api/core";
+import * as handlers from "@clhs-scoreboard/lappland/lib/index";
+import * as cookie from "@clhs-scoreboard/lappland/lib/cookie/cookie";
 import * as trpc from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
-import * as handlers from "src/handlers";
-import * as cookie from "src/handlers/libs/cookie";
 import * as mocks from "src/mocks";
 import { z } from "zod";
 

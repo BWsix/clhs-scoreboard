@@ -1,5 +1,5 @@
 import got from "got";
-import { API } from "src/handlers/constants";
+import { API } from "../constants";
 import { checkLoginStatus } from "./login.checkLoginStatus";
 import { getCookie } from "./login.getCookie";
 import { getName } from "./login.getName";

@@ -1,5 +1,5 @@
-import { API } from "src/handlers/constants";
-import type { ExamMetaType } from "src/schemas/examMeta.schema";
+import { API } from "../constants";
+import type { ExamMetaType } from "../schemas/examMeta.schema";
 
 const getWeight = (exam: ExamMetaType, weight = 0) => {
   weight += 100 * parseInt(exam.year, 10);

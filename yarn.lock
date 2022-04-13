@@ -1070,11 +1070,6 @@
     react-popper "^2.2.5"
     react-textarea-autosize "^8.3.2"
 
-"@mantine/form@^4.0.8":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@mantine/form/-/form-4.1.3.tgz#3f546b35e57b3e970838c03f038d3005f36fbe33"
-  integrity sha512-yHd/lEPVziUwv3yU045ak3Ar/gM1I7WNI9gFtEau2x5VRyLFZzc82c7eUYdNcPlJzJZrBNQffyVh5938jS5mng==
-
 "@mantine/hooks@^4.0.8":
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-4.1.3.tgz#5deb782689ce2a90e7276d1454ad660385ceb6cf"
@@ -1404,7 +1399,7 @@
   dependencies:
     "@babel/runtime" "^7.9.0"
 
-"@trpc/server@^9.20.3":
+"@trpc/server@^9.20.3", "@trpc/server@^9.22.0":
   version "9.22.0"
   resolved "https://registry.yarnpkg.com/@trpc/server/-/server-9.22.0.tgz#5c6442666efd774069af938016a7ab6def32f746"
   integrity sha512-MwMVLjXXeTFKdGtFQokI6odGZifMBvMpfaddqg3RJp2wcERzTm1A33MB5mmCxH9opjmPjqMMkT/3tRunRFaitw==
@@ -1464,7 +1459,7 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.5.tgz#1001cc5e6a3704b83c236027e77f2f58ea010f40"
   integrity sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==
 
-"@types/node@*", "@types/node@17.0.23":
+"@types/node@*":
   version "17.0.23"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.23.tgz#3b41a6e643589ac6442bdbd7a4a3ded62f33f7da"
   integrity sha512-UxDxWn7dl97rKVeVS61vErvw086aCYhDLyvRQZ5Rk65rZKepaFdm53GeqXaKBuOhED4e9uWq34IC3TdSdJJ2Gw==
@@ -2796,7 +2791,7 @@ globby@^6.1.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-got@^12.0.2:
+got@^12.0.3:
   version "12.0.3"
   resolved "https://registry.yarnpkg.com/got/-/got-12.0.3.tgz#c7314daab26d42039e624adbf98f6d442e5de749"
   integrity sha512-hmdcXi/S0gcAtDg4P8j/rM7+j3o1Aq6bXhjxkDhRY2ipe7PHpvx/14DgTY2czHOLaGeU8VRvRecidwfu9qdFug==
@@ -4967,7 +4962,7 @@ yaml@^1.7.2:
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.10.2.tgz#2301c5ffbf12b467de8da2333a459e29e7920e4b"
   integrity sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
 
-zod@^3.14.2:
+zod@^3.14.2, zod@^3.14.4:
   version "3.14.4"
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.14.4.tgz#e678fe9e5469f4663165a5c35c8f3dc66334a5d6"
   integrity sha512-U9BFLb2GO34Sfo9IUYp0w3wJLlmcyGoMd75qU9yf+DrdGA4kEx6e+l9KOkAlyUO0PSQzZCa3TR4qVlcmwqSDuw==

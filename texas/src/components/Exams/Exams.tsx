@@ -1,6 +1,6 @@
+import { ExamMetaType } from "@clhs-scoreboard/lappland/lib/schemas/examMeta.schema";
 import { useState } from "react";
 import { useQueryAuthErrorHandler } from "src/components/hooks/useQueryAuthErrorHandler";
-import { ExamMetaType } from "src/schemas/examMeta.schema";
 import { trpc } from "src/utils/trpc";
 import { AppShellContainerTitle } from "../AppShell/AppShell.Title";
 import { ExamDetail } from "./ExamDetail/ExamDetail";

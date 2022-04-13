@@ -1,6 +1,7 @@
 import got from "got";
-import { API } from "src/handlers/constants";
-import { decodeBig5, isSessionExpired } from "src/handlers/utils";
+import { API } from "../constants";
+import { decodeBig5 } from "../utils/decodeBig5";
+import { isSessionExpired } from "../utils/isSessionExpired";
 import { getExamMetaList } from "./examMetaList.getExamMetaList";
 
 export const examMetaList = async (sessionCookie: string) => {

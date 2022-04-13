@@ -1,7 +1,7 @@
+import { ExamMetaType } from "@clhs-scoreboard/lappland/lib/schemas/examMeta.schema";
 import { createStyles, Group, Menu, Text, UnstyledButton } from "@mantine/core";
 import { IconChevronDown } from "@tabler/icons";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { ExamMetaType } from "src/schemas/examMeta.schema";
 
 const useStyles = createStyles((theme, { opened }: { opened: boolean }) => ({
   control: {

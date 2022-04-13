@@ -1,9 +1,9 @@
+import type { ExamMetaType } from "@clhs-scoreboard/lappland/lib/schemas/examMeta.schema";
 import { Anchor, Divider, Group } from "@mantine/core";
 import { Dispatch, SetStateAction } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "src/components/Shared/ErrorFallback";
 import { LoaderCircle } from "src/components/Shared/LoaderCircle";
-import type { ExamMetaType } from "src/schemas/examMeta.schema";
 import { useExamDetailQuery } from "../hooks/useExamDetailQuery";
 import { Meta } from "./ExamDetail.Meta";
 import { ExamDetailTable } from "./ExamDetail.Table";

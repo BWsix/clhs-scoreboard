@@ -1,5 +1,6 @@
-import { decodeBig5, isSessionExpired } from "src/handlers/utils";
 import axios from "axios";
+import { decodeBig5 } from "../utils/decodeBig5";
+import { isSessionExpired } from "../utils/isSessionExpired";
 import { API } from "../constants";
 import { getExamOverall } from "./getExamOverall";
 
