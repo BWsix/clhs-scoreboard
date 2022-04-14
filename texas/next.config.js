@@ -9,6 +9,16 @@ const withTM = require("next-transpile-modules")(["@clhs-scoreboard/lappland"]);
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  async redirects() {
+    return [
+      {
+        source: "/portal",
+        destination: "https://eschool.clhs.tyc.edu.tw/online/",
+        permanent: false,
+        basePath: false,
+      },
+    ];
+  },
 };
 
 module.exports = withPlugins([

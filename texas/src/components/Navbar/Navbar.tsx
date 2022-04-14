@@ -100,6 +100,7 @@ const data = [
   { link: "/news", label: "官網公告", icon: IconSpeakerphone },
   { link: "/calendar", label: "行事曆", icon: IconCalendarEvent },
   { link: "/installation", label: "安裝教學", icon: IconDownload },
+  { link: "/portal", label: "壢中網站", icon: IconExternalLink },
 ];
 
 interface Props {
@@ -134,10 +135,6 @@ export function MyNavbar({ opened, closeSide }: Props) {
       <Navbar.Section grow>{links}</Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
-        <Box className={classes.linkNoHover}>
-          壢中成績查詢網站 <IconExternalLink color="gray" />
-        </Box>
-
         <Box className={classes.linkNoHover}>
           <IconUser className={classes.linkIcon} />
           <Username />
