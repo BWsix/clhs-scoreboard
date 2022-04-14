@@ -1,9 +1,9 @@
 import { newsListQuery } from "@clhs-api/core";
 import * as handlers from "@clhs-scoreboard/lappland/lib";
-import * as cookie from "@clhs-scoreboard/lappland/lib/cookie/cookie";
 import * as trpc from "@trpc/server";
 import * as trpcNext from "@trpc/server/adapters/next";
 import * as mocks from "src/mocks";
+import * as cookie from "src/utils/cookie";
 import { z } from "zod";
 
 export function createContext(opts?: trpcNext.CreateNextContextOptions) {
