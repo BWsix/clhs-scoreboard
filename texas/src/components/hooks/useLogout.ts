@@ -1,7 +1,6 @@
 import { useToggle } from "@mantine/hooks";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { useUsername } from "src/components/hooks/useUserName";
 import { event } from "src/utils/gtag";
 import { trpc } from "src/utils/trpc";
 
@@ -9,7 +8,7 @@ export const useLogout = (toHamePage?: boolean) => {
   const [isLogout, toggleLogout] = useToggle(false, [false, true]);
   const router = useRouter();
   const logoutMutation = trpc.useMutation("logout", { retry: false });
-  const { deleteUserName } = useUsername();
+  const deleteUserName = () => localStorage.removeItem("sb-username");
 
   useEffect(() => {
     if (!isLogout) return;
