@@ -5,10 +5,11 @@ import {
   MantineProvider,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { useEffect, useState } from "react";
 import { MyHeader } from "src/components/Header/Header";
-import { useColorScheme } from "src/components/Header/hooks/useColorScheme";
-import { usePrimaryColor } from "src/components/Header/hooks/usePrimaryColor";
+import { useColorScheme } from "src/components/hooks/useColorScheme";
 import { usePreviousPage } from "src/components/hooks/usePreviousPage";
+import { usePrimaryColor } from "src/components/hooks/usePrimaryColor";
 import { MyNavbar } from "src/components/Navbar/Navbar";
 
 interface Props {
@@ -25,6 +26,11 @@ export const MyAppShell: React.FC<Props> = ({ path, children }) => {
   const { primaryColor, setPrimaryColor } = usePrimaryColor();
   const [opened, { close, toggle }] = useDisclosure(false);
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, [mounted]);
+
   const noAppShell = PATHS_WITHOUT_APP_SHELL.includes(path);
 
   return (
@@ -36,8 +42,8 @@ export const MyAppShell: React.FC<Props> = ({ path, children }) => {
         withGlobalStyles
         withNormalizeCSS
         theme={{
-          colorScheme,
-          primaryColor,
+          colorScheme: mounted ? colorScheme : undefined,
+          primaryColor: mounted ? primaryColor : undefined,
           other: { variant: colorScheme === "dark" ? "filled" : "outline" },
         }}
       >

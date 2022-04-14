@@ -13,7 +13,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     localStorage.removeItem("cred");
-    localStorage.removeItem("sb-colorscheme");
 
     if (typeof window !== "undefined" && !window.ResizeObserver) {
       import("resize-observer").then(({ install }) => {
