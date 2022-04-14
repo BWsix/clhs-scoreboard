@@ -3,6 +3,7 @@ import {
   IconBook,
   IconCalendarEvent,
   IconDownload,
+  IconExternalLink,
   IconFile,
   IconList,
   IconLogout,
@@ -133,6 +134,10 @@ export function MyNavbar({ opened, closeSide }: Props) {
       <Navbar.Section grow>{links}</Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
+        <Box className={classes.linkNoHover}>
+          壢中成績查詢網站 <IconExternalLink color="gray" />
+        </Box>
+
         <Box className={classes.linkNoHover}>
           <IconUser className={classes.linkIcon} />
           <Username />
