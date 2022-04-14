@@ -8,6 +8,7 @@ const withTM = require("next-transpile-modules")(["@clhs-scoreboard/lappland"]);
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  swcMinify: true,
 };
 
 module.exports = withPlugins([
