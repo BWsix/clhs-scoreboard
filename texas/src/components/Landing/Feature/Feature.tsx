@@ -1,6 +1,5 @@
 import {
   Container,
-  createStyles,
   SimpleGrid,
   Text,
   ThemeIcon,
@@ -16,6 +15,7 @@ import {
 } from "@tabler/icons";
 import { Section } from "../Shared/Section";
 import { SectionTitle } from "../Shared/SectionTitle";
+import { useStyles } from "./Feature.style";
 
 export function Feature({ icon: Icon, title, description }: FeatureProps) {
   const theme = useMantineTheme();
@@ -33,17 +33,6 @@ export function Feature({ icon: Icon, title, description }: FeatureProps) {
     </div>
   );
 }
-
-const useStyles = createStyles((theme) => ({
-  description: {
-    textAlign: "center",
-    fontSize: 16,
-
-    [theme.fn.smallerThan("sm")]: {
-      textAlign: "left",
-    },
-  },
-}));
 
 interface FeatureProps {
   icon: TablerIcon;
