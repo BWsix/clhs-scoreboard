@@ -1,4 +1,4 @@
-import { Box, createStyles, Navbar, UnstyledButton } from "@mantine/core";
+import { ActionIcon, Box, Navbar, UnstyledButton } from "@mantine/core";
 import {
   IconBook,
   IconCalendarEvent,
@@ -14,84 +14,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useLogout } from "src/components/hooks/useLogout";
+import { useStyles } from "./Navbar.style";
 import { Username } from "./UserName/Username";
-
-const useStyles = createStyles((theme, _params, getRef) => {
-  const icon = getRef("icon");
-
-  const linkNoHover = {
-    ...theme.fn.focusStyles(),
-    display: "flex",
-    alignItems: "center",
-    textDecoration: "none",
-    fontSize: theme.fontSizes.sm,
-    color:
-      theme.colorScheme === "dark"
-        ? theme.colors.dark[1]
-        : theme.colors.gray[7],
-    padding: `${theme.spacing.xs}px ${theme.spacing.sm}px`,
-    borderRadius: theme.radius.sm,
-    fontWeight: 500,
-  };
-
-  return {
-    footer: {
-      paddingTop: theme.spacing.md,
-      marginTop: theme.spacing.md,
-      borderTop: `1px solid ${
-        theme.colorScheme === "dark"
-          ? theme.colors.dark[4]
-          : theme.colors.gray[2]
-      }`,
-    },
-
-    linkNoHover,
-
-    link: {
-      ...theme.fn.focusStyles(),
-      ...linkNoHover,
-      "&:hover": {
-        backgroundColor:
-          theme.colorScheme === "dark"
-            ? theme.colors.dark[6]
-            : theme.colors.gray[0],
-        color: theme.colorScheme === "dark" ? theme.white : theme.black,
-
-        [`& .${icon}`]: {
-          color: theme.colorScheme === "dark" ? theme.white : theme.black,
-        },
-      },
-    },
-
-    linkIcon: {
-      ref: icon,
-      color:
-        theme.colorScheme === "dark"
-          ? theme.colors.dark[2]
-          : theme.colors.gray[6],
-      marginRight: theme.spacing.sm,
-    },
-
-    linkActive: {
-      "&, &:hover": {
-        backgroundColor:
-          theme.colorScheme === "dark"
-            ? theme.fn.rgba(theme.colors[theme.primaryColor][8], 0.25)
-            : theme.colors[theme.primaryColor][0],
-        color:
-          theme.colorScheme === "dark"
-            ? theme.white
-            : theme.colors[theme.primaryColor][7],
-        [`& .${icon}`]: {
-          color:
-            theme.colors[theme.primaryColor][
-              theme.colorScheme === "dark" ? 5 : 7
-            ],
-        },
-      },
-    },
-  };
-});
 
 const data = [
   { link: "/exams", label: "考試成績", icon: IconFile },
@@ -100,7 +24,6 @@ const data = [
   { link: "/news", label: "官網公告", icon: IconSpeakerphone },
   { link: "/calendar", label: "行事曆", icon: IconCalendarEvent },
   { link: "/installation", label: "安裝教學", icon: IconDownload },
-  { link: "/portal", label: "壢中網站", icon: IconExternalLink },
 ];
 
 interface Props {
@@ -132,7 +55,22 @@ export function MyNavbar({ opened, closeSide }: Props) {
 
   return (
     <Navbar width={{ sm: 250 }} p="md" hiddenBreakpoint="sm" hidden={!opened}>
-      <Navbar.Section grow>{links}</Navbar.Section>
+      <Navbar.Section grow>
+        {links}
+
+        <Box
+          className={cx(classes.link)}
+          style={{ cursor: "pointer" }}
+          onClick={() => {
+            closeSide();
+
+            window.open("https://eschool.clhs.tyc.edu.tw/online/", "_blank");
+          }}
+        >
+          <IconExternalLink className={classes.linkIcon} />
+          <span>學校成績查詢系統</span>
+        </Box>
+      </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
         <Box className={classes.linkNoHover}>
@@ -146,7 +84,6 @@ export function MyNavbar({ opened, closeSide }: Props) {
           onClick={() => logout()}
         >
           <IconLogout className={classes.linkIcon} />
-
           <span>登出</span>
         </UnstyledButton>
       </Navbar.Section>
