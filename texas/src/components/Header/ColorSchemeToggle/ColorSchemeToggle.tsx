@@ -13,7 +13,7 @@ export function ColorSchemeToggle() {
 
   return (
     <MyActionIcon onClick={() => toggleColorScheme()}>
-      {mounted && (colorScheme === "dark" ? <IconSun /> : <IconMoonStars />)}
+      {!mounted || colorScheme === "light" ? <IconMoonStars /> : <IconSun />}
     </MyActionIcon>
   );
 }
