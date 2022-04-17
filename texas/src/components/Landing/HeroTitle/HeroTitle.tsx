@@ -44,7 +44,7 @@ export function HeroTitle() {
           <Button
             component="a"
             target="_blank"
-            href="https://github.com/BWsix/clhs_scoreboard"
+            href="https://github.com/BWsix/clhs-scoreboard"
             size="xl"
             variant="outline"
             className={cx(classes.control, classes.githubControl)}

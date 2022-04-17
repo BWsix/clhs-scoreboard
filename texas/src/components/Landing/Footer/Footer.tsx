@@ -35,7 +35,7 @@ export function Footer() {
           <ActionIcon
             size="lg"
             component="a"
-            href="https://github.com/BWsix/clhs_scoreboard"
+            href="https://github.com/BWsix/clhs-scoreboard"
             target="_blank"
             rel="noreferrer"
           >
