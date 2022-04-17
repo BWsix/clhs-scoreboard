@@ -1,4 +1,4 @@
-[![](/public/assets/dark.png)](https://clhs-scoreboard.vercel.app/)
+[![](/texas/public/assets/dark.png)](https://clhs-scoreboard.vercel.app/)
 
 # clhs scoreboard
 
