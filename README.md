@@ -13,6 +13,10 @@
 | [lappland](lappland) | API client for school portal |
 | [texas](texas)       |       Next.js frontend       |
 
+## 流程圖
+
+![](/flow.drawio.png)
+
 ## How can I contribute?
 
 **I'm using [Yarn](https://yarnpkg.com/) for this project, do not use npm for the following commands**
