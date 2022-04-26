@@ -1,0 +1,68 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base", ":disableRateLimiting"],
+  "schedule": ["at any time"],
+  "semanticCommits": "enabled",
+  "packageRules": [
+    {
+      "groupName": "devDependencies (non-major)",
+      "automerge": "true",
+      "depTypeList": ["devDependencies"],
+      "updateTypes": ["patch", "minor"],
+      "schedule": ["before 8am on Wednesday"]
+    },
+    {
+      "groupName": "dependencies (non-major)",
+      "depTypeList": ["dependencies"],
+      "updateTypes": ["patch", "minor"],
+      "schedule": ["before 8am on Wednesday"]
+    },
+    {
+      "groupName": "ESM devDependencies & dependencies (major)",
+      "depTypeList": ["dependencies", "devDependencies"],
+      "updateTypes": ["major"],
+      "matchPackageNames": [
+        "get-port",
+        "is-obj",
+        "is-regexp",
+        "mongo",
+        "p-reduce",
+        "postgres",
+        "sort-keys",
+        "node.js",
+        "@sindresorhus/slugify",
+        "chalk",
+        "cli-truncate",
+        "escape-string-regexp",
+        "execa",
+        "find-up",
+        "get-stdin",
+        "globby",
+        "has-yarn",
+        "indent-string",
+        "log-update",
+        "new-github-issue-url",
+        "node-fetch",
+        "ora",
+        "p-map",
+        "p-retry",
+        "pkg-up",
+        "read-pkg-up",
+        "replace-string",
+        "string-width",
+        "strip-ansi",
+        "strip-indent",
+        "temp-write",
+        "tempy",
+        "terminal-link"
+      ],
+      "schedule": ["before 8am on Wednesday"]
+    },
+    {
+      "groupName": "definitelyTyped",
+      "automerge": "true",
+      "packagePatterns": ["^@types/"],
+      "updateTypes": ["patch", "minor"]
+    }
+  ]
+}
