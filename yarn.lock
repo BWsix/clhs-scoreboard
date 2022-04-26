@@ -1059,12 +1059,12 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@mantine/core@4.1.3":
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-4.1.3.tgz#71265ae157f7f6b7b42c33e5b47a4e7f45356ce8"
-  integrity sha512-uIJNWUdoT8dpFBYXDbllv3d2GRgWftFZ3rIV22dN3o1XnJZ44a4woX7aWO8vDmv0H62CTZDyz02jWriLFMmfLQ==
+"@mantine/core@4.1.5":
+  version "4.1.5"
+  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-4.1.5.tgz#bd4931b88c58b6aadc6bd7d124900c8f0fbe7168"
+  integrity sha512-YzhzIAUDqIgseAQn9hxlIPqbWcFWZ20ZHY5lBFglqj/MLQf1uC3cp4pFHQJNv3FjtrRX0vL6XVNRoW4EThBoaA==
   dependencies:
-    "@mantine/styles" "4.1.3"
+    "@mantine/styles" "4.1.5"
     "@popperjs/core" "^2.9.3"
     "@radix-ui/react-scroll-area" "^0.1.1"
     react-popper "^2.2.5"
@@ -1100,6 +1100,18 @@
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/@mantine/styles/-/styles-4.1.3.tgz#a570cfe080ed66867b54f3a7ee9ec1bce821ae9a"
   integrity sha512-wkyfwPlLs4QWa5q3FfpqS0xGbAvnPEapKhfRKSQta3EqpwejolfwlhZMyJCOoah0RiVp4eWjucWSBApwvDZjxQ==
+  dependencies:
+    "@emotion/cache" "^11.7.1"
+    "@emotion/react" "^11.7.1"
+    "@emotion/serialize" "^1.0.2"
+    "@emotion/utils" "^1.0.0"
+    clsx "^1.1.1"
+    csstype "^3.0.9"
+
+"@mantine/styles@4.1.5":
+  version "4.1.5"
+  resolved "https://registry.yarnpkg.com/@mantine/styles/-/styles-4.1.5.tgz#ba65a00623fc1a7abb462988b6fbd1eed5e31085"
+  integrity sha512-eNN2q2iHk5lQA1N9Y7056Y7zXg22jIo6q7Xn1webBPLi9P98sT/Pabm3k8OWzx0Bor89Ey7Voi5RWCgPnpw45Q==
   dependencies:
     "@emotion/cache" "^11.7.1"
     "@emotion/react" "^11.7.1"
