@@ -1,37 +1,24 @@
-import type { Protocol } from "puppeteer";
-import puppeteer from "puppeteer";
+import got from "got";
 
-const API = "https://eschool.clhs.tyc.edu.tw/online/";
+const API = "https://eschool.clhs.tyc.edu.tw/";
 
-interface Props {
-  cookies: Protocol.Network.CookieParam[];
-}
-
-export const loginSecondStep = async ({ cookies: _cookies }: Props) => {
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.setCookie(..._cookies);
-
-  let requestLimiter = 0;
-  page.setRequestInterception(true);
-  page.on("request", (req) => {
-    if (++requestLimiter > 3) return req.abort();
-    req.continue();
-  });
-
+export const loginSecondStep = async (cookie: string) => {
   try {
-    await page.goto(API, { waitUntil: "load" });
-    const cookies = await page.cookies();
-    const cookie = cookies.find((cookie) =>
-      cookie.name.startsWith("ASPSESSIONID")
-    );
+    const getResult = await got.get(API + "online/", {
+      headers: { cookie },
+      followRedirect: false,
+    });
+    const redirectTo = getResult.headers["location"];
+    const _sessionCookie = getResult.headers["set-cookie"]![0]!.split(";")[0];
+    const sessionCookie = `${cookie}${_sessionCookie}`;
 
-    if (!cookie) throw new Error("");
+    await got.get(API + redirectTo, {
+      headers: { cookie: sessionCookie },
+      followRedirect: false,
+    });
 
-    return `${cookie.name}=${cookie.value}`;
+    return sessionCookie;
   } catch (e) {
     throw new Error("帳號密碼無誤，但發生錯誤無法登入");
-  } finally {
-    browser.close();
   }
 };

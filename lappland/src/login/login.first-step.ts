@@ -36,30 +36,10 @@ export const loginFirstStep = async (
   }
 
   try {
-    const cookieRawA = postResult.headers["set-cookie"]![0].split(
-      ";"
-    )[0] as string;
-    const cookieRawB = postResult.headers["set-cookie"]![1].split(
-      ";"
-    )[0] as string;
+    const cookieRawA = postResult.headers["set-cookie"]![0].split(";")[0];
+    const cookieRawB = postResult.headers["set-cookie"]![1].split(";")[0];
 
-    const cookieA = {
-      name: cookieRawA.split("=")[0],
-      value: cookieRawA.split("=")[1],
-      path: "/",
-      domain: "eschool.clhs.tyc.edu.tw",
-    };
-    const cookieB = {
-      name: cookieRawB.split("=")[0],
-      value: cookieRawB.split("=")[1],
-      path: "/",
-      domain: "eschool.clhs.tyc.edu.tw",
-    };
-
-    return {
-      cookies: [cookieA, cookieB],
-      cookieRaw: `${cookieRawA}; ${cookieB}; `,
-    };
+    return `${cookieRawA}; ${cookieRawB}; `;
   } catch (e) {
     throw new Error("帳號密碼無誤，但發生錯誤無法登入");
   }

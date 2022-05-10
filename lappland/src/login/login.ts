@@ -8,9 +8,9 @@ export const login = async (id: string, password: string) => {
   }
 
   const tokens = await getVerificationToken();
-  const { cookieRaw, cookies } = await loginFirstStep(id, password, tokens);
-  const cookie = await loginSecondStep({ cookies });
-  const name = "(壞掉了，晚點再更新)";
+  const cookies = await loginFirstStep(id, password, tokens);
+  const sessionCookie = await loginSecondStep(cookies);
+  const name = "取得姓名壞掉了之後再修";
 
-  return { sessionCookie: `${cookieRaw}${cookie}`, name };
+  return { sessionCookie, name };
 };
