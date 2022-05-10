@@ -1,32 +1,16 @@
-import got from "got";
-import { API } from "../constants";
-import { checkLoginStatus } from "./login.checkLoginStatus";
-import { getCookie } from "./login.getCookie";
-import { getName } from "./login.getName";
+import { loginFirstStep } from "./login.first-step";
 import { getVerificationToken } from "./login.getVerificationToken";
+import { loginSecondStep } from "./login.second-step";
 
 export const login = async (id: string, password: string) => {
   if (id === "" && password === "") {
     return { sessionCookie: "guest", name: "訪客模式" };
   }
 
-  const pageResult = await got.get(API.BASE);
+  const tokens = await getVerificationToken();
+  const { cookieRaw, cookies } = await loginFirstStep(id, password, tokens);
+  const cookie = await loginSecondStep({ cookies });
+  const name = "(壞掉了，晚點再更新)";
 
-  const sessionCookie = getCookie(pageResult);
-  const verificationToken = getVerificationToken(pageResult.body);
-
-  const loginResult = await got.post(API.LOGIN, {
-    headers: { cookie: sessionCookie },
-    form: {
-      division: "senior",
-      Loginid: id,
-      LoginPwd: password,
-      __RequestVerificationToken: verificationToken,
-    },
-  });
-
-  checkLoginStatus(loginResult);
-  const name = getName(loginResult.rawBody);
-
-  return { sessionCookie, name };
+  return { sessionCookie: `${cookieRaw}${cookie}`, name };
 };
