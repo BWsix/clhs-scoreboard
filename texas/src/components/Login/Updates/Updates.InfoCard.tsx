@@ -1,4 +1,4 @@
-import { Alert, Text } from "@mantine/core";
+import { Alert } from "@mantine/core";
 import { IconAlertCircle } from "@tabler/icons";
 
 interface Props {
@@ -15,7 +15,7 @@ export const InfoCard: React.FC<Props> = ({ children, title }) => {
       variant="outline"
       mt="md"
     >
-      <Text>{children}</Text>
+      {children}
     </Alert>
   );
 };
