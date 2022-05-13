@@ -3,8 +3,6 @@ import { getVerificationToken } from "./login.getVerificationToken";
 import { loginSecondStep } from "./login.second-step";
 
 export const login = async (id: string, password: string) => {
-  throw new Error("暫時關閉服務。(為什麼你還可以看到這個頁面==?)");
-
   if (id === "" && password === "") {
     return { sessionCookie: "guest", name: "訪客模式" };
   }
