@@ -7,7 +7,7 @@ import { TimetableTable } from "./Timetable.table";
 
 export const Timetable: React.FC = () => {
   const onError = useQueryAuthErrorHandler();
-  const { data, error, isError } = trpc.useQuery(["schedule"], {
+  const { data, error, isError } = trpc.useQuery(["timetable"], {
     onError,
     onSuccess: () => {
       event({ action: "scheduleQuery", category: "system" });

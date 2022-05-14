@@ -7,7 +7,7 @@ import { trpc } from "src/utils/trpc";
 export const useLogout = (toHamePage?: boolean) => {
   const [isLogout, toggleLogout] = useToggle(false, [false, true]);
   const router = useRouter();
-  const logoutMutation = trpc.useMutation("logout", { retry: false });
+  const logoutMutation = trpc.useMutation("auth.logout", { retry: false });
   const deleteUserName = () => localStorage.removeItem("sb-username");
 
   useEffect(() => {

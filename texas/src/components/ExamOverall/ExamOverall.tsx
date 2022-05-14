@@ -10,7 +10,7 @@ export const ExamOverall = () => {
   const [grade, setGrade] = useState(1);
 
   const onError = useQueryAuthErrorHandler();
-  const { data, isError, error } = trpc.useQuery(["examOverall", { grade }], {
+  const { data, isError, error } = trpc.useQuery(["exam.semester", { grade }], {
     onError,
   });
 

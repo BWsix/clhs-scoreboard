@@ -7,7 +7,7 @@ export const useLoginMutation = (redirectTo?: string) => {
   const updateUserName = (name: string) =>
     localStorage.setItem("sb-username", name);
 
-  const loginMutation = trpc.useMutation("login", {
+  const loginMutation = trpc.useMutation("auth.login", {
     onSuccess: (data) => {
       event({ action: "login", category: "system" });
 

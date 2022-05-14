@@ -1,1 +1,0 @@
-export { getSchedule } from "./schedule";

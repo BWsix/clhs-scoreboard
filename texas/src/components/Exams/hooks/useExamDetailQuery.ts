@@ -5,7 +5,7 @@ import { trpc } from "src/utils/trpc";
 export const useExamDetailQuery = (url: string | undefined) => {
   const onError = useQueryAuthErrorHandler();
 
-  const examDetailQuery = trpc.useQuery(["examDetail", { url: url || "" }], {
+  const examDetailQuery = trpc.useQuery(["exam.detail", { url: url || "" }], {
     enabled: !!url,
     onSuccess: (data) => {
       event({

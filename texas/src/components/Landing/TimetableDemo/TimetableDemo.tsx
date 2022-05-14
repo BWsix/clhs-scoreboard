@@ -1,5 +1,5 @@
+import { timeTable } from "@clhs-scoreboard/lappland/lib/mocks";
 import { TimetableTable } from "src/components/Timebable/Timetable.table";
-import { timeTable } from "src/mocks";
 import { Section } from "../Shared/Section";
 import { SectionTitle } from "../Shared/SectionTitle";
 
