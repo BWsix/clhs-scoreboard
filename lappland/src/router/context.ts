@@ -8,9 +8,15 @@ export const createContext = async (ctx: trpcNext.CreateNextContextOptions) => {
   let accessToken = cookie.get(ctx, "accessToken");
   const guest = accessToken === "guest";
 
+  const t = Date.now();
+
   if (refreshToken && !accessToken) {
     accessToken = await getAccessToken(refreshToken);
     cookie.set(ctx, "accessToken", accessToken);
+  }
+
+  if (Date.now() - t > 5555) {
+    throw new trpc.TRPCError({ code: "TIMEOUT", message: "登入花太久時間了" });
   }
 
   // Initialize `loggedIn` after updating the cookie to prevent execution timeout

@@ -2,7 +2,6 @@ import * as trpc from "@trpc/server";
 import { z } from "zod";
 import * as cookie from "../../utils/cookie";
 import { RouterContext } from "../context";
-import { getAccessToken } from "./login/getAccessToken";
 import { getRefreshToken } from "./login/getRefreshToken";
 
 export const authRouter = trpc
@@ -18,12 +17,8 @@ export const authRouter = trpc
         return { name: "訪客模式" };
       }
 
-      //* Looks like `getRefreshToken` can sometimes takes a lot of time to execute.
-      //* I'll comment out `getAccessToken` and let the root level context retrieve it instead.
       const refreshToken = await getRefreshToken(input.id, input.password);
       cookie.set(ctx, "refreshToken", refreshToken);
-      // const accessToken = await getAccessToken(refreshToken);
-      // cookie.set(ctx, "accessToken", accessToken);
 
       return { name: "姓名，晚點再修" };
     },
