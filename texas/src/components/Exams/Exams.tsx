@@ -1,6 +1,7 @@
 import { ExamMeta } from "@clhs-scoreboard/lappland/lib/router/exam/exam.types";
 import { useEffect, useState } from "react";
 import { DropDown } from "../Shared/DropDown";
+import { LoaderCircle } from "../Shared/LoaderCircle";
 import { ExamDetail } from "./ExamDetail/ExamDetail";
 import { useExamMetaQuery } from "./hooks/useExamMetaQuery";
 
@@ -19,7 +20,7 @@ export const Exams: React.FC = () => {
   if (isError) return <>{error.message}</>;
 
   return !data ? (
-    <>無法取得考試資料</>
+    <LoaderCircle />
   ) : (
     <>
       <div style={{ display: "flex", justifyContent: "end", width: "100%" }}>
