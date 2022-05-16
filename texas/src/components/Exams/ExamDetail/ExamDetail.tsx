@@ -1,4 +1,4 @@
-import type { ExamMetaType } from "@clhs-scoreboard/lappland/lib/schemas/examMeta.schema";
+import type { ExamMeta } from "@clhs-scoreboard/lappland/lib/router/exam/exam.types";
 import { Anchor, Divider, Group } from "@mantine/core";
 import { Dispatch, SetStateAction } from "react";
 import { ErrorBoundary } from "react-error-boundary";
@@ -9,7 +9,7 @@ import { Meta } from "./ExamDetail.Meta";
 import { ExamDetailTable } from "./ExamDetail.Table";
 
 interface Props {
-  examMeta: ExamMetaType | null;
+  examMeta: ExamMeta | null;
   setTitle: Dispatch<SetStateAction<string>>;
 }
 
