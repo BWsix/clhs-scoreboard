@@ -18,6 +18,9 @@ const getVerificationToken = async () => {
 export const getRefreshToken = async (id: string, password: string) => {
   const API = "https://eschool.clhs.tyc.edu.tw/auth/Auth/DoLogin";
 
+  console.log("Start executing `getRefreshToken`"); //TODO remove console.log
+  const t = Date.now(); //TODO remove console.log
+
   const tokens = await getVerificationToken();
 
   const postResult = await got.post(API, {
@@ -46,6 +49,8 @@ export const getRefreshToken = async (id: string, password: string) => {
   try {
     const cookieRawA = postResult.headers["set-cookie"]![0].split(";")[0];
     const cookieRawB = postResult.headers["set-cookie"]![1].split(";")[0];
+
+    console.log("Finish executing `getRefreshToken`: ", Date.now() - t); //TODO remove console.log
 
     return `${cookieRawA}; ${cookieRawB}; `;
   } catch (e) {
