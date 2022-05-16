@@ -4,7 +4,7 @@ export const getAccessToken = async (refreshToken: string) => {
   const API = "https://eschool.clhs.tyc.edu.tw/";
 
   try {
-    const getResult = await got.get(API + "online/", {
+    const getResult = await got.head(API + "online/", {
       headers: { cookie: refreshToken },
       followRedirect: false,
     });
@@ -12,7 +12,7 @@ export const getAccessToken = async (refreshToken: string) => {
     const accessToken = getResult.headers["set-cookie"]![0]!.split(";")[0];
     const sessionCookie = `${refreshToken}${accessToken}`;
 
-    await got.get(API + redirectTo, {
+    await got.head(API + redirectTo, {
       headers: { cookie: sessionCookie },
       followRedirect: false,
     });
