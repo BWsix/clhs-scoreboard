@@ -20,6 +20,12 @@ export const authRouter = trpc
 
       const refreshToken = await getRefreshToken(input.id, input.password);
       cookie.set(ctx, "refreshToken", refreshToken);
+
+      while (true) {
+        let timeout = 0;
+        timeout = 1;
+      }
+
       const accessToken = await getAccessToken(refreshToken);
       cookie.set(ctx, "accessToken", accessToken);
 
