@@ -1,4 +1,4 @@
-import type { ExamDetail } from "@clhs-scoreboard/lappland/lib/examDetail";
+import type { ExamDetail } from "@clhs-scoreboard/lappland/lib/router/exam/exam.types";
 import { Table } from "@mantine/core";
 
 interface Props {

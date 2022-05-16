@@ -20,6 +20,10 @@ export const LoginPageForm = () => {
   const loginMutation = useLoginMutation(redirectTo);
   const form = useForm({
     initialValues: { id: "", password: "" },
+    validationRules: {
+      id: (value) => value === "" || /^\d{6}$/.test(value),
+      password: (value) => value === "" || /^[A-Z]\d{9}$/.test(value),
+    },
   });
 
   return (

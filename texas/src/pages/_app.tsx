@@ -1,3 +1,4 @@
+import { RouterType } from "@clhs-scoreboard/lappland/lib";
 import { withTRPC } from "@trpc/next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -6,7 +7,6 @@ import Script from "next/script";
 import { useEffect } from "react";
 import { MyAppShell } from "src/components/AppShell/AppShell";
 import * as gtag from "src/utils/gtag";
-import { AppRouter } from "./api/trpc/[trpc]";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -69,7 +69,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default withTRPC<AppRouter>({
+export default withTRPC<RouterType>({
   config({ ctx }) {
     /**
      * If you want to use SSR, you need to use the server's full URL
@@ -84,7 +84,7 @@ export default withTRPC<AppRouter>({
       queryClientConfig: {
         defaultOptions: {
           queries: {
-            retry: 0,
+            retry: 2,
           },
         },
       },

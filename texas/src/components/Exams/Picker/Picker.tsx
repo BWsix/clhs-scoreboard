@@ -1,4 +1,4 @@
-import { ExamMetaType } from "@clhs-scoreboard/lappland/lib/schemas/examMeta.schema";
+import { ExamMeta } from "@clhs-scoreboard/lappland/lib/router/exam/exam.types";
 import { createStyles, Group, Menu, Text, UnstyledButton } from "@mantine/core";
 import { IconChevronDown } from "@tabler/icons";
 import React, { Dispatch, SetStateAction, useState } from "react";
@@ -41,8 +41,8 @@ const useStyles = createStyles((theme, { opened }: { opened: boolean }) => ({
 }));
 
 interface Props {
-  data: ExamMetaType[];
-  setSelected: Dispatch<SetStateAction<ExamMetaType | null>>;
+  data: ExamMeta[];
+  setSelected: Dispatch<SetStateAction<ExamMeta | null>>;
 }
 export function Picker({ data, setSelected }: Props) {
   const [opened, setOpened] = useState(false);
