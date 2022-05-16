@@ -18,16 +18,15 @@ export const authRouter = trpc
         return { name: "訪客模式" };
       }
 
+      console.log("before getRefreshToken:", Date.now());
       const refreshToken = await getRefreshToken(input.id, input.password);
       cookie.set(ctx, "refreshToken", refreshToken);
+      console.log("after getRefreshToken:", Date.now());
 
-      while (true) {
-        let timeout = 0;
-        timeout = 1;
-      }
-
+      console.log("before getAccessToken:", Date.now());
       const accessToken = await getAccessToken(refreshToken);
       cookie.set(ctx, "accessToken", accessToken);
+      console.log("after getAccessToken:", Date.now());
 
       return { name: "姓名，晚點再修" };
     },
