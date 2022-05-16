@@ -59,7 +59,7 @@ export const ExamOverall = () => {
       <div style={{ display: "flex", justifyContent: "end", width: "100%" }}>
         <DropDown
           title="年級選單"
-          itemTitles={GRADES}
+          itemTitles={GRADES.map((grade) => `${grade}年級`)}
           setSelectedIdx={(grade) => setGrade(grade + 1)}
         />
       </div>
