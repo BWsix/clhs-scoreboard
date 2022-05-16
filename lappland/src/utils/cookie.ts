@@ -5,7 +5,7 @@ const prefix = (name: TemplateStringsArray) => `token-${name}`;
 const COOKIES = {
   refreshToken: {
     name: prefix`refresh`,
-    ttl: 60 * 60 * 24 * 5,
+    ttl: 60 * 60 * 24 * 29, // Should be 30 days, but I'll keep it 29.
   },
   accessToken: {
     name: prefix`access`,
