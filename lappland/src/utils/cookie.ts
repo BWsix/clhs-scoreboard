@@ -1,19 +1,12 @@
 import type { CreateNextContextOptions as CtxType } from "@trpc/server/adapters/next";
 import nookies from "nookies";
 
-const prefix = (name: TemplateStringsArray) => `token-${name}`;
-const COOKIES = {
-  refreshToken: {
-    name: prefix`refresh`,
-    ttl: 60 * 60 * 24 * 29, // Should be 30 days, but I'll keep it 29.
-  },
-  accessToken: {
-    name: prefix`access`,
-    ttl: 60 * 15,
-  },
-};
-type CookieNames = keyof typeof COOKIES;
+type CookieNames = "refreshToken" | "accessToken";
 
+const TTL = {
+  refreshToken: 60 * 60 * 24 * 29, // Should be 30 days, but I'll keep it 29.
+  accessToken: 60 * 15,
+};
 const isDevMode = process.env.NODE_ENV === "development";
 /**
  * @param ttl Time to live (in seconds)
@@ -27,14 +20,13 @@ const setCookieConfig = (ttl: number) => ({
 });
 const getCookieConfig = { path: "/" };
 
-export const set = (ctx: CtxType, cookieName: CookieNames, value: string) => {
-  const { name, ttl } = COOKIES[cookieName];
-  nookies.set(ctx, name, value, setCookieConfig(ttl));
+export const set = (ctx: CtxType, name: CookieNames, value: string) => {
+  nookies.set(ctx, name, value, setCookieConfig(TTL[name]));
 };
 
-export const get = (ctx: CtxType, cookieName: CookieNames) => {
+export const get = (ctx: CtxType, name: CookieNames) => {
   const cookies = nookies.get(ctx, getCookieConfig);
-  let value = cookies[COOKIES[cookieName].name];
+  let value = cookies[name];
   return value;
 };
 
@@ -43,7 +35,7 @@ export const destroy = (ctx: CtxType, cookieName: CookieNames) => {
 };
 
 export const destroyAll = (ctx: CtxType) => {
-  for (const cookieName in COOKIES) {
-    destroy(ctx, cookieName as CookieNames);
-  }
+  Object.keys(TTL).forEach((name) => {
+    destroy(ctx, name as CookieNames);
+  });
 };
