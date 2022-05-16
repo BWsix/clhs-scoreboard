@@ -1,19 +1,27 @@
 import { RouterType } from "@clhs-scoreboard/lappland/lib";
 import { withTRPC } from "@trpc/next";
+import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Script from "next/script";
-import { useEffect } from "react";
+import { ReactElement, ReactNode, useEffect } from "react";
 import { MyAppShell } from "src/components/AppShell/AppShell";
 import * as gtag from "src/utils/gtag";
 
-function MyApp({ Component, pageProps }: AppProps) {
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
+  const getLayout = Component.getLayout ?? ((page) => page);
 
   useEffect(() => {
-    localStorage.removeItem("cred");
-
     if (typeof window !== "undefined" && !window.ResizeObserver) {
       import("resize-observer").then(({ install }) => {
         install();
@@ -63,7 +71,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       />
 
       <MyAppShell path={router.pathname}>
-        <Component {...pageProps} />
+        {getLayout(<Component {...pageProps} />)}
       </MyAppShell>
     </>
   );
