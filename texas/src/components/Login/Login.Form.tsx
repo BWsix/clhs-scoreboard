@@ -21,8 +21,8 @@ export const LoginPageForm = () => {
   const form = useForm({
     initialValues: { id: "", password: "" },
     validationRules: {
-      id: (value) => value === "" || /\d{6}/.test(value),
-      password: (value) => value === "" || /[A-Z]\d{9}/.test(value),
+      id: (value) => value === "" || /^\d{6}$/.test(value),
+      password: (value) => value === "" || /^[A-Z]\d{9}$/.test(value),
     },
   });
 

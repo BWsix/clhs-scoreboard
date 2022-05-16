@@ -84,7 +84,7 @@ export default withTRPC<RouterType>({
       queryClientConfig: {
         defaultOptions: {
           queries: {
-            retry: 0,
+            retry: 2,
           },
         },
       },
