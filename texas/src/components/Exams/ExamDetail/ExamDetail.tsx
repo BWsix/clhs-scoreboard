@@ -1,7 +1,7 @@
 import type { ExamMeta } from "@clhs-scoreboard/lappland/lib/router/exam/exam.types";
 import { Anchor, Divider, Group } from "@mantine/core";
-import { Dispatch, SetStateAction } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { AppShellContainerTitle } from "src/components/AppShell/AppShell.Title";
 import { ErrorFallback } from "src/components/Shared/ErrorFallback";
 import { LoaderCircle } from "src/components/Shared/LoaderCircle";
 import { useExamDetailQuery } from "../hooks/useExamDetailQuery";
@@ -9,24 +9,24 @@ import { Meta } from "./ExamDetail.Meta";
 import { ExamDetailTable } from "./ExamDetail.Table";
 
 interface Props {
-  examMeta: ExamMeta | null;
-  setTitle: Dispatch<SetStateAction<string>>;
+  examMeta: ExamMeta;
 }
 
-export const ExamDetail: React.FC<Props> = ({ examMeta, setTitle }) => {
-  const { data, isLoading, isError, error, refetch, isFetching, isRefetching } =
-    useExamDetailQuery(examMeta?.url);
+export const ExamDetail: React.FC<Props> = ({ examMeta }) => {
+  const { data, error, refetch, isError, isLoading, isFetching, isRefetching } =
+    useExamDetailQuery(examMeta.url);
 
-  if (!data || !examMeta || isLoading || isFetching || isRefetching) {
-    setTitle("Loading...");
+  if (!data || isLoading || isFetching || isRefetching) {
     return <LoaderCircle />;
   }
   if (isError) return <>{error.message}</>;
 
-  setTitle(`高${data.info.grade + data.info.semester} ${data.info.name}`);
-
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <AppShellContainerTitle
+        title={`高${data.info.grade + data.info.semester} ${data.info.name}`}
+      />
+
       <Meta data={data} />
 
       <Divider size="sm" my="lg" />
