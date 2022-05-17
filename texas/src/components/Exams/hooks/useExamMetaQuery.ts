@@ -2,13 +2,13 @@ import { useQueryAuthErrorHandler } from "src/components/hooks/useQueryAuthError
 import { event } from "src/utils/gtag";
 import { trpc } from "src/utils/trpc";
 
-export const useExamDetailQuery = (url: string | undefined) => {
+export const useExamMetaQuery = (onSuccess: () => void) => {
   const onError = useQueryAuthErrorHandler();
 
-  return trpc.useQuery(["exam.detail", { url: url || "" }], {
-    enabled: !!url,
+  return trpc.useQuery(["exam.meta"], {
     onSuccess: () => {
-      event({ action: "examDetailQuery" });
+      onSuccess();
+      event({ action: "examMetaQuery" });
     },
     onError,
   });

@@ -1,8 +1,7 @@
-import type { NextPage } from "next";
 import { News } from "src/components/News/News";
+import { getPageLayout } from "src/layouts/PageLayout";
 
-const NewsPage: NextPage = () => {
+export default function NewsPage() {
   return <News />;
-};
-
-export default NewsPage;
+}
+NewsPage.getLayout = getPageLayout({ title: "官網公告", onlyPageTitle: true });

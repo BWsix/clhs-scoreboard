@@ -1,37 +1,37 @@
 import { ExamMeta } from "@clhs-scoreboard/lappland/lib/router/exam/exam.types";
-import { useState } from "react";
-import { useQueryAuthErrorHandler } from "src/components/hooks/useQueryAuthErrorHandler";
-import { trpc } from "src/utils/trpc";
-import { AppShellContainerTitle } from "../AppShell/AppShell.Title";
+import { useEffect, useState } from "react";
+import { DropDown } from "../Shared/DropDown";
+import { LoaderCircle } from "../Shared/LoaderCircle";
 import { ExamDetail } from "./ExamDetail/ExamDetail";
-import { Picker } from "./Picker/Picker";
+import { useExamMetaQuery } from "./hooks/useExamMetaQuery";
 
 export const Exams: React.FC = () => {
-  const [selected, setSelected] = useState<ExamMeta | null>(null);
-  const [title, setTitle] = useState("");
-
-  const onError = useQueryAuthErrorHandler();
-  const [data, setData] = useState<ExamMeta[]>([]);
-
-  const { error, isError } = trpc.useQuery(["exam.meta"], {
-    onSuccess: (result) => {
-      setData(result);
-      setSelected(result[0]);
-    },
-    onError,
+  const [selectedIdx, setSelectedIdx] = useState<undefined | number>(undefined);
+  const [selected, setSelected] = useState<undefined | ExamMeta>(undefined);
+  const { data, error, isError } = useExamMetaQuery(() => {
+    setSelectedIdx(0);
   });
+
+  useEffect(() => {
+    if (selectedIdx === undefined || !data) return;
+    setSelected(data[selectedIdx]);
+  }, [data, selectedIdx]);
 
   if (isError) return <>{error.message}</>;
 
-  return (
+  return !data ? (
+    <LoaderCircle />
+  ) : (
     <>
       <div style={{ display: "flex", justifyContent: "end", width: "100%" }}>
-        <Picker data={data} setSelected={setSelected} />
+        <DropDown
+          title="考試選單"
+          itemTitles={data.map(({ displayName }) => displayName)}
+          setSelectedIdx={setSelectedIdx}
+        />
       </div>
 
-      <AppShellContainerTitle title={title} />
-
-      <ExamDetail examMeta={selected} setTitle={setTitle} />
+      {selected && <ExamDetail examMeta={selected} />}
     </>
   );
 };

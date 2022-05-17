@@ -6,7 +6,7 @@ export const examMetaSchema = z.object({
   semester: z.string(),
   url: z.string().url(),
   year: z.string(),
-  displayName: z.string().nullable(),
+  displayName: z.string(),
 });
 export type ExamMeta = z.infer<typeof examMetaSchema>;
 

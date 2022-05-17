@@ -1,7 +1,6 @@
-import { ExamMeta } from "@clhs-scoreboard/lappland/lib/router/exam/exam.types";
 import { createStyles, Group, Menu, Text, UnstyledButton } from "@mantine/core";
 import { IconChevronDown } from "@tabler/icons";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 
 const useStyles = createStyles((theme, { opened }: { opened: boolean }) => ({
   control: {
@@ -41,17 +40,18 @@ const useStyles = createStyles((theme, { opened }: { opened: boolean }) => ({
 }));
 
 interface Props {
-  data: ExamMeta[];
-  setSelected: Dispatch<SetStateAction<ExamMeta | null>>;
+  title: string;
+  itemTitles: string[];
+  setSelectedIdx: (idx: number) => void;
 }
-export function Picker({ data, setSelected }: Props) {
+export function DropDown({ title, itemTitles: titles, setSelectedIdx }: Props) {
   const [opened, setOpened] = useState(false);
   const { classes } = useStyles({ opened });
 
-  const items = data.map((item) => (
-    <Menu.Item onClick={() => setSelected(item)} key={item.url}>
+  const items = titles.map((title, idx) => (
+    <Menu.Item onClick={() => setSelectedIdx(idx)} key={idx}>
       <Text size="sm" weight={500} sx={{ whiteSpace: "nowrap" }}>
-        {item.displayName}
+        {title}
       </Text>
     </Menu.Item>
   ));
@@ -68,7 +68,7 @@ export function Picker({ data, setSelected }: Props) {
       control={
         <UnstyledButton className={classes.control}>
           <Group pr="sm">
-            <span className={classes.label}>考試清單</span>
+            <span className={classes.label}>{title}</span>
           </Group>
           <IconChevronDown size={16} className={classes.icon} />
         </UnstyledButton>

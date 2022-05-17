@@ -34,13 +34,8 @@ export const News = () => {
     },
   });
 
-  if (newsQuery.isError) {
-    return <>{newsQuery.error.message}</>;
-  }
-
-  if (!newsQuery.data) {
-    return <LoaderCircle />;
-  }
+  if (newsQuery.isError) return <>{newsQuery.error.message}</>;
+  if (!newsQuery.data) return <LoaderCircle />;
 
   const news = newsQuery.data.pages
     .map(({ newsList }) => newsList)

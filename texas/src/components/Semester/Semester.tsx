@@ -4,17 +4,19 @@ import { AppShellContainerTitle } from "src/components/AppShell/AppShell.Title";
 import { useQueryAuthErrorHandler } from "src/components/hooks/useQueryAuthErrorHandler";
 import { LoaderCircle } from "src/components/Shared/LoaderCircle";
 import { trpc } from "src/utils/trpc";
-import { Picker } from "./Picker/Picker";
+import { DropDown } from "../Shared/DropDown";
 
-export const ExamOverall = () => {
+const GRADES = ["一", "二", "三"];
+
+export const ExamSemester = () => {
   const [grade, setGrade] = useState(1);
-
   const onError = useQueryAuthErrorHandler();
   const { data, isError, error } = trpc.useQuery(["exam.semester", { grade }], {
     onError,
   });
 
   if (isError) return <>{error.message}</>;
+  if (!data) return <LoaderCircle />;
 
   const headScore = (
     <tr>
@@ -57,32 +59,27 @@ export const ExamOverall = () => {
   return (
     <>
       <div style={{ display: "flex", justifyContent: "end", width: "100%" }}>
-        <Picker setGrade={setGrade} />
+        <DropDown
+          title="年級選單"
+          itemTitles={GRADES.map((grade) => `${grade}年級`)}
+          setSelectedIdx={(grade) => setGrade(grade + 1)}
+        />
       </div>
 
-      <AppShellContainerTitle
-        title={`${["一", "二", "三"][grade - 1]}年級總成績`}
-      />
-      {!data ? (
-        <LoaderCircle />
-      ) : (
-        <Table striped horizontalSpacing="sm">
-          <thead>{headMeta}</thead>
-          <tbody>{rowsMeta}</tbody>
-        </Table>
-      )}
+      <AppShellContainerTitle title={`${GRADES[grade - 1]}年級總成績`} />
+
+      <Table striped horizontalSpacing="sm">
+        <thead>{headMeta}</thead>
+        <tbody>{rowsMeta}</tbody>
+      </Table>
 
       <Space h="xl" />
       <AppShellContainerTitle title="各科成績" />
 
-      {!data ? (
-        <LoaderCircle />
-      ) : (
-        <Table striped horizontalSpacing="sm">
-          <thead>{headScore}</thead>
-          <tbody>{rowsScore}</tbody>
-        </Table>
-      )}
+      <Table striped horizontalSpacing="sm">
+        <thead>{headScore}</thead>
+        <tbody>{rowsScore}</tbody>
+      </Table>
     </>
   );
 };
