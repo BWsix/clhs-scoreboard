@@ -1,12 +1,65 @@
-import { Container } from "@mantine/core";
-import { LoginPageForm } from "./Login.Form";
-import { Updates } from "./Login.Updates";
+import {
+  Button,
+  LoadingOverlay,
+  PasswordInput,
+  Text,
+  TextInput,
+  Title,
+  useMantineTheme,
+} from "@mantine/core";
+import { useForm } from "@mantine/hooks";
+import { useRouter } from "next/router";
+import { useLoginMutation } from "./hooks/useLoginMutation";
 
-export const Login: React.FC = () => {
+export const LoginPageForm = () => {
+  const theme = useMantineTheme();
+
+  const router = useRouter();
+  const redirectTo = router.query.redirectTo as string;
+
+  const loginMutation = useLoginMutation(redirectTo);
+  const form = useForm({
+    initialValues: { id: "", password: "" },
+    validationRules: {
+      id: (value) => value === "" || /^\d{6}$/.test(value),
+      password: (value) => value === "" || /^[A-Z]\d{9}$/.test(value),
+    },
+  });
+
   return (
-    <Container size="xs">
-      <LoginPageForm />
-      <Updates />
-    </Container>
+    <form
+      onSubmit={form.onSubmit(() => {
+        loginMutation.mutate(form.values);
+      })}
+    >
+      <Title order={3}>登入壢中Scoreboard</Title>
+      <div style={{ position: "relative" }}>
+        <LoadingOverlay visible={loginMutation.isLoading} />
+
+        <TextInput
+          label="學號"
+          placeholder="420420"
+          mt="md"
+          {...form.getInputProps("id")}
+        />
+
+        <PasswordInput
+          label="身分證字號 (開頭字母大寫)"
+          placeholder="A123456789"
+          mt="md"
+          {...form.getInputProps("password")}
+        />
+
+        <Button type="submit" mt="md" fullWidth variant={theme.other.variant}>
+          {form.values.id === "" && form.values.password === ""
+            ? "訪客登入"
+            : "登入"}
+        </Button>
+      </div>
+
+      <Text color="red" mt="md">
+        {loginMutation.error?.message || ""}
+      </Text>
+    </form>
   );
 };

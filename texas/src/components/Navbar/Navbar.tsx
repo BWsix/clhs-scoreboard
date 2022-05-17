@@ -19,7 +19,7 @@ import { Username } from "./UserName/Username";
 
 const data = [
   { link: "/exams", label: "考試成績", icon: IconFile },
-  { link: "/examOverall", label: "學期總成績", icon: IconList },
+  { link: "/semester", label: "學期成績", icon: IconList },
   { link: "/timetable", label: "課表", icon: IconBook },
   { link: "/news", label: "官網公告", icon: IconSpeakerphone },
   { link: "/calendar", label: "行事曆", icon: IconCalendarEvent },

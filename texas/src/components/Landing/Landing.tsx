@@ -5,7 +5,6 @@ import { ExamDetailDemo } from "./ExamDetailDemo/ExamDetailDemo";
 import { FeaturesGrid } from "./Feature/Feature";
 import { Footer } from "./Footer/Footer";
 import { HeroTitle } from "./HeroTitle/HeroTitle";
-import { TimetableDemo } from "./TimetableDemo/TimetableDemo";
 
 export const Landing = () => {
   return (
@@ -21,7 +20,6 @@ export const Landing = () => {
       <Container>
         <FeaturesGrid />
         <ExamDetailDemo />
-        <TimetableDemo />
         <Bottom />
       </Container>
 

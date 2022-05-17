@@ -1,8 +1,7 @@
-import type { NextPage } from "next";
 import { Timetable } from "src/components/Timebable/Timetable";
+import { getPageLayout } from "src/layouts/PageLayout";
 
-const TimetablePage: NextPage = () => {
+export default function TimetablePage() {
   return <Timetable />;
-};
-
-export default TimetablePage;
+}
+TimetablePage.getLayout = getPageLayout({ title: "課表" });

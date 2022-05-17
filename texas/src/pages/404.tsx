@@ -1,14 +1,14 @@
-import React from "react";
 import {
-  createStyles,
-  Title,
-  Text,
   Button,
   Container,
+  createStyles,
   Group,
+  Text,
+  Title,
 } from "@mantine/core";
-import { NextPage } from "next";
 import Link from "next/link";
+import React from "react";
+import { getPageLayout } from "src/layouts/PageLayout";
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -51,7 +51,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const NotFoundPage: NextPage = () => {
+export default function NotFoundPage() {
   const { classes } = useStyles();
 
   return (
@@ -75,6 +75,8 @@ const NotFoundPage: NextPage = () => {
       </Group>
     </Container>
   );
-};
-
-export default NotFoundPage;
+}
+NotFoundPage.getLayout = getPageLayout({
+  title: "找不到頁面",
+  onlyPageTitle: true,
+});
