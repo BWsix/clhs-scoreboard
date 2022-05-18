@@ -5,7 +5,7 @@ const url = "https://github.com/BWsix/clhs-scoreboard";
 
 export function GithubLink() {
   return (
-    <MyActionIcon onClick={() => window.open(url, "_blank")}>
+    <MyActionIcon href={url}>
       <IconBrandGithub />
     </MyActionIcon>
   );

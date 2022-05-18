@@ -3,13 +3,17 @@ import { ActionIcon } from "@mantine/core";
 interface Props {
   onClick?: () => void;
   children: React.ReactNode;
+  href?: string;
 }
 
-export const MyActionIcon: React.FC<Props> = ({ onClick, children }) => {
+export const MyActionIcon: React.FC<Props> = ({ onClick, children, href }) => {
   return (
     <ActionIcon
       onClick={onClick}
       size="lg"
+      component={href ? "a" : "button"}
+      href={href}
+      target={href && "_blank"}
       sx={(theme) => ({
         backgroundColor:
           theme.colorScheme === "dark"

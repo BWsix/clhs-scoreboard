@@ -63,11 +63,9 @@ export function MyNavbar({ opened, closeSide }: Props) {
         <Box
           className={cx(classes.link)}
           style={{ cursor: "pointer" }}
-          onClick={() => {
-            closeSide();
-
-            window.open("https://eschool.clhs.tyc.edu.tw/online/", "_blank");
-          }}
+          component="a"
+          href="https://eschool.clhs.tyc.edu.tw/online/"
+          target="_blank"
         >
           <IconExternalLink className={classes.linkIcon} />
           <span>學校成績查詢系統</span>
