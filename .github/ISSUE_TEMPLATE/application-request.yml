@@ -20,7 +20,7 @@ body:
       description: 請提供作者名稱
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: description
     attributes:
       label: 作品介紹
@@ -37,5 +37,7 @@ body:
   - type: input
     id: imageLink
     attributes:
-      label: 背景圖片連結(非必要)
+      label: 背景圖片連結
       description: 請提供放在網站上的背景圖片連結，可以上傳至imgur(https://imgur.com)
+    validations:
+      required: true

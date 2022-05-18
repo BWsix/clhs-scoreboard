@@ -4,6 +4,7 @@ import {
   IconCalendarEvent,
   IconDownload,
   IconExternalLink,
+  IconApps,
   IconFile,
   IconList,
   IconLogout,
@@ -24,6 +25,7 @@ const data = [
   { link: "/news", label: "官網公告", icon: IconSpeakerphone },
   { link: "/calendar", label: "行事曆", icon: IconCalendarEvent },
   { link: "/installation", label: "安裝教學", icon: IconDownload },
+  { link: "/resources", label: "社群資源", icon: IconApps },
 ];
 
 interface Props {
