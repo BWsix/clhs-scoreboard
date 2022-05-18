@@ -1,4 +1,4 @@
-import { Grid, Group, Text, Title } from "@mantine/core";
+import { Grid, Group, Text } from "@mantine/core";
 import got from "got";
 import { GetStaticProps } from "next";
 import Link from "next/link";
@@ -31,7 +31,9 @@ export const getStaticProps: GetStaticProps = async () => {
         imageUrl,
       ] = body.split("\n\n");
 
-      return { title, author, description, link, imageUrl };
+      const resource = { title, author, description, link, imageUrl };
+      console.log(resource);
+      return resource;
     }
   );
 
