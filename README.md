@@ -15,7 +15,17 @@
 
 ## 流程圖
 
-![](/flow.drawio.png)
+### 登入
+
+![](/assets/exam-flow.drawio.png)
+
+### 取得當次段考成績
+
+![](/assets/exam-flow.drawio.png)
+
+### auth guard
+
+![](/assets/auth-guard.drawio.png)
 
 ## How can I contribute?
 
