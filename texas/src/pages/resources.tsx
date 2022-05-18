@@ -9,6 +9,7 @@ import {
 import { getPageLayout } from "src/layouts/PageLayout";
 
 export const getStaticProps: GetStaticProps = async () => {
+  const DIVIDER = "B===D-3";
   const url = "https://api.github.com/repos/bwsix/clhs-scoreboard/issues";
   const searchParams = new URLSearchParams([
     ["labels", "community-resource"],
@@ -29,11 +30,11 @@ export const getStaticProps: GetStaticProps = async () => {
         link,
         _imageUrl,
         imageUrl,
-      ] = body.split("\n\n");
+      ] = body
+        .replaceAll(/((?:\r\n)|\n)/g, DIVIDER)
+        .split(`${DIVIDER}${DIVIDER}`);
 
-      const resource = { title, author, description, link, imageUrl };
-      console.log(resource);
-      return resource;
+      return { title, author, description, link, imageUrl };
     }
   );
 
