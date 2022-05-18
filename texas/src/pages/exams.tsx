@@ -1,8 +1,7 @@
-import type { NextPage } from "next";
 import { Exams } from "src/components/Exams/Exams";
+import { getPageLayout } from "src/layouts/PageLayout";
 
-const ExamsPage: NextPage = () => {
+export default function ExamsPage() {
   return <Exams />;
-};
-
-export default ExamsPage;
+}
+ExamsPage.getLayout = getPageLayout({ title: "成績查詢", onlyPageTitle: true });

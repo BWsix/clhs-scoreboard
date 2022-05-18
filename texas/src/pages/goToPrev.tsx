@@ -1,9 +1,9 @@
 import { Text } from "@mantine/core";
-import type { NextPage } from "next";
 import { useEffect } from "react";
 import { usePreviousPage } from "src/components/hooks/usePreviousPage";
+import { getPageLayout } from "src/layouts/PageLayout";
 
-const GoToPrev: NextPage = () => {
+export default function GoToPrev() {
   const { goToPrev } = usePreviousPage();
 
   useEffect(() => {
@@ -11,6 +11,8 @@ const GoToPrev: NextPage = () => {
   }, []);
 
   return <Text align="center">Redirecting...</Text>;
-};
-
-export default GoToPrev;
+}
+GoToPrev.getLayout = getPageLayout({
+  title: "Redirecting...",
+  onlyPageTitle: true,
+});
