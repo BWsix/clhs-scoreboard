@@ -17,7 +17,7 @@
 
 ### 登入
 
-![](/assets/exam-flow.drawio.png)
+![](/assets/login-flow.drawio.png)
 
 ### 取得當次段考成績
 
