@@ -1,7 +1,6 @@
-import { Grid, Group, Text } from "@mantine/core";
+import { Anchor, Grid, Group } from "@mantine/core";
 import got from "got";
 import { GetStaticProps } from "next";
-import Link from "next/link";
 import {
   ImageCardProps,
   ResourceImageCard,
@@ -62,22 +61,18 @@ export default function ResourcesPage({
   return (
     <>
       <Group>
-        <Link
+        <Anchor
           href="https://github.com/BWsix/clhs-scoreboard/issues?q=is%3Aissue+is%3Aclosed+label%3Acommunity-resource"
           target="_blank"
         >
-          <Text style={{ textDecoration: "underline", cursor: "pointer" }}>
-            在github上查看社群資源清單
-          </Text>
-        </Link>
-        <Link
+          在github上查看社群資源清單
+        </Anchor>
+        <Anchor
           href="https://github.com/BWsix/clhs-scoreboard/issues/new?assignees=BWsix&labels=application-request&template=application-request.yml"
           target="_blank"
         >
-          <Text style={{ textDecoration: "underline", cursor: "pointer" }}>
-            提交申請
-          </Text>
-        </Link>
+          提交申請
+        </Anchor>
       </Group>
       <Grid>{resourceList}</Grid>
     </>
