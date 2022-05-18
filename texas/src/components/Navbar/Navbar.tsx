@@ -1,13 +1,14 @@
-import { ActionIcon, Box, Navbar, UnstyledButton } from "@mantine/core";
+import { Box, Navbar, UnstyledButton } from "@mantine/core";
 import {
+  IconApps,
   IconBook,
   IconCalendarEvent,
   IconDownload,
   IconExternalLink,
-  IconApps,
   IconFile,
   IconList,
   IconLogout,
+  IconPhone,
   IconSpeakerphone,
   IconUser,
 } from "@tabler/icons";
@@ -60,6 +61,16 @@ export function MyNavbar({ opened, closeSide }: Props) {
       <Navbar.Section grow>
         {links}
 
+        <Box
+          className={cx(classes.link)}
+          style={{ cursor: "pointer" }}
+          component="a"
+          href="https://github.com/BWsix/clhs-scoreboard/issues/new?assignees=BWsix&labels=help+wanted&template=help.yml"
+          target="_blank"
+        >
+          <IconPhone className={classes.linkIcon} />
+          <span>客服專區</span>
+        </Box>
         <Box
           className={cx(classes.link)}
           style={{ cursor: "pointer" }}
