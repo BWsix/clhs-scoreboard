@@ -1,6 +1,7 @@
 name: 作品申請
 description: 在這裡填寫作品申請表單
 labels: ["application-request"]
+assignees: ["BWsix"]
 body:
   - type: markdown
     attributes:
@@ -9,32 +10,32 @@ body:
     id: title
     attributes:
       label: 標題
-      placeholder: 請提供簡短的作品名稱
+      description: 請提供簡短的作品名稱
     validations:
       required: true
   - type: input
     id: author
     attributes:
       label: 作者名稱
-      placeholder: 請提供作者名稱
+      description: 請提供作者名稱
     validations:
       required: true
   - type: textarea
     id: description
     attributes:
       label: 作品介紹
-      placeholder: 講簡單描述作品的用途
+      description: 講簡單描述作品的用途
     validations:
       required: true
   - type: input
     id: link
     attributes:
       label: 作品連結
-      placeholder: 請確保連結的穩定度
+      description: 請確保連結的穩定度
     validations:
       required: true
   - type: input
     id: imageLink
     attributes:
       label: 背景圖片連結(非必要)
-      placeholder: 請提供放在網站上的背景圖片連結，可以上傳至imgur(https://imgur.com)
+      description: 請提供放在網站上的背景圖片連結，可以上傳至imgur(https://imgur.com)

@@ -1,0 +1,26 @@
+name: 客服表單
+description: 在這裡填寫作品客服表單
+labels: ["help wanted"]
+assignees: ["BWsix"]
+body:
+  - type: markdown
+    attributes:
+      value: "客服表單，或是到[google表單](https://forms.gle/ZrhHU6CYTD7BPqYbA)填寫"
+  - type: dropdown
+    id: title
+    attributes:
+      label: 選擇訊息類型
+      description: 在這裡選擇訊息類型
+      multiple: false
+      options:
+        - "錯誤回報"
+        - "改善建議"
+        - "提問"
+        - "其他"
+    validations:
+      required: true
+  - type: textarea
+    id: content
+    attributes:
+      label: 內容
+      description: 講簡單描述作品的用途
