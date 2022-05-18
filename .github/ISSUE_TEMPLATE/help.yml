@@ -23,4 +23,5 @@ body:
     id: content
     attributes:
       label: 內容
-      description: 講簡單描述作品的用途
+    validations:
+      required: true
