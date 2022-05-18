@@ -30,9 +30,7 @@ export const getStaticProps: GetStaticProps = async () => {
         link,
         _imageUrl,
         imageUrl,
-      ] = body
-        .replaceAll(/((?:\r\n)|\n)/g, DIVIDER)
-        .split(`${DIVIDER}${DIVIDER}`);
+      ] = body.replace(/((?:\r\n)|\n)/g, DIVIDER).split(`${DIVIDER}${DIVIDER}`);
 
       return { title, author, description, link, imageUrl };
     }
