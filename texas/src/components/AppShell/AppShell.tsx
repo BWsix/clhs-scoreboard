@@ -4,7 +4,7 @@ import {
   Container,
   MantineProvider,
 } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { useDisclosure, useScrollLock } from "@mantine/hooks";
 import { useEffect, useState } from "react";
 import { MyHeader } from "src/components/Header/Header";
 import { useColorScheme } from "src/components/hooks/useColorScheme";
@@ -25,11 +25,16 @@ export const MyAppShell: React.FC<Props> = ({ path, children }) => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const { primaryColor, setPrimaryColor } = usePrimaryColor();
   const [opened, { close, toggle }] = useDisclosure(false);
+  const [_scrollLocked, setScrollLocked] = useScrollLock();
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
   }, [mounted]);
+
+  useEffect(() => {
+    setScrollLocked(opened);
+  }, [opened]);
 
   const noAppShell = PATHS_WITHOUT_APP_SHELL.includes(path);
 

@@ -1,4 +1,4 @@
-import { Box, Navbar, UnstyledButton } from "@mantine/core";
+import { Box, Navbar, ScrollArea, UnstyledButton } from "@mantine/core";
 import {
   IconApps,
   IconBook,
@@ -58,7 +58,12 @@ export function MyNavbar({ opened, closeSide }: Props) {
 
   return (
     <Navbar width={{ sm: 250 }} p="md" hiddenBreakpoint="sm" hidden={!opened}>
-      <Navbar.Section grow>
+      <Navbar.Section
+        grow
+        component={ScrollArea}
+        type="scroll"
+        scrollbarSize={6}
+      >
         {links}
 
         <Box
