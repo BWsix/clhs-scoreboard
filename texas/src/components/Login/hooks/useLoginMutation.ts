@@ -9,7 +9,7 @@ export const useLoginMutation = (redirectTo?: string) => {
 
   const loginMutation = trpc.useMutation("auth.login", {
     onSuccess: (data) => {
-      event({ action: "login", category: "system" });
+      event({ action: "auth.login", category: "system" });
 
       updateUserName(data.name);
       router.push(redirectTo || "/exams");

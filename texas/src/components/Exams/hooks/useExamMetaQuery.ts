@@ -8,7 +8,7 @@ export const useExamMetaQuery = (onSuccess: () => void) => {
   return trpc.useQuery(["exam.meta"], {
     onSuccess: () => {
       onSuccess();
-      event({ action: "examMetaQuery" });
+      event({ action: "exam.meta" });
     },
     onError,
   });

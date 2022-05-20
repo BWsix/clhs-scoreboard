@@ -3,6 +3,7 @@ import { useState } from "react";
 import { AppShellContainerTitle } from "src/components/AppShell/AppShell.Title";
 import { useQueryAuthErrorHandler } from "src/components/hooks/useQueryAuthErrorHandler";
 import { LoaderCircle } from "src/components/Shared/LoaderCircle";
+import { event } from "src/utils/gtag";
 import { trpc } from "src/utils/trpc";
 import { DropDown } from "../Shared/DropDown";
 
@@ -13,6 +14,9 @@ export const ExamSemester = () => {
   const onError = useQueryAuthErrorHandler();
   const { data, isError, error } = trpc.useQuery(["exam.semester", { grade }], {
     onError,
+    onSuccess: () => {
+      event({ action: "exam.semester", category: "system" });
+    },
   });
 
   if (isError) return <>{error.message}</>;

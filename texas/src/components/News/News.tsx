@@ -30,7 +30,7 @@ export const News = () => {
     refetchOnWindowFocus: false,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
     onSuccess: () => {
-      event({ action: "newsListQuery", category: "system" });
+      event({ action: "news", category: "system" });
     },
   });
 

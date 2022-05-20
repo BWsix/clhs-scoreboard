@@ -9,7 +9,7 @@ export const Timetable: React.FC = () => {
   const { data, error, isError } = trpc.useQuery(["timetable"], {
     onError,
     onSuccess: () => {
-      event({ action: "timetableQuery", category: "system" });
+      event({ action: "timetable", category: "system" });
     },
   });
 

@@ -8,7 +8,7 @@ export const useExamDetailQuery = (url: string | undefined) => {
   return trpc.useQuery(["exam.detail", { url: url || "" }], {
     enabled: !!url,
     onSuccess: () => {
-      event({ action: "examDetailQuery" });
+      event({ action: "exam.detail" });
     },
     onError,
   });

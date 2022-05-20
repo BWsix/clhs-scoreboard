@@ -14,7 +14,7 @@ export const useLogout = (toHamePage?: boolean) => {
     if (!isLogout) return;
 
     logoutMutation.mutateAsync().then(() => {
-      event({ action: "logout", category: "system" });
+      event({ action: "auth.logout", category: "system" });
 
       deleteUserName();
       if (toHamePage) {

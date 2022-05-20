@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import { getPageLayout } from "src/layouts/PageLayout";
-import { event } from "src/utils/gtag";
 
 const API = "https://calendar.google.com/calendar/embed";
 const config = {
@@ -18,10 +16,6 @@ const config = {
 };
 
 export default function CalendarPage() {
-  useEffect(() => {
-    event({ action: "calendarPage", category: "system" });
-  }, []);
-
   return (
     <div style={{ height: "100%" }}>
       <iframe
