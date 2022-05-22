@@ -1,9 +1,27 @@
-import { Alert, Anchor, Container, Title } from "@mantine/core";
+import { Alert, Anchor, Container, Title, Image, Code } from "@mantine/core";
 import { IconAlertCircle } from "@tabler/icons";
 import { LoginPageForm } from "src/components/Login/Login";
 import { getPageLayout } from "src/layouts/PageLayout";
 
 const INFO_LIST: InfoProps[] = [
+  {
+    title: "2022/05/22 💥藝術就是爆炸💥",
+    children: (
+      <>
+        💥 <Code>@clhs-scoreboard/lappland</Code>內所有的
+        <Code>String.prototype.split()</Code>已被替換為<Code>explode()</Code>.
+        <br />
+        <Anchor
+          href="https://github.com/BWsix/clhs-scoreboard/commit/130afb5eb34fe9ce44b08283ee8eca4a6205da3f"
+          target="_blank"
+          size="sm"
+        >
+          💥 explosive commit
+        </Anchor>
+        <Image src="https://i.imgur.com/1xq2Twm.png" alt="💥" />
+      </>
+    ),
+  },
   {
     title: "2022/05/21 🎉正式版🎉",
     children: (
