@@ -5,9 +5,6 @@ export const getAccessToken = async (refreshToken: string) => {
   const API = "https://eschool.clhs.tyc.edu.tw/";
 
   try {
-    console.log("Start executing `getAccessToken`"); //TODO remove console.log
-    const t = Date.now(); //TODO remove console.log
-
     const getResult = await got.head(API + "online/", {
       headers: { cookie: refreshToken },
       followRedirect: false,
@@ -20,8 +17,6 @@ export const getAccessToken = async (refreshToken: string) => {
       headers: { cookie: accessToken },
       followRedirect: false,
     });
-
-    console.log("Finish executing `getAccessToken`: ", Date.now() - t); //TODO remove console.log
 
     return accessToken;
   } catch (e) {
