@@ -1,10 +1,12 @@
+import { explode } from "explode.js";
 import got from "got";
 
 const getVerificationToken = async () => {
   const API = "https://eschool.clhs.tyc.edu.tw/auth/Auth/Login";
 
   const getResult = await got.get(API);
-  const validationCookie = getResult.headers["set-cookie"]![0].split(";")[0];
+  const validationCookie = explode(";", getResult.headers["set-cookie"]![0])[0];
+  console.log(validationCookie);
   const matchToken = /type="hidden" value="([\-\d\w]+)"/g;
   const requestVerificationToken = matchToken.exec(getResult.body)![1];
 
@@ -47,8 +49,8 @@ export const getRefreshToken = async (id: string, password: string) => {
   }
 
   try {
-    const cookieRawA = postResult.headers["set-cookie"]![0].split(";")[0];
-    const cookieRawB = postResult.headers["set-cookie"]![1].split(";")[0];
+    const cookieRawA = explode(";", postResult.headers["set-cookie"]![0])[0];
+    const cookieRawB = explode(";", postResult.headers["set-cookie"]![1])[0];
 
     console.log("Finish executing `getRefreshToken`: ", Date.now() - t); //TODO remove console.log
 

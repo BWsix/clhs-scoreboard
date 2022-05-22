@@ -1,3 +1,4 @@
+import { explode } from "explode.js";
 import got from "got";
 
 export const getAccessToken = async (refreshToken: string) => {
@@ -12,7 +13,7 @@ export const getAccessToken = async (refreshToken: string) => {
       followRedirect: false,
     });
     const redirectTo = getResult.headers["location"];
-    const sessionId = getResult.headers["set-cookie"]![0]!.split(";")[0];
+    const sessionId = explode(";", getResult.headers["set-cookie"]![0])[0];
     const accessToken = `${refreshToken}${sessionId}`;
 
     await got.head(API + redirectTo, {
