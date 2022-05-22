@@ -2544,7 +2544,7 @@ esutils@^2.0.2:
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
 
-explode.js@^1.0.1:
+explode.js@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/explode.js/-/explode.js-1.0.1.tgz#d73904e5f6422391dc292a56dc059e43796e5c28"
   integrity sha512-ldygzEDV/vKpVKLd7tYA+HAKZeMUwfluFT4f5+2YvK4iY9jWynx4PxLurqG9ZD2zh2nKDv+Agmmauw9xoqiD+g==
