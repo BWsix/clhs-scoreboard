@@ -13,13 +13,12 @@ interface Props {
 }
 
 export const ExamDetail: React.FC<Props> = ({ examMeta }) => {
-  const { data, error, refetch, isError, isLoading, isFetching, isRefetching } =
-    useExamDetailQuery(examMeta.url);
+  const { data, error, refetch, isError, isLoading } = useExamDetailQuery(
+    examMeta.url
+  );
 
-  if (!data || isLoading || isFetching || isRefetching) {
-    return <LoaderCircle />;
-  }
   if (isError) return <>{error.message}</>;
+  if (!data) return <LoaderCircle />;
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
