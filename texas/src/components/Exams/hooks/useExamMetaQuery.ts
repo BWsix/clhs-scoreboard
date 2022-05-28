@@ -6,6 +6,7 @@ export const useExamMetaQuery = (onSuccess: () => void) => {
   const onError = useQueryAuthErrorHandler();
 
   return trpc.useQuery(["exam.meta"], {
+    refetchOnWindowFocus: false,
     onSuccess: () => {
       onSuccess();
       event({ action: "exam.meta" });
