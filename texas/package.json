@@ -11,9 +11,9 @@
   "dependencies": {
     "@clhs-api/core": "0.0.8",
     "@clhs-scoreboard/lappland": "0.0.0",
-    "@mantine/core": "4.2.6",
-    "@mantine/hooks": "4.2.6",
-    "@mantine/next": "4.2.6",
+    "@mantine/core": "4.2.7",
+    "@mantine/hooks": "4.2.7",
+    "@mantine/next": "4.2.7",
     "@tabler/icons": "1.68.0",
     "@trpc/client": "9.23.6",
     "@trpc/next": "9.23.6",
@@ -27,7 +27,7 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-error-boundary": "3.1.4",
-    "react-query": "3.39.0",
+    "react-query": "3.39.1",
     "resize-observer": "1.0.4"
   },
   "devDependencies": {
