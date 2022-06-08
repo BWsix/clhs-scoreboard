@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@clhs-api/core": "0.0.8",
-    "@trpc/server": "9.23.6",
+    "@trpc/server": "9.24.0",
     "axios": "0.27.2",
     "cheerio": "1.0.0-rc.11",
     "explode.js": "1.0.1",
