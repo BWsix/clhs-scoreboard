@@ -1064,47 +1064,47 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@mantine/core@4.2.8":
-  version "4.2.8"
-  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-4.2.8.tgz#16248c8a4fd8bf29176b2392d47539242541cbec"
-  integrity sha512-PaWMfOEtbOzYJLNr9H74tsfoXFg6djjO+T6YKB2oiDTmJliRtyLGX2akeOVcU+gNSYajT5M2xGkd8GTX0PdHig==
+"@mantine/core@4.2.9":
+  version "4.2.9"
+  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-4.2.9.tgz#395895457a8b616abdb37f16c896e243281cc5fe"
+  integrity sha512-25krgKF7FUFDsF5IYk+A/7GjgAZFzEcaFmGvscXS/7ccOickBmXzENwY9eJpv+MDo/7Sj5eiS0ZBi+WN27tdcw==
   dependencies:
-    "@mantine/styles" "4.2.8"
+    "@mantine/styles" "4.2.9"
     "@popperjs/core" "^2.9.3"
     "@radix-ui/react-scroll-area" "^0.1.1"
     react-popper "^2.2.5"
     react-textarea-autosize "^8.3.2"
 
-"@mantine/hooks@4.2.8":
-  version "4.2.8"
-  resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-4.2.8.tgz#eeae72da40e30b6a8497a7e6c81a61aab051ef8e"
-  integrity sha512-CZYATDBlEEazl5XsS4bpgHe9auIxgRAnshw5GL0maOE3gKiYUFuvNGbJe6wlhqIOHUyW/Bk6vKZJPbLs39iw/A==
+"@mantine/hooks@4.2.9":
+  version "4.2.9"
+  resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-4.2.9.tgz#ada020b0a2820dc208e8dde23374e2f260d9111c"
+  integrity sha512-oLtlSXkl99vPGBTR9yoVCWoCQ25Bc4WhPci31iERMLMM/0fz85CZayQcAC4etq6un6rDiRNu6jq0YB1S5stmPg==
 
-"@mantine/next@4.2.8":
-  version "4.2.8"
-  resolved "https://registry.yarnpkg.com/@mantine/next/-/next-4.2.8.tgz#31c3da5f336a2e717dc8e26a4b7d16880f24b02d"
-  integrity sha512-EEKQ1HtP5MeCtx0Y8BM5BI53zvSwjaCsfoDerbjSWK9wan5UWcmkV5ZcYsBjbJMnuAKW0PoZaY1SwFd0uunmdQ==
+"@mantine/next@4.2.9":
+  version "4.2.9"
+  resolved "https://registry.yarnpkg.com/@mantine/next/-/next-4.2.9.tgz#cda2c227ee0776064cd464cb7e417c72d616a15d"
+  integrity sha512-avbxQeR9EerSHJ3HOg7rPAyBUoJ3/ifvYifyP/Sd6ap3hGzF1a/NN4tSRjoRmz1jTyAdmKIhL0k0alwi1OqA2A==
   dependencies:
-    "@mantine/ssr" "4.2.8"
+    "@mantine/ssr" "4.2.9"
 
-"@mantine/ssr@4.2.8":
-  version "4.2.8"
-  resolved "https://registry.yarnpkg.com/@mantine/ssr/-/ssr-4.2.8.tgz#19cada4f32adc20ac208156fc740ae103c306147"
-  integrity sha512-DCna1pXc3F3Bqbdf+K4wNvCBVSbLuIv2YiyKmE/Yw9Yhod34lVueXIDgkIhSOSwhjBkImqJDaPGxmme1M/XWCQ==
+"@mantine/ssr@4.2.9":
+  version "4.2.9"
+  resolved "https://registry.yarnpkg.com/@mantine/ssr/-/ssr-4.2.9.tgz#4ce7c687dfa12e4aab46ff2e78871fde0cd749d8"
+  integrity sha512-6B5R8ELRR+GQaXdnUUoSlZXEA5DiG4Pp91EOJTU+UYnieQ+gdLISp2HmYAvKMpETViOciBou6r8j2hH74tls4g==
   dependencies:
     "@emotion/cache" "11.7.1"
     "@emotion/react" "11.7.1"
     "@emotion/serialize" "1.0.2"
     "@emotion/server" "11.4.0"
     "@emotion/utils" "1.0.0"
-    "@mantine/styles" "4.2.8"
+    "@mantine/styles" "4.2.9"
     csstype "3.0.9"
     html-react-parser "1.3.0"
 
-"@mantine/styles@4.2.8":
-  version "4.2.8"
-  resolved "https://registry.yarnpkg.com/@mantine/styles/-/styles-4.2.8.tgz#fa03bf61d627aaea5b521afaef1ceccf8098aa1d"
-  integrity sha512-e7/EzzUqvwA90pwYjKd3rfIi2AUrInZv5H1Q3HOfaXZH+RkNQzovq558DRtHIR34v9yhVi6nMrTUO2PPf4CNig==
+"@mantine/styles@4.2.9":
+  version "4.2.9"
+  resolved "https://registry.yarnpkg.com/@mantine/styles/-/styles-4.2.9.tgz#97fbc96be5ea970218aab0ad62a8f7c736bc6225"
+  integrity sha512-UT5m1412N20HPl+Mg2zTN7gP34J1GIa3o7eQ+fHThAQkAMm/vBehzX8nkbdxwyYkwuu6+/4kizcbM/Op4jMI3g==
   dependencies:
     "@emotion/cache" "11.7.1"
     "@emotion/react" "11.7.1"
@@ -1377,37 +1377,37 @@
   dependencies:
     defer-to-connect "^2.0.1"
 
-"@tabler/icons@1.68.0":
-  version "1.68.0"
-  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-1.68.0.tgz#047bd88966cc24ef957b3c429a13bb82cca95561"
-  integrity sha512-UseBEEhv7r+Drl3iZih7rkwqkfJJZscjd5ZvK1WdIIulQsBa+qE8WBDGdAO0RtjkCclEK88z9kC0s5wiVPIvkw==
+"@tabler/icons@1.69.0":
+  version "1.69.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-1.69.0.tgz#5ae7404289f19f1971884f00995fec7d177e6239"
+  integrity sha512-RNlzhDUYh1UFTbNtrztEUosY+OJGRXACBe+TD2j87IRQtosmiXrQf2v0oksdFdsFkwwVoR31dTKBuB3SDO5IBQ==
 
-"@trpc/client@9.24.0":
-  version "9.24.0"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-9.24.0.tgz#39b86e4c89dfe43a3afd15003f8a7bbeedbb8011"
-  integrity sha512-ECrn/h8c4Af1ubY9XgNpTZf84mUzDPZRVBhgkgBQXZsvTO3FWkVKcYRoJV6w/sOs3PkaNjQuv2fjzgIErXN6QA==
+"@trpc/client@9.25.2":
+  version "9.25.2"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-9.25.2.tgz#3ece63bc58436a12a49a7ef3aa3ff54f03bdd750"
+  integrity sha512-wW4KEvG+mF5ParqmyTgSjxwOjvxtsQCso6nZeZ3PI19d9bBUprFx9E+UkS5R3gqNm9lddQx7tx+ie+OFkDmp3g==
   dependencies:
     "@babel/runtime" "^7.9.0"
 
-"@trpc/next@9.24.0":
-  version "9.24.0"
-  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-9.24.0.tgz#cd1614e4abff87a4562066222343ba73d0387a99"
-  integrity sha512-F57kuTSIPkJvkc2AiGF4oeGCuyFptgdujxIMA/oxYicTaXQ332usVq2LV0LD+woQ4VHT3Rsgs7EwPf36GpA0PQ==
+"@trpc/next@9.25.2":
+  version "9.25.2"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-9.25.2.tgz#721182d1426e28848c87ef473dff781e9c812ab4"
+  integrity sha512-OiRcmNd5sxTR23O2oVxBVoSj4DNVZe84GzXBKxShYjeDyld0OKmQzqB1H2rMsCmNU7/Yd4lYDQBjGnDVP5VxPQ==
   dependencies:
     "@babel/runtime" "^7.9.0"
     react-ssr-prepass "^1.5.0"
 
-"@trpc/react@9.24.0":
-  version "9.24.0"
-  resolved "https://registry.yarnpkg.com/@trpc/react/-/react-9.24.0.tgz#73b2be09155939179eb7e7fdd0ac56c0415fab94"
-  integrity sha512-ekcSJ048glcBZlP9Szg9j3WETUiwAwNjNNLr1VQPWnXkQxr8uqCWMCTD6TIlKSCJE9rLMhToFXdg/AeZXeeHsg==
+"@trpc/react@9.25.2":
+  version "9.25.2"
+  resolved "https://registry.yarnpkg.com/@trpc/react/-/react-9.25.2.tgz#93c9c9c46bfee16ede9b326c2c964a38b4f8b84d"
+  integrity sha512-osP1JmhhBLWmSkoCc19YcGiQdeEq0RtvO0uvLe2DfzGpQL1orB72nvqWHXlIGHWA4E0cnc1FRmoXokWYCwHPxQ==
   dependencies:
     "@babel/runtime" "^7.9.0"
 
-"@trpc/server@9.24.0":
-  version "9.24.0"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-9.24.0.tgz#4b02090af8283600a0237457968997d1c7f55aca"
-  integrity sha512-yrWMXl6kTgd3o1zE8zkw10KttY8xeilZRvxlpXhLGeeGaBqfvWdU+ljpBK1eSC5j9uDJrMc1gaNqtA++B8Zoqg==
+"@trpc/server@9.25.2":
+  version "9.25.2"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-9.25.2.tgz#3ac58753b4cf7b2aa1a2a51d94bd0798b495a78a"
+  integrity sha512-E5ibK5jLgWremiPs2pO+Y/YktRH7+CqmMwp97mTp9ymYZn3od4C9TuFg6bxEK1bQKnUezpzHJyGRADVKCWrjsw==
 
 "@types/cacheable-request@^6.0.2":
   version "6.0.2"
