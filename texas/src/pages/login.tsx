@@ -5,6 +5,15 @@ import { getPageLayout } from "src/layouts/PageLayout";
 
 const INFO_LIST: InfoProps[] = [
   {
+    title: "2022/06/27 無法登入的錯誤",
+    children: (
+      <>
+        也許是瞬時流量太大導致學校伺服器不穩定，有時會出現無法登入的狀況。
+        這時請不要放棄希望，多試幾次就能登入了！(吧)
+      </>
+    ),
+  },
+  {
     title: "2022/05/22 💥藝術就是爆炸💥",
     children: (
       <>
