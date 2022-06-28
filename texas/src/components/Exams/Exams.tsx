@@ -17,7 +17,7 @@ export const Exams: React.FC = () => {
     setSelected(data[selectedIdx]);
   }, [data, selectedIdx]);
 
-  if (isError) return <>{error.message}</>;
+  if (isError) return <>{error.message === "URI malformed" ? "學校伺服器目前已關閉成績查詢功能" : `錯誤：${error.message}`}</>;
 
   return !data ? (
     <LoaderCircle />
