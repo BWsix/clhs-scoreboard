@@ -5,11 +5,17 @@ import { getPageLayout } from "src/layouts/PageLayout";
 
 const INFO_LIST: InfoProps[] = [
   {
-    title: "2022/06/27 無法登入的錯誤",
+    title: "2022/07/04 無法登入的問題",
     children: (
       <>
-        也許是瞬時流量太大導致學校伺服器不穩定，有時會出現無法登入的狀況。
-        這時請不要放棄希望，試試看重整頁面或重開app，再多試幾次就能登入了！(吧)
+        學校系統更改了登入認證，導致發生無法登入的錯誤。目前錯誤已被排除，詳細情況可以參考這個
+        <Anchor
+          href="https://github.com/BWsix/clhs-scoreboard/commit/bbc3b1a566c1d0f97d6c68fd8b77356e5c5f777c"
+          target="_blank"
+          size="sm"
+        >
+          commit
+        </Anchor>
       </>
     ),
   },
