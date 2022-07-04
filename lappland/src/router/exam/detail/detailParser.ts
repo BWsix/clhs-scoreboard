@@ -1,6 +1,9 @@
+import { serviceAvailableGuard } from "../../../utils/serviceUnavailable";
 import { ExamDetail, ExamSubject } from "../exam.types";
 
 export const detailParser = (content: string): ExamDetail => {
+  serviceAvailableGuard(content);
+
   const MATCH_SUBJECT_NAME =
     /<td class="top" style="font-size: 15px;">([\u4e00-\u9fa5\-\s\d\w]+)<\/td>/g;
   const MATCH_GENERIC_SCORE =

@@ -1,3 +1,4 @@
+import { serviceAvailableGuard } from "../../../utils/serviceUnavailable";
 import { ExamMeta } from "../exam.types";
 
 const getWeight = (exam: ExamMeta, weight = 0) => {
@@ -15,6 +16,8 @@ const examNameMapper = {
 };
 
 export const metaParser = (body: string) => {
+  serviceAvailableGuard(body);
+
   const MATCHER =
     /number=(\d+)&[\d\w\%\=\;]+">\[(\d\d\d)([\u4e00-\u9fa5])\] ([\u4e00-\u9fa5\d]+)</g;
 

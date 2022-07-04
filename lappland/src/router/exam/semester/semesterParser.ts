@@ -1,4 +1,5 @@
 import { explode } from "explode.js";
+import { serviceAvailableGuard } from "../../../utils/serviceUnavailable";
 
 const getSubjects = (content: string) => {
   const MATCH_LINE = /<td(?:[\s\w\=\"]*)>([\u4e00-\u9fa5\w\.\;\&-]+|)<\/td>/g;
@@ -57,6 +58,8 @@ const getMetaList = (content: string) => {
 };
 
 export const semesterParser = (content: string) => {
+  serviceAvailableGuard(content);
+
   content = content.replace(/&nbsp;/g, "");
   content = explode(`text-align: center;">成績</td>`, content)[1];
   const [contentScores, contentMeta] = content.split(

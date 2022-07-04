@@ -5,15 +5,14 @@ const getVerificationToken = async () => {
   const API = "https://eschool.clhs.tyc.edu.tw/auth/Auth/Login";
 
   const getResult = await got.get(API);
-  const validationCookie = explode(";", getResult.headers["set-cookie"]![0])[0];
   const matchToken = /type="hidden" value="([\-\d\w]+)"/g;
   const requestVerificationToken = matchToken.exec(getResult.body)![1];
 
-  if (!validationCookie || !requestVerificationToken) {
+  if (!requestVerificationToken) {
     throw new Error("無法登入，可能是學校系統掛掉或是更新了");
   }
 
-  return { validationCookie, requestVerificationToken };
+  return { requestVerificationToken };
 };
 
 export const getRefreshToken = async (id: string, password: string) => {
@@ -22,7 +21,6 @@ export const getRefreshToken = async (id: string, password: string) => {
   const tokens = await getVerificationToken();
   const postResult = await got.post(API, {
     headers: {
-      cookie: tokens.validationCookie,
       "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
     },
     form: {
