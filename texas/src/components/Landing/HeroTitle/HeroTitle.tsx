@@ -10,7 +10,7 @@ export function HeroTitle() {
 
   return (
     <div className={classes.wrapper}>
-      <Container size={700} className={classes.inner}>
+      <Container size={700} className={classes.inner} mt={56}>
         <h1 className={classes.title}>
           一個
           <Text
