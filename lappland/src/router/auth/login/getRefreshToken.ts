@@ -8,11 +8,16 @@ const getVerificationToken = async () => {
   const matchToken = /type="hidden" value="([\-\d\w]+)"/g;
   const requestVerificationToken = matchToken.exec(getResult.body)![1];
 
+  let validationCookie: string | undefined = undefined;
+  if (getResult.headers["set-cookie"]) {
+    validationCookie = explode(";", getResult.headers["set-cookie"]![0])[0];
+  }
+
   if (!requestVerificationToken) {
     throw new Error("無法登入，可能是學校系統掛掉或是更新了");
   }
 
-  return { requestVerificationToken };
+  return { requestVerificationToken, validationCookie };
 };
 
 export const getRefreshToken = async (id: string, password: string) => {
@@ -22,6 +27,7 @@ export const getRefreshToken = async (id: string, password: string) => {
   const postResult = await got.post(API, {
     headers: {
       "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      cookie: tokens.validationCookie,
     },
     form: {
       LoginId: id,
