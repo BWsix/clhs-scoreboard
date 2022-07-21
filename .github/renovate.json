@@ -9,13 +9,13 @@
       "automerge": "true",
       "depTypeList": ["devDependencies"],
       "updateTypes": ["patch", "minor"],
-      "schedule": ["before 8am on Wednesday"]
+      "schedule": ["before 8am on Sunday"]
     },
     {
       "groupName": "dependencies (non-major)",
       "depTypeList": ["dependencies"],
       "updateTypes": ["patch", "minor"],
-      "schedule": ["before 8am on Wednesday"]
+      "schedule": ["before 8am on Sunday"]
     },
     {
       "groupName": "ESM devDependencies & dependencies (major)",
@@ -56,7 +56,7 @@
         "tempy",
         "terminal-link"
       ],
-      "schedule": ["before 8am on Wednesday"]
+      "schedule": ["before 8am on Sunday"]
     },
     {
       "groupName": "definitelyTyped",
