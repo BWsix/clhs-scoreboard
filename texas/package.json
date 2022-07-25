@@ -11,7 +11,7 @@
   "dependencies": {
     "@clhs-api/core": "0.0.8",
     "@clhs-scoreboard/lappland": "0.0.0",
-    "@mantine/core": "4.2.12",
+    "@mantine/core": "5.0.0",
     "@mantine/hooks": "4.2.12",
     "@mantine/next": "4.2.12",
     "@tabler/icons": "1.78.0",
