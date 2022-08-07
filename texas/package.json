@@ -19,7 +19,7 @@
     "@trpc/next": "9.26.2",
     "@trpc/react": "9.26.2",
     "@trpc/server": "9.26.2",
-    "next": "12.2.3",
+    "next": "12.2.4",
     "next-compose-plugins": "2.2.1",
     "next-pwa": "5.5.5",
     "next-transpile-modules": "9.0.0",
