@@ -10,7 +10,14 @@ const getVerificationToken = async () => {
 
   let validationCookie: string | undefined = undefined;
   if (getResult.headers["set-cookie"]) {
-    validationCookie = explode(";", getResult.headers["set-cookie"]![0])[0];
+    const rawVerificationToken = getResult.headers["set-cookie"].find(
+      (cookie) => cookie.includes("Token")
+    );
+    if (typeof rawVerificationToken !== "string") {
+      throw new Error("無法登入，可能是學校系統掛掉或是更新了");
+    }
+
+    validationCookie = explode(";", rawVerificationToken)[0];
   }
 
   if (!requestVerificationToken) {
@@ -31,15 +38,17 @@ export const getRefreshToken = async (id: string, password: string) => {
     },
     form: {
       LoginId: id,
-      Password: password,
-      __RequestVerificationToken: tokens.requestVerificationToken,
-      LoginType: "Student",
+      LoginType: 2,
       IdentityId: undefined,
       IsKeepLogin: true,
       GoogleToken: undefined,
       IsLeaveSchoolStudent: false,
+      IdentityIdEncrypt: undefined,
       ChangeAndModifyPwd: false,
       IsTriggerFromReadCard: false,
+      Password: password,
+      PassString: password,
+      __RequestVerificationToken: tokens.requestVerificationToken,
     },
   });
 
