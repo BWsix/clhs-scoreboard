@@ -8,7 +8,8 @@ export const parseTimetable = (decodedScheduleHtml: string) => {
   const MATCH_ROOM =
     /<br><span [\d\w\s\;\:\-\u4e00-\u9fa5\n\"\<\>\=()]+<\/span><br>/g;
   const MATCH_NAME = /<br>[\u4e00-\u9fa5]+/g;
-  const MATCH_LESSON = /<td >([\u4e00-\u9fa5\w︴：\<\>\:\-\s\n ]+)<\/td>\n/g;
+  const MATCH_LESSON =
+    /<td >([\u4e00-\u9fa5\w︴()：、\<\>\:\-\s\n ]+)<\/td>\n/g;
 
   const $ = load(decodedScheduleHtml);
 
