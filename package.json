@@ -12,6 +12,6 @@
     "dev": "turbo run dev"
   },
   "devDependencies": {
-    "turbo": "1.4.6"
+    "turbo": "1.4.7"
   }
 }
