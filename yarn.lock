@@ -1399,19 +1399,16 @@
   resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-1.112.0.tgz#6119c6046085a06d4246b1ffab7f1c1435d736b5"
   integrity sha512-M1FmEXqeOUG1iZOLue1aLKEl+E3HHU1JaXb/LmZuOjOWuhHHpfQnSv+mgSmupehophq5piwSPhqnytt1Uh6oLw==
 
-"@trpc/client@9.27.4":
-  version "9.27.4"
-  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-9.27.4.tgz#01942784af5628e615bd6dd6094a16c5f7a7d457"
-  integrity sha512-NyS3J333xy8PJWGTSKO0egvj3x/s4SaSPx7XDWHf/i51W/i5Fla+sNxYpv+4z+SwE2xyJKszN2EZbvKIW2X/wA==
-  dependencies:
-    "@babel/runtime" "^7.9.0"
+"@trpc/client@10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@trpc/client/-/client-10.0.0.tgz#b2b3059453b14fbf93e5de08d5cf595fec356a32"
+  integrity sha512-qxYbpFvokyL0SHSck/roBvG5/tORm+jTqzr+hnwyCghE4MQ0EGoyBImgdgUDAkTEjdarYTy1I3YplUw48QF4gQ==
 
-"@trpc/next@9.27.4":
-  version "9.27.4"
-  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-9.27.4.tgz#55c0b5997421855a42333c5f4e93463e9c5bf522"
-  integrity sha512-QY7eT37hIjHmtqOSEfx4IvZXOGHozIQ6B0MQ3+olmpMpTrygcYi4mFiurPV8Txh1iLa5mgBoJ1ZepLaSc0qzkg==
+"@trpc/next@10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@trpc/next/-/next-10.0.0.tgz#f0076e889367abdac89198be0d83abd1ae7ca229"
+  integrity sha512-ka7N2fFTGDsfX5wctyJzTV6Ci6godGA0s75gWoeTU1gAsXzE9Hkt/ozarzlrcpiFSjLBeGhIyuB4RbFN29VGTw==
   dependencies:
-    "@babel/runtime" "^7.9.0"
     react-ssr-prepass "^1.5.0"
 
 "@trpc/react@9.27.4":
@@ -1421,10 +1418,10 @@
   dependencies:
     "@babel/runtime" "^7.9.0"
 
-"@trpc/server@9.27.4":
-  version "9.27.4"
-  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-9.27.4.tgz#6a3d8df1168a46a2b3e6566ba2c48b2aa2f532c1"
-  integrity sha512-yw0omUrxGp8+gEAuieZFeXB4bCqFvmyCDL3GOBv+Q6+cK0m5824ViHZKPgK5DYG1ijN/lbi1hP3UVKywPN7rbQ==
+"@trpc/server@10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@trpc/server/-/server-10.0.0.tgz#6ee2332b8cbb5a3f317553b97dda90763a56adbd"
+  integrity sha512-PnSlKM3WtguEb1hryekuVlR00QOR8nbFKuZbuLbzfkLju+xOB+F3NplWW5YMVBywWdJKasX/inQDKur2SHyPfg==
 
 "@types/estree@0.0.39":
   version "0.0.39"
