@@ -14,7 +14,7 @@
     "@mantine/core": "4.2.12",
     "@mantine/hooks": "4.2.12",
     "@mantine/next": "4.2.12",
-    "@tabler/icons": "1.115.0",
+    "@tabler/icons": "1.116.1",
     "@trpc/client": "9.27.4",
     "@trpc/next": "9.27.4",
     "@trpc/react": "9.27.4",
