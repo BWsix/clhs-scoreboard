@@ -11,7 +11,7 @@
     "dev": "tsc -w"
   },
   "devDependencies": {
-    "typescript": "4.9.5"
+    "typescript": "5.0.2"
   },
   "dependencies": {
     "@clhs-api/core": "0.0.8",
