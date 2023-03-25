@@ -22,7 +22,6 @@ export const LoginPageForm = () => {
     initialValues: { id: "", password: "" },
     validationRules: {
       id: (value) => value === "" || /^\d{6}$/.test(value),
-      password: (value) => value === "" || /^[A-Z]\d{9}$/.test(value),
     },
   });
 
@@ -44,7 +43,7 @@ export const LoginPageForm = () => {
         />
 
         <PasswordInput
-          label="身分證字號 (開頭字母大寫)"
+          label="密碼 (預設是身分證字號，開頭字母大寫)"
           placeholder="A123456789"
           mt="md"
           {...form.getInputProps("password")}

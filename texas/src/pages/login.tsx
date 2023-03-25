@@ -5,6 +5,20 @@ import { getPageLayout } from "src/layouts/PageLayout";
 
 const INFO_LIST: InfoProps[] = [
   {
+    title: "2023/03/25 修改密碼後無法登入的問題",
+    children: (
+      <>
+        原來還可以改密碼👀
+        <br />
+        謝謝
+        <Anchor href="https://github.com/watercatuwu" target="_blank" size="sm">
+          溺水貓watercat
+        </Anchor>
+        發現這個問題
+      </>
+    ),
+  },
+  {
     title: "2022/07/04 無法登入的問題",
     children: (
       <>
