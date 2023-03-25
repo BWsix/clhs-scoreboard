@@ -49,6 +49,7 @@ yarn build
 
 謝謝你們的幫助，讓壢中 scoreboard 變得更好
 
+- [@watercatuwu](https://github.com/watercatuwu)
 - [@Austin0914](https://github.com/Austin0914)
 - [@ian05012](https://github.com/ian05012)
 - [@Yong1230](https://github.com/Yong1230)
