@@ -57,8 +57,8 @@ export const getRefreshToken = async (id: string, password: string) => {
   }
 
   try {
-    const cookieRawA = explode(";", postResult.headers["set-cookie"]![0])[0];
-    const cookieRawB = explode(";", postResult.headers["set-cookie"]![1])[0];
+    const cookieRawA = explode(";", postResult.headers["set-cookie"]![2])[0];
+    const cookieRawB = explode(";", postResult.headers["set-cookie"]![3])[0];
 
     return `${cookieRawA}; ${cookieRawB}; `;
   } catch (e) {

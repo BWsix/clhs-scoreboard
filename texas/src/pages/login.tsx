@@ -5,6 +5,28 @@ import { getPageLayout } from "src/layouts/PageLayout";
 
 const INFO_LIST: InfoProps[] = [
   {
+    title: "2023/04/04 錯誤：帳號密碼無誤，但發生錯誤無法登入",
+    children: (
+      <>
+        學校成績查詢系統又又又更新了登入邏輯。雖然暫時修好了，但有可能是因為最近學校正在更新系統所以才有這次的問題。總之有極大的機率未來還會再出問題。
+        <br />
+        謝謝
+        <Anchor href="https://github.com/weedfish1" target="_blank" size="sm">
+          weedfish1
+        </Anchor>
+        發現這個問題
+        <br />
+        <Anchor
+          href="https://github.com/BWsix/clhs-scoreboard/issues/164"
+          target="_blank"
+          size="sm"
+        >
+          https://github.com/BWsix/clhs-scoreboard/issues/164
+        </Anchor>
+      </>
+    ),
+  },
+  {
     title: "2023/03/25 修改密碼後無法登入的問題",
     children: (
       <>
@@ -15,6 +37,14 @@ const INFO_LIST: InfoProps[] = [
           溺水貓watercat
         </Anchor>
         發現這個問題
+        <br />
+        <Anchor
+          href="https://github.com/BWsix/clhs-scoreboard/issues/158"
+          target="_blank"
+          size="sm"
+        >
+          https://github.com/BWsix/clhs-scoreboard/issues/158
+        </Anchor>
       </>
     ),
   },
