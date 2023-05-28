@@ -2839,10 +2839,10 @@ globby@^6.1.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-got@12.6.0:
-  version "12.6.0"
-  resolved "https://registry.yarnpkg.com/got/-/got-12.6.0.tgz#8d382ee5de4432c086e83c133efdd474484f6ac7"
-  integrity sha512-WTcaQ963xV97MN3x0/CbAriXFZcXCfgxVp91I+Ze6pawQOa7SgzwSx2zIJJsX+kTajMnVs0xcFD1TxZKFqhdnQ==
+got@12.6.1:
+  version "12.6.1"
+  resolved "https://registry.yarnpkg.com/got/-/got-12.6.1.tgz#8869560d1383353204b5a9435f782df9c091f549"
+  integrity sha512-mThBblvlAF1d4O5oqyvN+ZxLAYwIJK7bpMxgYqPD9okW0C3qm5FFn7k811QrcuEBwaogR3ngOFoCfs6mRv7teQ==
   dependencies:
     "@sindresorhus/is" "^5.2.0"
     "@szmarczak/http-timer" "^5.0.1"
@@ -3941,10 +3941,10 @@ react-dom@17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-react-error-boundary@4.0.4:
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/react-error-boundary/-/react-error-boundary-4.0.4.tgz#d2e84505b0a67cec7a6bf33b0146faadfe31597d"
-  integrity sha512-AbqMFx8bCsob8rCHZvJYQ42MQijK0/034RUvan9qrqyJCpazr8d9vKHrysbxcr6odoHLZvQEcYomFPoIqH9fow==
+react-error-boundary@4.0.7:
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/react-error-boundary/-/react-error-boundary-4.0.7.tgz#dd65b16d1939894d59ab084af1d371fb10a16ebb"
+  integrity sha512-XyDSL7Uhv3PMs0e1k29cMSnZPSlUCsF7Ci0dtdcpkaWDi9bM2hw6ru2l+PgBhiqilE1ne2XIlsllcaHsn0B6Dw==
   dependencies:
     "@babel/runtime" "^7.12.5"
 
